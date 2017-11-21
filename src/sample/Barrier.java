@@ -5,4 +5,17 @@ package sample;
  */
 public class Barrier
 {
+    private boolean opened;
+
+    public void openBarrier(){
+        opened = true;
+    }
+
+    public void closeBarrier(){
+        opened = false;
+    }
+
+    public boolean isOpen(){
+        return opened;
+    }
 }

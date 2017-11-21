@@ -5,7 +5,8 @@ import java.util.List;
 /**
  * Created by Jordan on 21/11/2017.
  */
-public class Floor
+public class DisplayScreen
 {
-    List<ParkingBay> parkingBayList;
+    List<CarPark> carParkList;
+
 }

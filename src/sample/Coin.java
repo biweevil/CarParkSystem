@@ -5,4 +5,9 @@ package sample;
  */
 public class Coin
 {
+    private Car car;
+
+    public String toString(){
+        return this.hashCode()+"";
+    }
 }

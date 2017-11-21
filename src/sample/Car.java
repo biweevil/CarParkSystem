@@ -5,4 +5,10 @@ package sample;
  */
 public class Car
 {
+    private String registraionPlate;
+    private boolean paid;
+
+    public Car(String registraionPlate){
+        this.registraionPlate = registraionPlate;
+    }
 }
