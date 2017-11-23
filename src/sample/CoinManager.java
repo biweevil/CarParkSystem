@@ -1,5 +1,7 @@
 package sample;
 
+import java.util.*;
+
 /**
  * Created by Jordan on 23/11/2017.
  */
@@ -7,15 +9,34 @@ public class CoinManager
 {
     private static CoinManager coinManager;
 
-    public static CoinManager getInstance(){
-        return coinManager==null ? coinManager = new CoinManager() : coinManager;
+    private Queue <Coin> coinPool;
+    private ArrayList <Coin> decirculatedCoins;
+
+    private CoinManager()
+    {
+        coinPool = new LinkedList <Coin>();
+        decirculatedCoins = new ArrayList <Coin>();
     }
 
-    public Coin requestCoin(){
-
+    public void addNewCoins(Coin[] newCoins)
+    {
+        for (Coin newCoin : newCoins)
+        {
+            coinPool.add(newCoin);
+        }
     }
 
-    public returnCoin(){
-
+    public void addUsedCoin(Coin usedCoin)
+    {
+        usedCoin.assignCurrentMachine(null);
+        decirculatedCoins.add(usedCoin);
     }
+
+    public void lostCoin(Car car)
+    {
+        coinPool.remove(car.getCoin());
+    }
+
+
+    //TODO how are coin managed
 }

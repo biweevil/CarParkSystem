@@ -5,10 +5,21 @@ package sample;
  */
 public class RegPlateScanner
 {
-    public Car scanCar(){
-        String regPlate = cameraOutput();
-        Car newCar = new Car(regPlate);
-        return newCar;
+    private GUIStat input;
+
+    public String scanCar(){
+        input = GUIStat.getInstance();
+        String regPlate;
+        if(input.isRegPlateInput())
+        {
+            //TODO get plate input from GUI
+            regPlate = null;
+        }
+        else
+        {
+            regPlate = cameraOutput();
+        }
+        return regPlate;
     }
 
     private String cameraOutput(){

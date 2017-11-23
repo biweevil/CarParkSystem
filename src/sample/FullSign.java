@@ -5,4 +5,22 @@ package sample;
  */
 public class FullSign
 {
+
+    public FullSign()
+    {
+
+    }
+
+    public boolean isFull()
+    {
+        return full;
+    }
+
+    public void setFull(boolean full)
+    {
+        this.full = full;
+    }
+
+    private boolean full;
+
 }

@@ -5,7 +5,18 @@ package sample;
  */
 public class CoinCollector extends CoinMachine
 {
+    public CoinCollector(int size){
+        super(size);
+    }
+
     public void startInteraction(Car currentCar){
 
+    }
+
+    public void emptyCoins(){
+        while (!coinBox.isEmpty())
+        {
+            coinManager.addUsedCoin(coinBox.poll());
+        }
     }
 }

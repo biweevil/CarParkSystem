@@ -11,12 +11,13 @@ public abstract class AccessPoint
     protected Car currentCar;
     protected CarPark carPark;
 
-    public void carArrived(){
-        currentCar = regPlateScanner.scanCar();
-    }
 
     public void carInteracts(){
-        coinMachine.startInteraction(currentCar);
+        currentCar = regPlateScanner.scanCar();
+        if(currentCar != null)
+        {
+            coinMachine.startInteraction(currentCar);
+        }
     }
 
 }

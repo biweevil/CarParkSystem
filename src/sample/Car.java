@@ -1,24 +1,23 @@
 package sample;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by Jordan on 21/11/2017.
  */
 public class Car
 {
     private String registraionPlate;
-    private boolean paid;
+    private LocalDateTime timeOfEntry;
+    private Coin coin;
 
-    public Car(String registraionPlate){
+    public Car(String registraionPlate, Coin coin){
         this.registraionPlate = registraionPlate;
-        paid = false;
+        this.coin = coin;
     }
 
-    public void paid(){
-        paid = true;
-    }
-
-    public boolean isPaid(){
-        return paid;
+    public Coin getCoin(){
+        return coin;
     }
 
 }
