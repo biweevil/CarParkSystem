@@ -10,5 +10,15 @@ public class Car
 
     public Car(String registraionPlate){
         this.registraionPlate = registraionPlate;
+        paid = false;
     }
+
+    public void paid(){
+        paid = true;
+    }
+
+    public boolean isPaid(){
+        return paid;
+    }
+
 }

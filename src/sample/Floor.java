@@ -7,5 +7,16 @@ import java.util.List;
  */
 public class Floor
 {
-    List<ParkingBay> parkingBayList;
+    private int bays;
+
+    public Floor(int bays){
+        this.bays = bays;
+    }
+
+    public int noOfBays(){
+        return bays;
+    }
+
+
+
 }

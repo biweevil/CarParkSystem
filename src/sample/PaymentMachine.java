@@ -5,4 +5,5 @@ package sample;
  */
 public class PaymentMachine
 {
+    private PaymentProcessor paymentProcessor;
 }

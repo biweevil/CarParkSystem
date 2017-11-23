@@ -5,4 +5,10 @@ package sample;
  */
 public class EntryPoint extends AccessPoint
 {
+    private FullSign fullSign;
+    private FloorDisplay floorDisplay;
+
+    public EntryPoint(){
+        coinMachine = new CoinDispenser();
+    }
 }

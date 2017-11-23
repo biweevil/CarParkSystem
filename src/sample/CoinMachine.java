@@ -5,4 +5,7 @@ package sample;
  */
 public class CoinMachine
 {
+    public void startInteraction(Car currentCar){
+
+    }
 }

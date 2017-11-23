@@ -5,4 +5,7 @@ package sample;
  */
 public class ExitPoint extends AccessPoint
 {
+    public ExitPoint(){
+        coinMachine = new CoinCollector();
+    }
 }
