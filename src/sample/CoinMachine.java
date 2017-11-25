@@ -1,22 +1,25 @@
 package sample;
 
-import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by Jordan on 21/11/2017.
+
  */
 public abstract class CoinMachine
 {
-    protected LinkedBlockingQueue<Coin> coinBox;
+    protected LinkedBlockingQueue <Coin> coinBox;
     protected CoinManager coinManager;
+    protected Car currentCar;
 
-    public CoinMachine(CarPark carPark, int size){
-        coinBox = new LinkedBlockingQueue <Coin>(size);
+    public CoinMachine(CarPark carPark, int size)
+    {
+        coinBox = new LinkedBlockingQueue <>(size);
         coinManager = carPark.getCoinManager();
     }
 
-    public void startInteraction(Car currentCar){
+    public void startInteraction(Car currentCar)
+    {
 
     }
 }
