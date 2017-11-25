@@ -9,15 +9,42 @@ import java.util.Stack;
  */
 public class CarPark
 {
+    //DITCH NUMBER PLATES, BARCODE COINS!!!!!!!!!!!!!
+    //can not use number plate scanner
+    //
+    //extreme conditions,
+    //a car exceed max stay
+    //a car if ditched
+    //a coin is lost //use picture
+    //a car breaks down //
+    //a number plate is not readable
+    //number is incorrectly read
+    //machine runs out of coins
+    //unknown recognised coin entered
+    //coin collector is full
+    //coin is entered in payment booth before last transaction
+    //coin is left in the payment machine
+    //car park is full
+    //car tailgates
+    //customer cannot pay up
+    //system loses of the number of spaces available
+    //barrier does not raise - press for assistance
+    ////cant lose car, cant lose number plate,
     private Stack<Floor> floorList;
     private EntryPoint entryPoint;
     private Stack<ExitPoint> exitPoints;
     private Stack<PaymentMachine> paymentMachines;
+    private CoinManager coinManager;
 
     public CarPark(){
         floorList = new Stack<Floor> ();
         exitPoints = new Stack <ExitPoint>();
         paymentMachines = new Stack <PaymentMachine>();
+    }
+
+    public CoinManager getCoinManager()
+    {
+        return coinManager;
     }
 
     public int getSpaces(){
@@ -33,8 +60,8 @@ public class CarPark
         return (Floor)((List)floorList).get(floor);
     }
 
-    public void addFloor(int bays){
-        floorList.push(new Floor(bays));
+    public void addFloor(int bays, boolean secure){
+        floorList.push(new Floor(this, bays, secure));
     }
 
     public void removeFloor(){
@@ -49,4 +76,14 @@ public class CarPark
         exitPoints.pop();
     }
 
+    public void addPaymentMachine(){
+        paymentMachines.push(new PaymentMachine(this));
+    }
+
+    public void bayViolation(SecureBay secureBay){
+        secureBay.toString();
+    }
+
+
 }
+
