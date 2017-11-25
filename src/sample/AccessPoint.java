@@ -13,8 +13,8 @@ public abstract class AccessPoint
 
 
     public void carInteracts(){
-        currentCar = regPlateScanner.scanCar();
-        if(currentCar != null)
+        String carRegPlate = regPlateScanner.scanCar();
+        if(carRegPlate.length() > 0)
         {
             coinMachine.startInteraction(currentCar);
         }

@@ -5,4 +5,16 @@ package sample;
  */
 public class PaymentProcessor
 {
+    private Coin currentCoin;
+    private String status;
+
+    public void start(Coin c){
+
+    }
+
+
+
+    public String getStatus(){
+        return status;
+    }
 }

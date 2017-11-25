@@ -5,7 +5,12 @@ package sample;
  */
 public class CoinDispenser extends CoinMachine
 {
-    public void startInteraction(Car currentCar){
+    CoinDispenser(CarPark carPark, int size)
+    {
+        super(carPark, size);
+    }
 
+    public void startInteraction(Car currentCar){
+        this.currentCar = currentCar;
     }
 }

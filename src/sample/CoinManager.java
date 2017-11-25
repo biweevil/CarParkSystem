@@ -37,6 +37,11 @@ public class CoinManager
         coinPool.remove(car.getCoin());
     }
 
+    public boolean validCoin(Coin testCoin)
+    {
+        return coinPool.contains(testCoin);
+    }
+
 
     //TODO how are coin managed
 }
