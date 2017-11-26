@@ -7,33 +7,33 @@ public class RegPlateScanner
 {
     private GUIStat input;
 
-    public String scanCar(){
+    public String scanCar()
+    {
         input = GUIStat.getInstance();
         String regPlate;
-        if(input.isRegPlateInput())
+        if (input.isRegPlateInput())
         {
             //TODO get plate input from GUI
             regPlate = null;
-        }
-        else
+        } else
         {
             regPlate = cameraOutput();
         }
         return regPlate;
     }
 
-    private String cameraOutput(){
-        return  letter()+letter()+
-                number()+number()+
-                " "+letter()+letter()+
-                letter();
+    private String cameraOutput()
+    {
+        return letter() + letter() + number() + number() + " " + letter() + letter() + letter();
     }
 
-    private String letter(){
+    private String letter()
+    {
         return Character.toString((char) (65 + Math.random() * 26));
     }
 
-    private int number(){
-        return (int)Math.random()%10;
+    private int number()
+    {
+        return (int) Math.random() % 10;
     }
 }

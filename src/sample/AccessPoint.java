@@ -6,7 +6,7 @@ package sample;
 public abstract class AccessPoint
 {
     protected RegPlateScanner regPlateScanner;
-    protected Barrier entryBarrier;
+    protected Barrier barrier;
     protected CoinMachine coinMachine;
     protected Car currentCar;
     protected CarPark carPark;

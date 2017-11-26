@@ -30,16 +30,23 @@ public class CarPark
     //system loses of the number of spaces available
     //barrier does not raise - press for assistance
     ////cant lose car, cant lose number plate,
-    private Stack<Floor> floorList;
-    private EntryPoint entryPoint;
-    private Stack<ExitPoint> exitPoints;
-    private Stack<PaymentMachine> paymentMachines;
-    private CoinManager coinManager;
+    //change not available
+    //full of cash
 
-    public CarPark(){
-        floorList = new Stack<Floor> ();
+    private Stack <Floor> floorList;
+    private EntryPoint entryPoint;
+    private Stack <ExitPoint> exitPoints;
+    private Stack <PaymentMachine> paymentMachines;
+    private CoinManager coinManager;
+    private PaymentModel paymentModel;
+    private int noOfCars;
+
+    public CarPark()
+    {
+        floorList = new Stack <Floor>();
         exitPoints = new Stack <ExitPoint>();
         paymentMachines = new Stack <PaymentMachine>();
+        noOfCars = 0;
     }
 
     public CoinManager getCoinManager()
@@ -47,40 +54,53 @@ public class CarPark
         return coinManager;
     }
 
-    public int getSpaces(){
-        int sum =0;
-        for (Floor floor: floorList)
+    public int getCapacity()
+    {
+        int sum = 0;
+        for (Floor floor : floorList)
         {
             sum += floor.noOfBays();
         }
         return sum;
     }
 
-    public final Floor getFloor(int floor){
-        return (Floor)((List)floorList).get(floor);
+    public int getSpaces()
+    {
+        return noOfCars;
     }
 
-    public void addFloor(int bays, boolean secure){
+    public final Floor getFloor(int floor)
+    {
+        return (Floor) ((List) floorList).get(floor);
+    }
+
+    public void addFloor(int bays, boolean secure)
+    {
         floorList.push(new Floor(this, bays, secure));
     }
 
-    public void removeFloor(){
+    public void removeFloor()
+    {
         floorList.pop();
     }
 
-    public void addExitPoint(){
+    public void addExitPoint()
+    {
         exitPoints.push(new ExitPoint());
     }
 
-    public void removeExitPoint(){
+    public void removeExitPoint()
+    {
         exitPoints.pop();
     }
 
-    public void addPaymentMachine(){
-        paymentMachines.push(new PaymentMachine(this));
+    public void addPaymentMachine()
+    {
+        paymentMachines.push(new PaymentMachine(this, paymentModel));
     }
 
-    public void bayViolation(SecureBay secureBay){
+    public void bayViolation(SecureBay secureBay)
+    {
         secureBay.toString();
     }
 

@@ -8,7 +8,11 @@ public class EntryPoint extends AccessPoint
     private FullSign fullSign;
     private FloorDisplay floorDisplay;
 
-    public EntryPoint(){
-        coinMachine = new CoinDispenser();
+    public EntryPoint()
+    {
+        coinMachine = new CoinDispenser(carPark, 100);
+        fullSign = new FullSign();
+        floorDisplay = new FloorDisplay();
     }
+
 }

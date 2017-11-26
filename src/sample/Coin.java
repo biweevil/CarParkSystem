@@ -2,7 +2,6 @@ package sample;
 
 /**
  * Created by Jordan on 21/11/2017.
-
  */
 public class Coin
 {
@@ -10,24 +9,29 @@ public class Coin
     private CoinMachine currentMachine;
     private boolean paid;
 
-    public String toString(){
-        return this.hashCode()+"";
+    public String toString()
+    {
+        return this.hashCode() + "";
     }
 
-    public void paid(){
+    public void paid()
+    {
         paid = true;
     }
 
-    public void assignCar(Car newCar){
+    public void assignCar(Car newCar)
+    {
         car = newCar;
         paid = false;
     }
 
-    public boolean isPaid(){
+    public boolean isPaid()
+    {
         return paid;
     }
 
-    public void assignCurrentMachine(CoinMachine currentMachine){
+    public void assignCurrentMachine(CoinMachine currentMachine)
+    {
         this.currentMachine = currentMachine;
     }
 }
