@@ -10,9 +10,9 @@ public class CoinCollector extends CoinMachine
         super(carPark, size);
     }
 
-    public void startInteraction(Car currentCar)
+    public void startInteraction(Coin currentCoin)
     {
-        this.currentCar = currentCar;
+        this.currentCoin = currentCoin;
     }
 
     public void emptyCoins()

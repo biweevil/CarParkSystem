@@ -10,7 +10,7 @@ public abstract class CoinMachine
 {
     protected LinkedBlockingQueue <Coin> coinBox;
     protected CoinManager coinManager;
-    protected Car currentCar;
+    protected Coin currentCoin;
 
     public CoinMachine(CarPark carPark, int size)
     {
@@ -18,7 +18,7 @@ public abstract class CoinMachine
         coinManager = carPark.getCoinManager();
     }
 
-    public void startInteraction(Car currentCar)
+    public void startInteraction(Coin currentCoin)
     {
 
     }

@@ -1,0 +1,9 @@
+.road {
+	-fx-background-image: url("CARPARK.jpg");
+	-fx-background-size: cover;
+}
+
+.formbg {
+	-fx-background-image: url("LINEAR.jpg");
+	-fx-background-size: cover;
+}

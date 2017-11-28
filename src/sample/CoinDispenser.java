@@ -10,7 +10,7 @@ public class CoinDispenser extends CoinMachine
         super(carPark, size);
     }
 
-    public void startInteraction(Car currentCar){
-        this.currentCar = currentCar;
+    public void startInteraction(Coin currentCoin){
+        this.currentCoin = currentCoin;
     }
 }

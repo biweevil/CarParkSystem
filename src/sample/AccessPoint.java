@@ -8,7 +8,7 @@ public abstract class AccessPoint
     protected RegPlateScanner regPlateScanner;
     protected Barrier barrier;
     protected CoinMachine coinMachine;
-    protected Car currentCar;
+    protected Coin currentCoin;
     protected CarPark carPark;
 
 
@@ -16,7 +16,7 @@ public abstract class AccessPoint
         String carRegPlate = regPlateScanner.scanCar();
         if(carRegPlate.length() > 0)
         {
-            coinMachine.startInteraction(currentCar);
+            coinMachine.startInteraction(currentCoin);
         }
     }
 

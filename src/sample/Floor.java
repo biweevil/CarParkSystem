@@ -11,14 +11,13 @@ public class Floor
 
     public Floor(CarPark carPark, int bayN, boolean secure)
     {
-        if(secure)
+        if (secure)
         {
             for (int i = 0; i < bayN; i++)
             {
                 bays[i] = new SecureBay(carPark, this, i + 1);
             }
-        }
-        else
+        } else
         {
             for (int i = 0; i < bayN; i++)
             {
@@ -28,18 +27,20 @@ public class Floor
     }
 
 
-    public int noOfBays(){
+    public int noOfBays()
+    {
         return bays.length;
     }
 
-    public String getFloorLetter(){
+    public String getFloorLetter()
+    {
         return floorLetter;
     }
 
-    public void bayViolation(SecureBay secureBay){
+    public void bayViolation(SecureBay secureBay)
+    {
         carPark.bayViolation(secureBay);
     }
-
 
 
 }
