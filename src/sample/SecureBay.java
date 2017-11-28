@@ -74,4 +74,12 @@ public class SecureBay extends Bay
             floor.bayViolation(this);
         }
     }
+
+    public boolean isCarPresent(){
+        return carPresent;
+    }
+
+    public boolean isSecured(){
+        return secured;
+    }
 }
