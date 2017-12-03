@@ -12,6 +12,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -47,7 +48,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Accordion prefHeight="600.0" prefWidth="800.0" stylesheets="@css.css">
+      <Accordion prefHeight="1056.0" prefWidth="1920.0" stylesheets="@css.css">
         <panes>
           <TitledPane prefHeight="487.0" prefWidth="723.0" text="Car Park Manager">
             <content>
@@ -229,9 +230,37 @@
           </TitledPane>
             <TitledPane layoutX="10.0" layoutY="60.0" text="Pre Paid App">
                <content>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="640.0">
+                  <SplitPane dividerPositions="0.3529718456725756, 0.6496350364963503" prefHeight="870.0" prefWidth="1918.0">
+                     <items>
+                        <AnchorPane prefHeight="955.0" prefWidth="108.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="262.0" layoutY="41.0" prefHeight="51.0" prefWidth="592.0" text="Payment Machine">
+                                 <font>
+                                    <Font name="System Bold" size="35.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="88.0" prefHeight="119.0" prefWidth="894.0" styleClass="formbg" text="Welcome" textFill="#0f084a">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="955.0" prefWidth="1244.0">
+                           <children>
+                              <Label layoutX="221.0" layoutY="39.0" text="Exit Display">
+                                 <font>
+                                    <Font name="System Bold" size="35.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="90.0" prefHeight="119.0" prefWidth="492.0" styleClass="formbg" text="Welcome" textFill="#0f084a">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="955.0" prefWidth="1231.0">
                            <children>
                               <Label layoutX="275.0" layoutY="29.0" text="Log In">
                                  <font>
@@ -253,40 +282,22 @@
                                     <Font size="24.0" />
                                  </font>
                               </Button>
-                              <TextField layoutX="147.0" layoutY="223.0" prefHeight="33.0" prefWidth="360.0" />
-                              <TextField layoutX="147.0" layoutY="293.0" prefHeight="33.0" prefWidth="360.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="640.0">
-                           <children>
-                              <Label layoutX="169.0" layoutY="37.0" text="Payment Machine">
+                              <TextField layoutX="147.0" layoutY="240.0" prefHeight="33.0" prefWidth="360.0" />
+                              <TextField layoutX="147.0" layoutY="310.0" prefHeight="33.0" prefWidth="360.0" />
+                              <Label alignment="CENTER" layoutX="218.0" layoutY="220.0" prefHeight="17.0" prefWidth="218.0" text="Username">
                                  <font>
-                                    <Font name="System Bold" size="35.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="88.0" prefHeight="119.0" prefWidth="492.0" styleClass="formbg" text="Welcome" textFill="#0f084a">
+                              <Label alignment="CENTER" layoutX="218.0" layoutY="290.0" prefHeight="17.0" prefWidth="218.0" text="Password">
                                  <font>
-                                    <Font size="37.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="640.0">
-                           <children>
-                              <Label layoutX="221.0" layoutY="39.0" text="Exit Display">
-                                 <font>
-                                    <Font name="System Bold" size="35.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="90.0" prefHeight="119.0" prefWidth="492.0" styleClass="formbg" text="Welcome" textFill="#0f084a">
-                                 <font>
-                                    <Font size="37.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
+                     </items>
+                  </SplitPane>
                </content>
             </TitledPane>
         </panes>
