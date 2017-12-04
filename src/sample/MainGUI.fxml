@@ -14,6 +14,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
@@ -113,24 +114,27 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <ScrollPane fx:id="FloorPanel" hbarPolicy="NEVER" layoutX="424.0" layoutY="44.0" prefHeight="473.0" prefWidth="886.0" rotate="26.6">
+                                          <ScrollPane fx:id="FloorPanel" hbarPolicy="NEVER" layoutX="309.0" layoutY="49.0" prefHeight="473.0" prefWidth="886.0" rotate="26.6">
                                              <content>
-                                                <VBox fx:id="FloorView" />
+                                                <VBox fx:id="FloorView" prefHeight="119.0" prefWidth="882.0">
+                                                   <children>
+                                                      <Label prefHeight="60.0" prefWidth="896.0" text="0 Spaces Avaliable" textFill="#2a038c">
+                                                         <font>
+                                                            <Font name="Consolas" size="36.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="59.0" prefWidth="881.0" text="0 Secure Spaces Avaliable" textFill="#110092" wrapText="true">
+                                                         <font>
+                                                            <Font name="Consolas" size="36.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
                                              </content>
                                              <rotationAxis>
                                                 <Point3D y="1.0" z="0.05" />
                                              </rotationAxis>
                                           </ScrollPane>
-                                          <Label layoutX="36.0" layoutY="79.0" prefHeight="77.0" prefWidth="337.0" text="0 Spaces Avaliable" textFill="#2a038c">
-                                             <font>
-                                                <Font size="36.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="37.0" layoutY="189.0" prefHeight="59.0" prefWidth="425.0" text="0 Secure Spaces Avaliable" textFill="#110092">
-                                             <font>
-                                                <Font size="36.0" />
-                                             </font>
-                                          </Label>
                                        </children>
                                     </AnchorPane>
                               </content>
@@ -259,7 +263,21 @@
                                               </TitledPane>
                                               <TitledPane fx:id="CashMachineView" text="Cash Machine">
                                                 <content>
-                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <RadioButton fx:id="Pound20" layoutX="18.0" layoutY="65.0" mnemonicParsing="false" text="£20" />
+                                                            <RadioButton fx:id="Pound10" layoutX="18.0" layoutY="82.0" mnemonicParsing="false" text="£10" />
+                                                            <RadioButton fx:id="Pound5" layoutX="18.0" layoutY="99.0" mnemonicParsing="false" text="£5" />
+                                                            <RadioButton fx:id="Pence5" layoutX="142.0" layoutY="99.0" mnemonicParsing="false" text="5p" />
+                                                            <RadioButton fx:id="Pound2" layoutX="84.0" layoutY="65.0" mnemonicParsing="false" text="£2" />
+                                                            <RadioButton fx:id="Pence50" layoutX="84.0" layoutY="99.0" mnemonicParsing="false" text="50p" />
+                                                            <RadioButton fx:id="Pound1" layoutX="84.0" layoutY="82.0" mnemonicParsing="false" text="£1" />
+                                                            <RadioButton fx:id="Pence20" layoutX="142.0" layoutY="65.0" mnemonicParsing="false" text="20p" />
+                                                            <RadioButton fx:id="Pence10" layoutX="142.0" layoutY="82.0" mnemonicParsing="false" text="10p" />
+                                                            <TextField fx:id="CashDisplay" disable="true" editable="false" layoutX="27.0" layoutY="23.0" />
+                                                            <Button fx:id="InsertCash" layoutX="31.0" layoutY="141.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Insert Cash" />
+                                                         </children>
+                                                      </AnchorPane>
                                                 </content>
                                               </TitledPane>
                                             </panes>
@@ -272,12 +290,12 @@
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <Label alignment="CENTER" layoutX="329.0" layoutY="56.0" prefHeight="173.0" prefWidth="571.0" text="Insert Coin to Exit" textAlignment="CENTER" textFill="#1200b2" wrapText="true">
+                                          <Label fx:id="ExitDisplay" alignment="CENTER" layoutX="329.0" layoutY="56.0" prefHeight="173.0" prefWidth="571.0" text="Insert Coin to Exit" textAlignment="CENTER" textFill="#1200b2" wrapText="true">
                                              <font>
                                                 <Font size="48.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="CoinButton1" layoutX="416.0" layoutY="305.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="396.0" text="Coin">
+                                          <Button fx:id="ExitInsert" layoutX="416.0" layoutY="305.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="396.0" text="Insert">
                                              <font>
                                                 <Font name="Consolas" size="48.0" />
                                              </font>
