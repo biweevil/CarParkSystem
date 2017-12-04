@@ -1,5 +1,7 @@
 package sample;
 
+import com.sun.javafx.robot.FXRobot;
+import com.sun.javafx.robot.FXRobotFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -22,6 +24,7 @@ public class Main extends Application {
         main.getStylesheets().add(Main.class.getResource("css.css").toExternalForm());
         primaryStage.setScene(main);
         primaryStage.show();
+
     }
 
 
