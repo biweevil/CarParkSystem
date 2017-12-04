@@ -9,7 +9,7 @@ import java.util.Stack;
  */
 public class CarPark
 {
-    //DITCH NUMBER PLATES, BARCODE COINS!!!!!!!!!!!!!
+    //DITCH NUMBER PLATES, QR COINS!!!!!!!!!!!!!
     //can not use number plate scanner
     //
     //extreme conditions,
@@ -17,8 +17,6 @@ public class CarPark
     //a car if ditched
     //a coin is lost //use picture
     //a car breaks down //
-    //a number plate is not readable
-    //number is incorrectly read
     //machine runs out of coins
     //unknown recognised coin entered
     //coin collector is full
@@ -32,6 +30,8 @@ public class CarPark
     ////cant lose car, cant lose number plate,
     //change not available
     //full of cash
+
+
 
     private Stack <Floor> floorList;
     private EntryPoint entryPoint;
@@ -104,6 +104,4 @@ public class CarPark
         secureBay.toString();
     }
 
-
 }
-

@@ -1,5 +1,7 @@
 package sample;
 
+import com.sun.javafx.robot.FXRobot;
+import com.sun.javafx.robot.FXRobotFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -18,16 +20,11 @@ public class Main extends Application {
         Parent root = (Parent) loader.load();
         Controller controller = loader.getController();
         primaryStage.setTitle("Car Park System");
-        Scene main = new Scene(root, 3840, 2160);
+        Scene main = new Scene(root, 1200, 700);
         main.getStylesheets().add(Main.class.getResource("css.css").toExternalForm());
         primaryStage.setScene(main);
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        primaryStage.setX(primaryScreenBounds.getMinX());
-        primaryStage.setY(primaryScreenBounds.getMinY());
-        primaryStage.setWidth(primaryScreenBounds.getWidth());
-        primaryStage.setHeight(primaryScreenBounds.getHeight());
-        primaryStage.setMaximized(true);
         primaryStage.show();
+
     }
 
 

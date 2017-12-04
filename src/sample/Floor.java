@@ -8,9 +8,11 @@ public class Floor
     private Bay[] bays;
     private String floorLetter;
     private CarPark carPark;
+    private boolean secure;
 
     public Floor(CarPark carPark, int bayN, boolean secure)
     {
+        this.secure = secure;
         if (secure)
         {
             for (int i = 0; i < bayN; i++)
@@ -40,6 +42,21 @@ public class Floor
     public void bayViolation(SecureBay secureBay)
     {
         carPark.bayViolation(secureBay);
+    }
+
+    public int noOfSpaces(){
+        int sum = 0;
+        if (secure){
+            for (Bay sbay: bays)
+            {
+                sum+=((SecureBay)sbay).isCarPresent()?1:0;
+            }
+        }
+        else
+        {
+            sum = -1;
+        }
+        return sum;
     }
 
 
