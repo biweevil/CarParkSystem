@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="800.0">
         <menus>
@@ -174,7 +174,37 @@
                      <children>
                         <SplitPane dividerPositions="0.5" prefHeight="500.0" prefWidth="800.0">
                           <items>
-                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" layoutX="112.0" layoutY="75.0" prefHeight="258.0" prefWidth="125.0" spacing="5.0" styleClass="formbg">
+                                       <children>
+                                          <Label text="Make a Booking">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" prefHeight="127.0" prefWidth="96.0" stylesheets="@css.css" text="Coins in use:" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="93.0" prefWidth="90.0" text="367 Coins">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" prefHeight="11.0" prefWidth="48.0" text="Pool Size" />
+                                          <TextField />
+                                          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Update">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets top="50.0" />
+                                       </opaqueInsets>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children></Pane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
                           </items>
                         </SplitPane>
