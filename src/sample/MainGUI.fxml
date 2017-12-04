@@ -9,6 +9,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -31,6 +32,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
 
 
 <AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
@@ -316,6 +318,7 @@
                      <children>
                         <SplitPane fx:id="AppSplitBar" dividerPositions="0.17252931323283083" orientation="VERTICAL" prefHeight="599.0" prefWidth="1200.0">
                           <items>
+
                             <AnchorPane fx:id="LogInBG" maxHeight="100.0" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="1200.0">
                                  <children>
                                     <TextField fx:id="UserNameTextbox" layoutX="608.0" layoutY="57.0" />
@@ -354,8 +357,29 @@
                                        </effect>
                                     </Label>
                                  </children>
+                                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" layoutX="88.0" layoutY="75.0" prefHeight="258.0" prefWidth="244.0" spacing="5.0" styleClass="formbg">
+                                       <children>
+                                          <Label prefHeight="83.0" prefWidth="220.0" text="Select a Payment Method">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ChoiceBox prefWidth="150.0" />
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets top="50.0" />
+                                       </opaqueInsets>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children></Pane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
                               </AnchorPane>
                             <AnchorPane fx:id="AppMain" minHeight="0.0" minWidth="0.0" prefHeight="499.0" prefWidth="1200.0" />
+
                           </items>
                         </SplitPane>
                      </children>
