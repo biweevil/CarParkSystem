@@ -10,6 +10,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -19,6 +20,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -31,6 +33,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -67,16 +70,183 @@
         <panes>
           <TitledPane text="Car Park Manager">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane fx:id="FloorsBox" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView fx:id="ManagerList" layoutX="391.0" layoutY="92.0" prefHeight="415.0" prefWidth="420.0" />
-                        <FlowPane alignment="BOTTOM_CENTER" layoutX="391.0" layoutY="49.0" prefHeight="42.0" prefWidth="420.0">
+                        <ListView fx:id="ManagerList" layoutX="601.0" layoutY="92.0" prefHeight="415.0" prefWidth="420.0" />
+                        <FlowPane alignment="BOTTOM_CENTER" layoutX="601.0" layoutY="50.0" prefHeight="42.0" prefWidth="420.0">
                            <children>
-                            <Button fx:id="CarParkSelect" alignment="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" text="Car Park Select" />
-                              <Button fx:id="FloorSelect" alignment="CENTER" layoutX="161.0" layoutY="21.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" text="Floor Select" />
-                              <Button fx:id="BaySelect" alignment="CENTER" layoutX="220.0" layoutY="21.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" text="Bay Select" />
+                            <Button fx:id="CarParkSelect" alignment="CENTER" mnemonicParsing="false" prefWidth="140.0" text="Car Park Select" />
+                              <Button fx:id="FloorSelect" alignment="CENTER" layoutX="161.0" layoutY="21.0" mnemonicParsing="false" prefWidth="140.0" text="Floor Select" />
+                              <Button fx:id="BaySelect" alignment="CENTER" layoutX="220.0" layoutY="21.0" mnemonicParsing="false" prefWidth="140.0" text="Bay Select" />
                            </children>
                         </FlowPane>
+                        <Accordion layoutX="209.0" layoutY="67.0" prefHeight="522.0" prefWidth="392.0">
+                          <panes>
+                            <TitledPane fx:id="OverviewPanel" animated="false" text="Overview">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="NewCarParkButton" layoutX="62.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="New Car Park" />
+                                          <Button fx:id="DeleteSelectedCarParkButton" layoutX="62.0" layoutY="66.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Delete Selected Car Park" />
+                                          <Separator layoutX="62.0" layoutY="117.0" prefWidth="284.0" />
+                                          <HBox alignment="CENTER" layoutX="62.0" layoutY="130.0" prefHeight="44.0" prefWidth="284.0">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Total Car Parks">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="TotalCarParksBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="62.0" layoutY="174.0" prefHeight="44.0" prefWidth="284.0">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Total Spaces">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="TotalSpacesBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </AnchorPane>
+                              </content>
+                            </TitledPane>
+                            <TitledPane fx:id="CarParkEditorPanel" animated="false" prefHeight="491.0" prefWidth="392.0" text="Car Park Editor">
+                                 <content>
+                                    <ScrollPane hbarPolicy="NEVER" prefHeight="430.0" prefWidth="390.0">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="399.0">
+                                             <children>
+                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="33.0" prefHeight="44.0" prefWidth="284.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Car Park Name">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="CarParkNameBox" alignment="CENTER" prefHeight="26.0" prefWidth="146.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="77.0" prefHeight="44.0" prefWidth="284.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Exit Points">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="ExitPointsBox" alignment="CENTER" prefHeight="26.0" prefWidth="146.0" />
+                                                   </children>
+                                                </HBox>
+                                                <Separator layoutX="58.0" layoutY="120.0" prefHeight="0.0" prefWidth="284.0" />
+                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="126.0" prefHeight="44.0" prefWidth="284.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Capacity">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="CapacityBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="170.0" prefHeight="44.0" prefWidth="284.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Cars">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="CarsBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="214.0" prefHeight="44.0" prefWidth="284.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Spaces">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="SpacesBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="258.0" prefHeight="44.0" prefWidth="284.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Bookings">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="BookingsBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="302.0" prefHeight="44.0" prefWidth="284.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Floors">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="346.0" prefHeight="44.0" prefWidth="284.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Secure Floors">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="SecureFloorsBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" layoutX="57.0" layoutY="390.0" prefHeight="44.0" prefWidth="284.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Secure Bays">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="SecureBayBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </ScrollPane>
+                                 </content>
+                            </TitledPane>
+                            <TitledPane fx:id="FloorEditorPanel" animated="false" text="Floor Editor">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Button layoutX="53.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Add Floor" />
+                                          <Button layoutX="53.0" layoutY="66.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Remove Floor" />
+                                          <HBox alignment="CENTER" layoutX="53.0" layoutY="118.0" prefHeight="44.0" prefWidth="284.0">
+                                             <children>
+                                                <CheckBox fx:id="SecureFloorCheckBox" alignment="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="224.0" text="Secure Floor" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="53.0" layoutY="172.0" prefHeight="44.0" prefWidth="284.0">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Floor Capacity">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="FloorCapacityBox" alignment="CENTER" prefHeight="26.0" prefWidth="146.0" />
+                                             </children>
+                                          </HBox>
+                                          <Separator layoutX="53.0" layoutY="117.0" prefHeight="0.0" prefWidth="284.0" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </TitledPane>
+                          </panes>
+                        </Accordion>
                      </children>
                   </AnchorPane>
             </content>
