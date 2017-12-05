@@ -33,20 +33,27 @@ public class CarPark
 
 
 
-    private Stack <Floor> floorList;
-    private EntryPoint entryPoint;
-    private Stack <ExitPoint> exitPoints;
-    private Stack <PaymentMachine> paymentMachines;
-    private CoinManager coinManager;
-    private PaymentModel paymentModel;
-    private int noOfCars;
+    public int exitPoints;
+    public String carParkName;
 
-    public CarPark()
+    public Stack <Floor> floorList;
+    public EntryPoint entryPoint;
+    public Stack <PaymentMachine> paymentMachines;
+    public CoinManager coinManager;
+    public PaymentModel paymentModel;
+    public int noOfCars;
+
+    public CarPark(String name)
     {
+        exitPoints = 1;
+
         floorList = new Stack <Floor>();
-        exitPoints = new Stack <ExitPoint>();
         paymentMachines = new Stack <PaymentMachine>();
         noOfCars = 0;
+    }
+
+    public String toString(){
+        return carParkName;
     }
 
     public CoinManager getCoinManager()
@@ -82,16 +89,6 @@ public class CarPark
     public void removeFloor()
     {
         floorList.pop();
-    }
-
-    public void addExitPoint()
-    {
-        exitPoints.push(new ExitPoint());
-    }
-
-    public void removeExitPoint()
-    {
-        exitPoints.pop();
     }
 
     public void addPaymentMachine()

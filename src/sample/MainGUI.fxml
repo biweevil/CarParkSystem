@@ -38,7 +38,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="1200.0">
         <menus>
@@ -56,7 +56,9 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="NextHourButton" mnemonicParsing="false" text="Next Hour" />
+                  <MenuItem fx:id="NextDayButton" mnemonicParsing="false" text="Next Day" />
+                  <MenuItem fx:id="Next10Button" mnemonicParsing="false" text="Next 10 Minutes" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -66,7 +68,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Accordion layoutY="25.0" prefHeight="675.0" prefWidth="1200.0">
+      <Accordion layoutY="25.0" prefHeight="655.0" prefWidth="1200.0">
         <panes>
           <TitledPane text="Car Park Manager">
             <content>
@@ -80,7 +82,7 @@
                               <Button fx:id="BaySelect" alignment="CENTER" layoutX="220.0" layoutY="21.0" mnemonicParsing="false" prefWidth="140.0" text="Bay Select" />
                            </children>
                         </FlowPane>
-                        <Accordion layoutX="209.0" layoutY="67.0" prefHeight="522.0" prefWidth="392.0">
+                        <Accordion layoutX="209.0" layoutY="67.0" prefHeight="440.0" prefWidth="392.0">
                           <panes>
                             <TitledPane fx:id="OverviewPanel" animated="false" text="Overview">
                               <content>
@@ -143,7 +145,7 @@
                                                    </children>
                                                 </HBox>
                                                 <Separator layoutX="58.0" layoutY="120.0" prefHeight="0.0" prefWidth="284.0" />
-                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="126.0" prefHeight="44.0" prefWidth="284.0">
+                                                <HBox alignment="CENTER" layoutX="59.0" layoutY="310.0" prefHeight="44.0" prefWidth="284.0">
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Capacity">
                                                          <font>
@@ -153,7 +155,7 @@
                                                       <TextField fx:id="CapacityBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
                                                    </children>
                                                 </HBox>
-                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="170.0" prefHeight="44.0" prefWidth="284.0">
+                                                <HBox alignment="CENTER" layoutX="59.0" layoutY="354.0" prefHeight="44.0" prefWidth="284.0">
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Cars">
                                                          <font>
@@ -163,7 +165,7 @@
                                                       <TextField fx:id="CarsBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
                                                    </children>
                                                 </HBox>
-                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="214.0" prefHeight="44.0" prefWidth="284.0">
+                                                <HBox alignment="CENTER" layoutX="59.0" layoutY="398.0" prefHeight="44.0" prefWidth="284.0">
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Spaces">
                                                          <font>
@@ -173,7 +175,7 @@
                                                       <TextField fx:id="SpacesBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
                                                    </children>
                                                 </HBox>
-                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="258.0" prefHeight="44.0" prefWidth="284.0">
+                                                <HBox alignment="CENTER" layoutX="59.0" layoutY="442.0" prefHeight="44.0" prefWidth="284.0">
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Bookings">
                                                          <font>
@@ -183,7 +185,7 @@
                                                       <TextField fx:id="BookingsBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
                                                    </children>
                                                 </HBox>
-                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="302.0" prefHeight="44.0" prefWidth="284.0">
+                                                <HBox alignment="CENTER" layoutX="59.0" layoutY="486.0" prefHeight="44.0" prefWidth="284.0">
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Floors">
                                                          <font>
@@ -193,7 +195,7 @@
                                                       <TextField alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
                                                    </children>
                                                 </HBox>
-                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="346.0" prefHeight="44.0" prefWidth="284.0">
+                                                <HBox alignment="CENTER" layoutX="59.0" layoutY="530.0" prefHeight="44.0" prefWidth="284.0">
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Secure Floors">
                                                          <font>
@@ -203,7 +205,7 @@
                                                       <TextField fx:id="SecureFloorsBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
                                                    </children>
                                                 </HBox>
-                                                <HBox alignment="CENTER" layoutX="57.0" layoutY="390.0" prefHeight="44.0" prefWidth="284.0">
+                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="574.0" prefHeight="44.0" prefWidth="284.0">
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Secure Bays">
                                                          <font>
@@ -211,6 +213,14 @@
                                                          </font>
                                                       </Label>
                                                       <TextField fx:id="SecureBayBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
+                                                   </children>
+                                                </HBox>
+                                                <Button layoutX="58.0" layoutY="132.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Add Floor" />
+                                                <Button layoutX="58.0" layoutY="184.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Remove Floor" />
+                                                <Separator layoutX="59.0" layoutY="308.0" prefWidth="284.0" />
+                                                <HBox alignment="CENTER" layoutX="58.0" layoutY="239.0" prefHeight="44.0" prefWidth="284.0">
+                                                   <children>
+                                                      <CheckBox fx:id="SecureFloorCheckBox" alignment="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="224.0" text="Secure Floor" />
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -223,14 +233,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <Button layoutX="53.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Add Floor" />
-                                          <Button layoutX="53.0" layoutY="66.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Remove Floor" />
-                                          <HBox alignment="CENTER" layoutX="53.0" layoutY="118.0" prefHeight="44.0" prefWidth="284.0">
-                                             <children>
-                                                <CheckBox fx:id="SecureFloorCheckBox" alignment="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="224.0" text="Secure Floor" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" layoutX="53.0" layoutY="172.0" prefHeight="44.0" prefWidth="284.0">
+                                          <HBox alignment="CENTER" layoutX="53.0" layoutY="14.0" prefHeight="44.0" prefWidth="284.0">
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Floor Capacity">
                                                    <font>
@@ -240,7 +243,27 @@
                                                 <TextField fx:id="FloorCapacityBox" alignment="CENTER" prefHeight="26.0" prefWidth="146.0" />
                                              </children>
                                           </HBox>
-                                          <Separator layoutX="53.0" layoutY="117.0" prefHeight="0.0" prefWidth="284.0" />
+                                          <Separator layoutX="53.0" layoutY="57.0" prefWidth="284.0" />
+                                          <Label alignment="CENTER" layoutX="106.0" layoutY="60.0" prefHeight="25.0" prefWidth="178.0" text="Override Bay" />
+                                          <Button fx:id="FreeSpaceButton" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" text="Free Space" />
+                                          <Button fx:id="FillSpacesButton" layoutX="195.0" layoutY="85.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" text="Disable Space" />
+                                          <Separator layoutX="53.0" layoutY="136.0" prefWidth="284.0" />
+                                          <AnchorPane fx:id="CarStatusPanel" layoutX="53.0" layoutY="150.0" prefHeight="200.0" prefWidth="284.0">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="39.0" prefWidth="284.0" text="Car Status" />
+                                                <Label fx:id="hasPaidLabel" alignment="CENTER" layoutY="39.0" prefHeight="40.0" prefWidth="284.0" text="Paid : True">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="CostLabel" alignment="CENTER" layoutY="79.0" prefHeight="40.0" prefWidth="284.0" text="Current Charge : £0.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Button fx:id="OverrideChargeButton" layoutY="119.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Override Charge" />
+                                             </children>
+                                          </AnchorPane>
                                        </children>
                                     </AnchorPane>
                               </content>
@@ -453,8 +476,8 @@
                                                             <RadioButton fx:id="Pound1" layoutX="84.0" layoutY="82.0" mnemonicParsing="false" text="£1" />
                                                             <RadioButton fx:id="Pence20" layoutX="142.0" layoutY="65.0" mnemonicParsing="false" text="20p" />
                                                             <RadioButton fx:id="Pence10" layoutX="142.0" layoutY="82.0" mnemonicParsing="false" text="10p" />
-                                                            <TextField fx:id="CashDisplay" disable="true" editable="false" layoutX="27.0" layoutY="23.0" />
-                                                            <Button fx:id="InsertCash" layoutX="31.0" layoutY="141.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Insert Cash" />
+                                                            <TextField fx:id="CashDisplay" editable="false" layoutX="27.0" layoutY="23.0" />
+                                                            <Button fx:id="InsertCashButton" layoutX="31.0" layoutY="141.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Insert Cash" />
                                                          </children>
                                                       </AnchorPane>
                                                 </content>
@@ -561,5 +584,14 @@
           </TitledPane>
         </panes>
       </Accordion>
+      <HBox layoutY="680.0" prefHeight="20.0" prefWidth="1200.0">
+         <children>
+            <Label text="Current Date :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
