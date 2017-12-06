@@ -46,9 +46,9 @@ public class CarPark
     public CarPark(String name)
     {
         exitPoints = 1;
+        carParkName = name;
 
         floorList = new Stack <Floor>();
-        paymentMachines = new Stack <PaymentMachine>();
         noOfCars = 0;
     }
 

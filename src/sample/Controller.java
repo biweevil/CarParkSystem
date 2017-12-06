@@ -6,9 +6,13 @@ package sample;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
@@ -26,6 +30,8 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 public class Controller {
 
@@ -48,7 +54,7 @@ public class Controller {
     private AnchorPane FloorsBox; // Value injected by FXMLLoader
 
     @FXML // fx:id="ManagerList"
-    private ListView<?> ManagerList; // Value injected by FXMLLoader
+    private ListView<String> ManagerList; // Value injected by FXMLLoader
 
     @FXML // fx:id="CarParkSelect"
     private Button CarParkSelect; // Value injected by FXMLLoader
@@ -342,6 +348,12 @@ public class Controller {
     public Floor currentFloor;
     public Bay bayCurrentBay;
     public List<CarPark> carParkList;
+    public List<Floor> floorList;
+    public List<Bay> bayList;
+    public enum listMode{
+        CARPARKS, FLOORS, BAYS
+    }
+    public listMode currentListMode = listMode.CARPARKS;
 
     public void CarParkManCallbacks(){
         currentDateTime = LocalDateTime.now();
@@ -349,11 +361,49 @@ public class Controller {
         carParkList = new LinkedList <CarPark>();
         CarPark defaultCP = new CarPark("Default Car Park");
         carParkList.add(defaultCP);
+        currentCarPark = defaultCP;
 
+        NewCarParkButton.setOnAction(event -> {
+            int i = 0;
+            currentCarPark = new CarPark("Default Car Park"+ ++i);
+            carParkList.add(currentCarPark);
+            Update();
+        });
+
+
+
+        Update();
+    }
+
+    public void Update(){
+        UpdateManList();
     }
 
     public void CarParkManUpdate(){
+        UpdateManList();
+    }
 
+    public void UpdateManList(){
+        LinkedList<String> stringList = new LinkedList <String>();
+        switch (currentListMode){
+            case BAYS:
+                for(int count = 0; count < bayList.size(); count++){
+                    stringList.add(bayList.get(count).toString());
+                }
+                break;
+            case FLOORS:
+                for(int count = 0; count < floorList.size(); count++){
+                    stringList.add(floorList.get(count).toString());
+                }
+                break;
+            case CARPARKS:
+                for(int count = 0; count < carParkList.size(); count++){
+                    stringList.add(carParkList.get(count).toString());
+                }
+                break;
+        }
+        ObservableList<String> observableList = FXCollections.observableArrayList(stringList);
+        ManagerList.setItems(observableList);
     }
 
 }
