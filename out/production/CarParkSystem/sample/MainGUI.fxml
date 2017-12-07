@@ -122,7 +122,7 @@
                                  <content>
                                     <ScrollPane hbarPolicy="NEVER" prefHeight="430.0" prefWidth="390.0">
                                       <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="399.0">
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="703.0" prefWidth="399.0">
                                              <children>
                                                 <HBox alignment="CENTER" layoutX="58.0" layoutY="33.0" prefHeight="44.0" prefWidth="284.0">
                                                    <children>

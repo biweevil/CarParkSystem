@@ -350,9 +350,12 @@ public class Controller {
     public List<CarPark> carParkList;
     public List<Floor> floorList;
     public List<Bay> bayList;
+
     public enum listMode{
         CARPARKS, FLOORS, BAYS
     }
+    public int CARPARKCOUNTUP = 1;
+
     public listMode currentListMode = listMode.CARPARKS;
 
     public void CarParkManCallbacks(){
@@ -364,26 +367,52 @@ public class Controller {
         currentCarPark = defaultCP;
 
         NewCarParkButton.setOnAction(event -> {
-            int i = 0;
-            currentCarPark = new CarPark("Default Car Park"+ ++i);
-            carParkList.add(currentCarPark);
-            Update();
+            if(currentListMode == listMode.CARPARKS)
+            {
+                String newName = "Car Park" + CARPARKCOUNTUP++;
+                Iterator <CarPark> stringIt = carParkList.iterator();
+                while (stringIt.hasNext())
+                {
+                    if (stringIt.next().toString().equals(newName))
+                    {
+                        newName = "Car Park" + CARPARKCOUNTUP++;
+                        stringIt = carParkList.iterator();
+                    }
+                }
+                currentCarPark = new CarPark(newName);
+                carParkList.add(currentCarPark);
+                Update();
+            }
         });
 
-
-
+        DeleteSelectedCarParkButton.setOnAction(event -> {
+            if(currentListMode == listMode.CARPARKS)
+            {
+                UpdateMan();
+                String searchName = ManagerList.selectionModelProperty().toString();
+                carParkList.forEach(carPark ->
+                {
+                    if (carPark.toString().equals(searchName))
+                    {
+                        carParkList.remove(carPark);
+                        return;
+                    }
+                });
+            }
+        });
         Update();
+
     }
 
     public void Update(){
-        UpdateManList();
+        UpdateMan();
     }
 
     public void CarParkManUpdate(){
-        UpdateManList();
+        UpdateMan();
     }
 
-    public void UpdateManList(){
+    public void UpdateMan(){
         LinkedList<String> stringList = new LinkedList <String>();
         switch (currentListMode){
             case BAYS:
@@ -404,6 +433,7 @@ public class Controller {
         }
         ObservableList<String> observableList = FXCollections.observableArrayList(stringList);
         ManagerList.setItems(observableList);
+        
     }
 
 }
