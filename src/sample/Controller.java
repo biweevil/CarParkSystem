@@ -11,22 +11,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Accordion;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -346,7 +335,7 @@ public class Controller {
     public LocalDateTime currentDateTime;
     public CarPark currentCarPark;
     public Floor currentFloor;
-    public Bay bayCurrentBay;
+    public Bay currentBay;
     public List<CarPark> carParkList;
     public List<Floor> floorList;
     public List<Bay> bayList;
@@ -369,6 +358,7 @@ public class Controller {
         NewCarParkButton.setOnAction(event -> {
             if(currentListMode == listMode.CARPARKS)
             {
+                CARPARKCOUNTUP = 0;
                 String newName = "Car Park" + CARPARKCOUNTUP++;
                 Iterator <CarPark> stringIt = carParkList.iterator();
                 while (stringIt.hasNext())
@@ -389,18 +379,50 @@ public class Controller {
             if(currentListMode == listMode.CARPARKS)
             {
                 UpdateMan();
-                String searchName = ManagerList.selectionModelProperty().toString();
-                carParkList.forEach(carPark ->
+                if(currentCarPark != null)
                 {
-                    if (carPark.toString().equals(searchName))
-                    {
-                        carParkList.remove(carPark);
-                        return;
-                    }
-                });
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete "+currentCarPark.toString());
+                    alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {
+                        carParkList.remove(currentCarPark);
+                        currentCarPark = null;
+                    });
+                }
+                Update();
             }
         });
-        Update();
+
+
+
+        ManagerList.setOnMousePressed(event -> {
+                    String searchName = ManagerList.getFocusModel().getFocusedItem();
+            switch (currentListMode){
+                case CARPARKS:
+                    carParkList.forEach(carPark ->
+                    {
+                        if (carPark.toString().equals(searchName))
+                        {
+                            currentCarPark = carPark;
+                        }
+                    });
+                    break;
+                case FLOORS:
+                    floorList.forEach(floor ->
+                    {
+                        if (floor.toString().equals(searchName))
+                        {
+                            currentFloor = floor;
+                        }
+                    });
+                    break;
+                case BAYS:
+                    bayList.forEach(bay -> {
+                        if (bay.toString().equals(searchName))
+                        {
+                            currentBay = bay;
+                        }
+                    });
+            }
+        });
 
     }
 
@@ -433,7 +455,8 @@ public class Controller {
         }
         ObservableList<String> observableList = FXCollections.observableArrayList(stringList);
         ManagerList.setItems(observableList);
-        
+
+        TotalCarParksBox.setText(String.valueOf(carParkList.size()));
     }
 
 }
