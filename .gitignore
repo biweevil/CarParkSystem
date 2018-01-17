@@ -25,3 +25,4 @@ hs_err_pid*
 *.html
 .project
 *.iml
+out/production/CarParkSystem/sample/MainGUI.fxml

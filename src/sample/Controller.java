@@ -4,21 +4,21 @@
 
 package sample;
 
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import sun.plugin2.applet.Applet2Manager;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
@@ -252,7 +252,20 @@ public class Controller {
     @FXML // fx:id="AppMain"
     private AnchorPane AppMain; // Value injected by FXMLLoader
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
+    private Button SignUpButton;
+
+    @FXML
+    private TextField UserNameSignupTextbox1;
+
+    @FXML
+    private PasswordField PasswordSignupTextbox1;
+
+    @FXML
+    private Button LogoutButton;
+
+    @FXML
+        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert NextHourButton != null : "fx:id=\"NextHourButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert NextDayButton != null : "fx:id=\"NextDayButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -330,6 +343,7 @@ public class Controller {
         assert AppMain != null : "fx:id=\"AppMain\" was not injected: check your FXML file 'MainGUI.fxml'.";
 
         CarParkManCallbacks();
+        AppCallBacks();
     }
 
     public LocalDateTime currentDateTime;
@@ -340,31 +354,29 @@ public class Controller {
     public List<Floor> floorList;
     public List<Bay> bayList;
 
-    public enum listMode{
+    public enum listMode {
         CARPARKS, FLOORS, BAYS
     }
+
     public int CARPARKCOUNTUP = 1;
 
     public listMode currentListMode = listMode.CARPARKS;
 
-    public void CarParkManCallbacks(){
+    public void CarParkManCallbacks() {
         currentDateTime = LocalDateTime.now();
 
-        carParkList = new LinkedList <CarPark>();
+        carParkList = new LinkedList<CarPark>();
         CarPark defaultCP = new CarPark("Default Car Park");
         carParkList.add(defaultCP);
         currentCarPark = defaultCP;
 
         NewCarParkButton.setOnAction(event -> {
-            if(currentListMode == listMode.CARPARKS)
-            {
+            if (currentListMode == listMode.CARPARKS) {
                 CARPARKCOUNTUP = 0;
                 String newName = "Car Park" + CARPARKCOUNTUP++;
-                Iterator <CarPark> stringIt = carParkList.iterator();
-                while (stringIt.hasNext())
-                {
-                    if (stringIt.next().toString().equals(newName))
-                    {
+                Iterator<CarPark> stringIt = carParkList.iterator();
+                while (stringIt.hasNext()) {
+                    if (stringIt.next().toString().equals(newName)) {
                         newName = "Car Park" + CARPARKCOUNTUP++;
                         stringIt = carParkList.iterator();
                     }
@@ -376,12 +388,10 @@ public class Controller {
         });
 
         DeleteSelectedCarParkButton.setOnAction(event -> {
-            if(currentListMode == listMode.CARPARKS)
-            {
+            if (currentListMode == listMode.CARPARKS) {
                 UpdateMan();
-                if(currentCarPark != null)
-                {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete "+currentCarPark.toString());
+                if (currentCarPark != null) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + currentCarPark.toString());
                     alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {
                         carParkList.remove(currentCarPark);
                         currentCarPark = null;
@@ -392,15 +402,13 @@ public class Controller {
         });
 
 
-
         ManagerList.setOnMousePressed(event -> {
-                    String searchName = ManagerList.getFocusModel().getFocusedItem();
-            switch (currentListMode){
+            String searchName = ManagerList.getFocusModel().getFocusedItem();
+            switch (currentListMode) {
                 case CARPARKS:
                     carParkList.forEach(carPark ->
                     {
-                        if (carPark.toString().equals(searchName))
-                        {
+                        if (carPark.toString().equals(searchName)) {
                             currentCarPark = carPark;
                         }
                     });
@@ -408,16 +416,14 @@ public class Controller {
                 case FLOORS:
                     floorList.forEach(floor ->
                     {
-                        if (floor.toString().equals(searchName))
-                        {
+                        if (floor.toString().equals(searchName)) {
                             currentFloor = floor;
                         }
                     });
                     break;
                 case BAYS:
                     bayList.forEach(bay -> {
-                        if (bay.toString().equals(searchName))
-                        {
+                        if (bay.toString().equals(searchName)) {
                             currentBay = bay;
                         }
                     });
@@ -426,29 +432,29 @@ public class Controller {
 
     }
 
-    public void Update(){
+    public void Update() {
         UpdateMan();
     }
 
-    public void CarParkManUpdate(){
+    public void CarParkManUpdate() {
         UpdateMan();
     }
 
-    public void UpdateMan(){
-        LinkedList<String> stringList = new LinkedList <String>();
-        switch (currentListMode){
+    public void UpdateMan() {
+        LinkedList<String> stringList = new LinkedList<String>();
+        switch (currentListMode) {
             case BAYS:
-                for(int count = 0; count < bayList.size(); count++){
+                for (int count = 0; count < bayList.size(); count++) {
                     stringList.add(bayList.get(count).toString());
                 }
                 break;
             case FLOORS:
-                for(int count = 0; count < floorList.size(); count++){
+                for (int count = 0; count < floorList.size(); count++) {
                     stringList.add(floorList.get(count).toString());
                 }
                 break;
             case CARPARKS:
-                for(int count = 0; count < carParkList.size(); count++){
+                for (int count = 0; count < carParkList.size(); count++) {
                     stringList.add(carParkList.get(count).toString());
                 }
                 break;
@@ -458,5 +464,82 @@ public class Controller {
 
         TotalCarParksBox.setText(String.valueOf(carParkList.size()));
     }
+
+    private void AppCallBacks() {
+        new File("Accounts").mkdirs();
+        SignUpButton.setOnAction((ActionEvent event) -> {
+
+            if ((UserNameSignupTextbox1.getText().isEmpty()) || (PasswordSignupTextbox1.getText().isEmpty())) {
+                LogInFeeback.setText("You need to enter the Username and Password");
+            } else {
+                if (new File("Accounts/" + UserNameSignupTextbox1.getText() + ".txt").exists()) {
+                    LogInFeeback.setText("Username already Exists");
+                    UserNameSignupTextbox1.setText("");
+                    PasswordSignupTextbox1.setText("");
+                } else {
+                    File accountFile;
+                    accountFile = new File("Accounts/" +
+                            UserNameSignupTextbox1.getText() + ".txt");
+                    BufferedWriter bw = null;
+                    FileWriter fw;
+
+                    try {
+                        accountFile.createNewFile();
+                        fw = new FileWriter(accountFile);
+                        bw = new BufferedWriter(fw);
+                        bw.write(PasswordSignupTextbox1.getText());
+                        bw.newLine();
+                        bw.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    UserNameSignupTextbox1.setText("");
+                    PasswordSignupTextbox1.setText("");
+                    AppSplitBar.setDividerPosition(0, 0.0);
+                    AppMain.setVisible(true);
+                    LogInFeeback.setText("Login Succesful!");
+                }
+            }
+
+
+        });
+
+        LoginButton.setOnAction((event -> {
+            File currentAccount = new File("Accounts/" + UserNameTextbox.getText() + ".txt");
+            if (currentAccount.exists()) {
+                try {
+                    Scanner scanner = new Scanner(new FileInputStream(currentAccount));
+                    if (scanner.nextLine().equals(PasswordTextbox.getText())) {
+                        LogInFeeback.setText("Login Succesful!");
+                        UserNameTextbox.setText("");
+                        PasswordTextbox.setText("");
+                        AppSplitBar.setDividerPosition(0, 0.0);
+                        AppMain.setVisible(true);
+
+                    } else {
+                        LogInFeeback.setText("Incorrect Password");
+                        UserNameTextbox.setText("");
+                        PasswordTextbox.setText("");
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                LogInFeeback.setText("User Doesn't exist");
+                UserNameTextbox.setText("");
+                PasswordTextbox.setText("");
+            }
+
+        }));
+        LogoutButton.setOnAction(event -> {
+
+            AppMain.setVisible(false);
+            AppSplitBar.setDividerPosition(0, 0.2764);
+            LogInFeeback.setText("Succesfully Signed Out!");
+
+        });
+
+    }
+
 
 }
