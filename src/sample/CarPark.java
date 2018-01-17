@@ -40,7 +40,6 @@ public class CarPark
     public EntryPoint entryPoint;
     public Stack <PaymentMachine> paymentMachines;
     public CoinManager coinManager;
-    public PaymentModel paymentModel;
     public int noOfCars;
 
     public CarPark(String name)
@@ -49,6 +48,8 @@ public class CarPark
         carParkName = name;
 
         floorList = new Stack <Floor>();
+        Floor firstFloor = new Floor(this, 10, false, floorList.size());
+        floorList.push(firstFloor);
         noOfCars = 0;
     }
 
@@ -83,7 +84,7 @@ public class CarPark
 
     public void addFloor(int bays, boolean secure)
     {
-        floorList.push(new Floor(this, bays, secure));
+        floorList.push(new Floor(this, bays, secure, floorList.size()));
     }
 
     public void removeFloor()
@@ -93,12 +94,14 @@ public class CarPark
 
     public void addPaymentMachine()
     {
-        paymentMachines.push(new PaymentMachine(this, paymentModel));
+        paymentMachines.push(new PaymentMachine(this));
     }
 
     public void bayViolation(SecureBay secureBay)
     {
         secureBay.toString();
     }
+
+
 
 }

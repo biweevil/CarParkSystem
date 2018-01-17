@@ -6,10 +6,7 @@ package sample;
 
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
@@ -23,6 +20,12 @@ import javafx.scene.layout.VBox;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class Controller {
+
+    @FXML // fx:id="NewFloorButton"
+    private Button NewFloorButton; // Value injected by FXMLLoader
+
+    @FXML // fx:id="RemoveFloorButton"
+    private Button RemoveFloorButton; // Value injected by FXMLLoader
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -252,6 +255,7 @@ public class Controller {
     @FXML // fx:id="AppMain"
     private AnchorPane AppMain; // Value injected by FXMLLoader
 
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert NextHourButton != null : "fx:id=\"NextHourButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -354,6 +358,10 @@ public class Controller {
         CarPark defaultCP = new CarPark("Default Car Park");
         carParkList.add(defaultCP);
         currentCarPark = defaultCP;
+        currentFloor = currentCarPark.getFloor(0);
+        currentBay = currentFloor.getBay(0);
+        bayList = new ArrayList<Bay>(currentFloor.noOfBays());
+        floorList = currentCarPark.floorList;
 
         NewCarParkButton.setOnAction(event -> {
             if(currentListMode == listMode.CARPARKS)
@@ -391,7 +399,13 @@ public class Controller {
             }
         });
 
+        NewFloorButton.setOnAction(event -> {
+            currentCarPark.addFloor(100, false);
+        });
 
+        RemoveFloorButton.setOnAction(event -> {
+
+        });
 
         ManagerList.setOnMousePressed(event -> {
                     String searchName = ManagerList.getFocusModel().getFocusedItem();
@@ -402,6 +416,8 @@ public class Controller {
                         if (carPark.toString().equals(searchName))
                         {
                             currentCarPark = carPark;
+                            currentFloor = currentCarPark.floorList.get(0);
+                            currentBay = currentFloor.getBay(0);
                         }
                     });
                     break;
@@ -411,6 +427,7 @@ public class Controller {
                         if (floor.toString().equals(searchName))
                         {
                             currentFloor = floor;
+                            currentBay = currentFloor.getBay(0);
                         }
                     });
                     break;
@@ -422,6 +439,21 @@ public class Controller {
                         }
                     });
             }
+        });
+
+        CarParkSelect.setOnAction(event -> {
+            currentListMode = listMode.CARPARKS;
+            CarParkManUpdate();
+        });
+
+        FloorSelect.setOnAction(event -> {
+            currentListMode = listMode.FLOORS;
+            CarParkManUpdate();
+        });
+
+        BaySelect.setOnAction(event -> {
+            currentListMode = listMode.BAYS;
+            CarParkManUpdate();
         });
 
     }
@@ -444,7 +476,7 @@ public class Controller {
                 break;
             case FLOORS:
                 for(int count = 0; count < floorList.size(); count++){
-                    stringList.add(floorList.get(count).toString());
+                    stringList.add(currentCarPark.floorList.get(count).toString());
                 }
                 break;
             case CARPARKS:

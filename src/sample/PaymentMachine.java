@@ -10,11 +10,11 @@ public class PaymentMachine
     private Coin heldCoin;
     private String status;
 
-    public PaymentMachine(CarPark carPark, PaymentModel paymentModel)
+    public PaymentMachine(CarPark carPark)
     {
         this.carPark = carPark;
         status = "Enter Coin";
-        paymentProcessor = new PaymentProcessor(paymentModel);
+        paymentProcessor = new PaymentProcessor();
     }
 
     public boolean insertCoin(Coin coin)

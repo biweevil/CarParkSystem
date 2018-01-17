@@ -7,11 +7,10 @@ public class PaymentProcessor
 {
     private Coin currentCoin;
     private String status;
-    private PaymentModel paymentModel;
 
-    public PaymentProcessor(PaymentModel paymentModel)
+    public PaymentProcessor()
     {
-        this.paymentModel = paymentModel;
+
     }
 
     public void start(Coin c)

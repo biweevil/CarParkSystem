@@ -215,8 +215,8 @@
                                                       <TextField fx:id="SecureBayBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
                                                    </children>
                                                 </HBox>
-                                                <Button layoutX="58.0" layoutY="132.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Add Floor" />
-                                                <Button layoutX="58.0" layoutY="184.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Remove Floor" />
+                                                <Button fx:id="NewFloorButton" layoutX="58.0" layoutY="132.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Add Floor" />
+                                                <Button fx:id="RemoveFloorButton" layoutX="58.0" layoutY="184.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Remove Floor" />
                                                 <Separator layoutX="59.0" layoutY="308.0" prefWidth="284.0" />
                                                 <HBox alignment="CENTER" layoutX="58.0" layoutY="239.0" prefHeight="44.0" prefWidth="284.0">
                                                    <children>
