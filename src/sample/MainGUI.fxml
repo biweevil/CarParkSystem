@@ -516,33 +516,33 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane fx:id="AppSplitBar" dividerPositions="0.17252931323283083" orientation="VERTICAL" prefHeight="599.0" prefWidth="1200.0">
+                        <SplitPane fx:id="AppSplitBar" dividerPositions="0.2764" orientation="VERTICAL" prefHeight="599.0" prefWidth="1200.0">
                           <items>
-                            <AnchorPane fx:id="LogInBG" maxHeight="100.0" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="1200.0">
+                            <AnchorPane fx:id="LogInBG" maxHeight="161.0" minHeight="0.0" minWidth="0.0" prefHeight="161.0" prefWidth="1198.0">
                                  <children>
-                                    <TextField fx:id="UserNameTextbox" layoutX="608.0" layoutY="57.0" />
-                                    <Label layoutX="514.0" layoutY="54.0" prefHeight="27.0" prefWidth="94.0" text="Username">
+                                    <TextField fx:id="UserNameTextbox" layoutX="496.0" layoutY="54.0" />
+                                    <Label layoutX="402.0" layoutY="56.0" prefHeight="27.0" prefWidth="94.0" text="Username">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="757.0" layoutY="56.0" prefHeight="27.0" prefWidth="83.0" text="Password">
+                                    <Label layoutX="711.0" layoutY="56.0" prefHeight="27.0" prefWidth="83.0" text="Password">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <PasswordField fx:id="PasswordTextbox" layoutX="840.0" layoutY="57.0" />
+                                    <PasswordField fx:id="PasswordTextbox" layoutX="794.0" layoutY="57.0" />
                                     <Button fx:id="LoginButton" layoutX="1005.0" layoutY="50.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" text="Sign In">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Label fx:id="LogInFeeback" layoutX="774.0" layoutY="13.0" prefHeight="25.0" prefWidth="215.0" text="Log In Required">
+                                    <Label fx:id="LogInFeeback" layoutX="402.0" layoutY="102.0" prefHeight="27.0" prefWidth="694.0" text="Log In Required">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <Button layoutX="1005.0" layoutY="7.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="89.0" text="Sign Up">
+                                    <Button fx:id="SignUpButton" layoutX="1005.0" layoutY="7.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="89.0" text="Sign Up">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -555,9 +555,21 @@
                                           <Reflection />
                                        </effect>
                                     </Label>
+                                    <TextField fx:id="UserNameSignupTextbox1" layoutX="496.0" layoutY="14.0" />
+                                    <Label layoutX="402.0" layoutY="16.0" prefHeight="27.0" prefWidth="94.0" text="Username">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField fx:id="PasswordSignupTextbox1" layoutX="794.0" layoutY="17.0" />
+                                    <Label layoutX="711.0" layoutY="19.0" prefHeight="27.0" prefWidth="83.0" text="Password">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
-                            <AnchorPane fx:id="AppMain" minHeight="0.0" minWidth="0.0" prefHeight="499.0" prefWidth="1200.0">
+                            <AnchorPane fx:id="AppMain" minHeight="0.0" minWidth="0.0" prefHeight="460.0" prefWidth="1198.0" visible="false">
                                  <children>
                                     <VBox alignment="TOP_CENTER" prefHeight="178.0" prefWidth="244.0" spacing="5.0" styleClass="formbg">
                                        <children>
@@ -575,6 +587,11 @@
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </VBox>
+                                    <Button fx:id="LogoutButton" layoutX="1041.0" layoutY="17.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="102.0" text="Sign Out">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>
