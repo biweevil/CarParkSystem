@@ -6,21 +6,26 @@ package sample;
 
 import java.io.*;
 import java.net.URL;
-import java.text.ParseException;
-import java.time.LocalDateTime;
 import java.util.*;
 
-import javafx.beans.InvalidationListener;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Camera;
+import javafx.scene.Parent;
+import javafx.scene.PerspectiveCamera;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import sun.plugin2.applet.Applet2Manager;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
+import static java.lang.Thread.sleep;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class Controller
@@ -358,6 +363,13 @@ public class Controller
         CarParkManCallbacks();
         CustomerCallBacks();
         AppCallBacks();
+        try
+        {
+            CoinStageSetup();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         Update();
     }
 
@@ -368,6 +380,7 @@ public class Controller
     private List <Floor> floorList;
     private List <Bay> bayList;
     private AccountInfo accountInfo;
+    private Stage CoinStage;
 
     public enum listMode
     {
@@ -569,15 +582,32 @@ public class Controller
 
     private void CustomerCallBacks()
     {
-        String message = "Please Take Coin";
+        String message1 = "Please Proceed";
+        String message2 = "Press for coin.";
         CoinButton.setOnAction(event -> {
-            if(EntryTextDisplay.getText().equals(message)){
-                EntryTextDisplay.setText("Press for coin.");
-                Tabs.getSelectionModel().getSelectedItem().disableProperty().setValue(true);
-                Tabs.getSelectionModel().selectNext();
-                Tabs.getSelectionModel().getSelectedItem().disableProperty().setValue(false);
+            if(EntryTextDisplay.getText().equals(message1)){
+                EntryTextDisplay.setText(message2);
+            }else{
+                EntryTextDisplay.setText(message1);
+                try
+                {
+                    sleep(500);
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                Platform.runLater(()->{
+                    try
+                    {
+                        sleep(2000);
+                    } catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    CoinStage.show();
+                    CoinStage.toFront();
+                    EntryTextDisplay.setText(message2);});
             }
-            EntryTextDisplay.setText(message);
         });
     }
 
@@ -667,6 +697,21 @@ public class Controller
             accountInfo = null;
         });
 
+    }
+
+    void CoinStageSetup() throws IOException
+    {
+        CoinStage = new Stage();
+        CoinStage.setTitle("Coin Select");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CoinGUI.fxml"));
+        Parent root = (Parent) loader.load();
+        CoinGUI coinGUI = loader.getController();
+        CoinStage.setTitle("Car Park System");
+        int coinWindowW = 200;
+        Scene main = new Scene(root, coinWindowW, 300);
+        main.getStylesheets().add(Main.class.getResource("css.css").toExternalForm());
+        CoinStage.setScene(main);
+        CoinStage.setX(Screen.getPrimary().getVisualBounds().getMaxX()-coinWindowW);
     }
 
 
