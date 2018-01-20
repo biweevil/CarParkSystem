@@ -275,6 +275,9 @@ public class Controller
     private Label AccountBalance; // Value injected by FXMLLoader
 
     @FXML
+    private TabPane Tabs;
+
+    @FXML
         // This method is called by the FXMLLoader when initialization is complete
     void initialize()
     {
@@ -353,6 +356,7 @@ public class Controller
         assert AppMain != null : "fx:id=\"AppMain\" was not injected: check your FXML file 'MainGUI.fxml'.";
 
         CarParkManCallbacks();
+        CustomerCallBacks();
         AppCallBacks();
         Update();
     }
@@ -563,6 +567,20 @@ public class Controller
         ExitPointsBox.setText(String.valueOf(currentCarPark.exitPoints));
     }
 
+    private void CustomerCallBacks()
+    {
+        String message = "Please Take Coin";
+        CoinButton.setOnAction(event -> {
+            if(EntryTextDisplay.getText().equals(message)){
+                EntryTextDisplay.setText("Press for coin.");
+                Tabs.getSelectionModel().getSelectedItem().disableProperty().setValue(true);
+                Tabs.getSelectionModel().selectNext();
+                Tabs.getSelectionModel().getSelectedItem().disableProperty().setValue(false);
+            }
+            EntryTextDisplay.setText(message);
+        });
+    }
+
     private void AppCallBacks()
     {
         AppMain.setVisible(false);
@@ -597,7 +615,7 @@ public class Controller
                     PasswordSignupTextbox1.setText("");
                     AppSplitBar.setDividerPosition(0, 0.0);
                     AppMain.setVisible(true);
-                    LogInFeeback.setText("Login Succesful!");
+                    LogInFeeback.setText("Login Successful!");
                 }
             }
 
@@ -614,7 +632,7 @@ public class Controller
                     Scanner scanner = new Scanner(new FileInputStream(currentAccount));
                     if (scanner.nextLine().equals(PasswordTextbox.getText()))
                     {
-                        LogInFeeback.setText("Login Succesful!");
+                        LogInFeeback.setText("Login Successful!");
                         UserNameTextbox.setText("");
                         PasswordTextbox.setText("");
                         AppSplitBar.setDividerPosition(0, 0.0);

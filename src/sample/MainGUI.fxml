@@ -277,18 +277,18 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TabPane prefHeight="599.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane fx:id="Tabs" prefHeight="599.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                             <Tab text="Entry Point">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="826.0">
                                        <children>
-                                          <Label fx:id="EntryTextDisplay" alignment="CENTER" layoutX="344.0" layoutY="53.0" prefHeight="173.0" prefWidth="571.0" text="Press For Coin" textAlignment="CENTER" textFill="#1200b2" wrapText="true">
+                                          <Label fx:id="EntryTextDisplay" alignment="CENTER" layoutX="344.0" layoutY="53.0" prefHeight="173.0" prefWidth="571.0" text="Press For Coin." textAlignment="CENTER" textFill="#1200b2" wrapText="true">
                                              <font>
                                                 <Font size="48.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="CoinButton" layoutX="460.0" layoutY="268.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="351.0" text="Coin">
+                                          <Button fx:id="CoinButton" layoutX="536.0" layoutY="270.0" mnemonicParsing="false" prefHeight="189.0" prefWidth="189.0" style="-fx-background-radius: 100; -fx-background-color: fff000; -fx-border-radius: 100; -fx-border-color: black;" text="Coin">
                                              <font>
                                                 <Font size="48.0" />
                                              </font>
