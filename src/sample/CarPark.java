@@ -33,20 +33,36 @@ public class CarPark
 
 
 
-    private Stack <Floor> floorList;
-    private EntryPoint entryPoint;
-    private Stack <ExitPoint> exitPoints;
-    private Stack <PaymentMachine> paymentMachines;
-    private CoinManager coinManager;
-    private PaymentModel paymentModel;
-    private int noOfCars;
+    public int exitPoints;
+    public String carParkName;
 
-    public CarPark()
+    public Stack <Floor> floorList;
+    public EntryPoint entryPoint;
+    public Stack <PaymentMachine> paymentMachines;
+    public CoinManager coinManager;
+    public int noOfCars;
+
+    public CarPark(String name)
     {
+        exitPoints = 1;
+        carParkName = name;
+
         floorList = new Stack <Floor>();
-        exitPoints = new Stack <ExitPoint>();
-        paymentMachines = new Stack <PaymentMachine>();
+        Floor firstFloor = new Floor(this, 10, false, floorList.size());
+        floorList.push(firstFloor);
         noOfCars = 0;
+    }
+
+    public void setName(String newName){
+        carParkName = newName;
+    }
+
+    public void setExitPoints(int exitPoints){
+        this.exitPoints = exitPoints;
+    }
+
+    public String toString(){
+        return carParkName;
     }
 
     public CoinManager getCoinManager()
@@ -76,7 +92,7 @@ public class CarPark
 
     public void addFloor(int bays, boolean secure)
     {
-        floorList.push(new Floor(this, bays, secure));
+        floorList.push(new Floor(this, bays, secure, floorList.size()));
     }
 
     public void removeFloor()
@@ -84,24 +100,16 @@ public class CarPark
         floorList.pop();
     }
 
-    public void addExitPoint()
-    {
-        exitPoints.push(new ExitPoint());
-    }
-
-    public void removeExitPoint()
-    {
-        exitPoints.pop();
-    }
-
     public void addPaymentMachine()
     {
-        paymentMachines.push(new PaymentMachine(this, paymentModel));
+        paymentMachines.push(new PaymentMachine(this));
     }
 
     public void bayViolation(SecureBay secureBay)
     {
         secureBay.toString();
     }
+
+
 
 }
