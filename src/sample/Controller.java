@@ -31,238 +31,233 @@ import static javafx.collections.FXCollections.observableArrayList;
 public class Controller
 {
 
-    @FXML // fx:id="NewFloorButton"
-    private Button NewFloorButton; // Value injected by FXMLLoader
+    @FXML
+    private MenuItem ShowCoins;
 
-    @FXML // fx:id="RemoveFloorButton"
-    private Button RemoveFloorButton; // Value injected by FXMLLoader
+    @FXML
+    private MenuItem NextHourButton;
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
+    @FXML
+    private MenuItem NextDayButton;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+    @FXML
+    private MenuItem Next10Button;
 
-    @FXML // fx:id="NextHourButton"
-    private MenuItem NextHourButton; // Value injected by FXMLLoader
+    @FXML
+    private AnchorPane FloorsBox;
 
-    @FXML // fx:id="NextDayButton"
-    private MenuItem NextDayButton; // Value injected by FXMLLoader
+    @FXML
+    private ListView<String> ManagerList;
 
-    @FXML // fx:id="Next10Button"
-    private MenuItem Next10Button; // Value injected by FXMLLoader
+    @FXML
+    private Button CarParkSelect;
 
-    @FXML // fx:id="FloorsBox"
-    private AnchorPane FloorsBox; // Value injected by FXMLLoader
+    @FXML
+    private Button FloorSelect;
 
-    @FXML // fx:id="ManagerList"
-    private ListView <String> ManagerList; // Value injected by FXMLLoader
+    @FXML
+    private Button BaySelect;
 
-    @FXML // fx:id="CarParkSelect"
-    private Button CarParkSelect; // Value injected by FXMLLoader
+    @FXML
+    private TitledPane OverviewPanel;
 
-    @FXML // fx:id="FloorSelect"
-    private Button FloorSelect; // Value injected by FXMLLoader
+    @FXML
+    private Button NewCarParkButton;
 
-    @FXML // fx:id="BaySelect"
-    private Button BaySelect; // Value injected by FXMLLoader
+    @FXML
+    private Button DeleteSelectedCarParkButton;
 
-    @FXML // fx:id="OverviewPanel"
-    private TitledPane OverviewPanel; // Value injected by FXMLLoader
+    @FXML
+    private TextField TotalCarParksBox;
 
-    @FXML // fx:id="NewCarParkButton"
-    private Button NewCarParkButton; // Value injected by FXMLLoader
+    @FXML
+    private TextField TotalSpacesBox;
 
-    @FXML // fx:id="DeleteSelectedCarParkButton"
-    private Button DeleteSelectedCarParkButton; // Value injected by FXMLLoader
+    @FXML
+    private TitledPane CarParkEditorPanel;
 
-    @FXML // fx:id="TotalCarParksBox"
-    private TextField TotalCarParksBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField CarParkNameBox;
 
-    @FXML // fx:id="TotalSpacesBox"
-    private TextField TotalSpacesBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField ExitPointsBox;
 
-    @FXML // fx:id="CarParkEditorPanel"
-    private TitledPane CarParkEditorPanel; // Value injected by FXMLLoader
+    @FXML
+    private TextField CapacityBox;
 
-    @FXML // fx:id="CarParkNameBox"
-    private TextField CarParkNameBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField CarsBox;
 
-    @FXML // fx:id="ExitPointsBox"
-    private TextField ExitPointsBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField SpacesBox;
 
-    @FXML // fx:id="CapacityBox"
-    private TextField CapacityBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField BookingsBox;
 
-    @FXML // fx:id="CarsBox"
-    private TextField CarsBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField SecureFloorsBox;
 
-    @FXML // fx:id="SpacesBox"
-    private TextField SpacesBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField SecureBayBox;
 
-    @FXML // fx:id="BookingsBox"
-    private TextField BookingsBox; // Value injected by FXMLLoader
+    @FXML
+    private Button NewFloorButton;
 
-    @FXML // fx:id="SecureFloorsBox"
-    private TextField SecureFloorsBox; // Value injected by FXMLLoader
+    @FXML
+    private Button RemoveFloorButton;
 
-    @FXML // fx:id="SecureBayBox"
-    private TextField SecureBayBox; // Value injected by FXMLLoader
+    @FXML
+    private CheckBox SecureFloorCheckBox;
 
-    @FXML // fx:id="SecureFloorCheckBox"
-    private CheckBox SecureFloorCheckBox; // Value injected by FXMLLoader
+    @FXML
+    private TitledPane FloorEditorPanel;
 
-    @FXML // fx:id="FloorEditorPanel"
-    private TitledPane FloorEditorPanel; // Value injected by FXMLLoader
+    @FXML
+    private TextField FloorCapacityBox;
 
-    @FXML // fx:id="FloorCapacityBox"
-    private TextField FloorCapacityBox; // Value injected by FXMLLoader
+    @FXML
+    private Button FreeSpaceButton;
 
-    @FXML // fx:id="FreeSpaceButton"
-    private Button FreeSpaceButton; // Value injected by FXMLLoader
+    @FXML
+    private Button FillSpacesButton;
 
-    @FXML // fx:id="FillSpacesButton"
-    private Button FillSpacesButton; // Value injected by FXMLLoader
+    @FXML
+    private AnchorPane CarStatusPanel;
 
-    @FXML // fx:id="CarStatusPanel"
-    private AnchorPane CarStatusPanel; // Value injected by FXMLLoader
+    @FXML
+    private Label hasPaidLabel;
 
-    @FXML // fx:id="hasPaidLabel"
-    private Label hasPaidLabel; // Value injected by FXMLLoader
+    @FXML
+    private Label CostLabel;
 
-    @FXML // fx:id="CostLabel"
-    private Label CostLabel; // Value injected by FXMLLoader
+    @FXML
+    private Button OverrideChargeButton;
 
-    @FXML // fx:id="OverrideChargeButton"
-    private Button OverrideChargeButton; // Value injected by FXMLLoader
+    @FXML
+    private TabPane Tabs;
 
-    @FXML // fx:id="EntryTextDisplay"
-    private Label EntryTextDisplay; // Value injected by FXMLLoader
+    @FXML
+    private Label EntryTextDisplay;
 
-    @FXML // fx:id="CoinButton"
-    private Button CoinButton; // Value injected by FXMLLoader
+    @FXML
+    private Button CoinButton;
 
-    @FXML // fx:id="FloorPanel"
-    private ScrollPane FloorPanel; // Value injected by FXMLLoader
+    @FXML
+    private ScrollPane FloorPanel;
 
-    @FXML // fx:id="FloorView"
-    private VBox FloorView; // Value injected by FXMLLoader
+    @FXML
+    private VBox FloorView;
 
-    @FXML // fx:id="BarcodeButtonPayment"
-    private ImageView BarcodeButtonPayment; // Value injected by FXMLLoader
+    @FXML
+    private ImageView BarcodeButtonPayment;
 
-    @FXML // fx:id="PaymentTextDisplay"
-    private Label PaymentTextDisplay; // Value injected by FXMLLoader
+    @FXML
+    private Label PaymentTextDisplay;
 
-    @FXML // fx:id="PaymentGUI"
-    private Accordion PaymentGUI; // Value injected by FXMLLoader
+    @FXML
+    private Accordion PaymentGUI;
 
-    @FXML // fx:id="CardMachineView"
-    private TitledPane CardMachineView; // Value injected by FXMLLoader
+    @FXML
+    private TitledPane CardMachineView;
 
-    @FXML // fx:id="CardPin1"
-    private Button CardPin1; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin1;
 
-    @FXML // fx:id="CardPin2"
-    private Button CardPin2; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin2;
 
-    @FXML // fx:id="CardPin3"
-    private Button CardPin3; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin3;
 
-    @FXML // fx:id="CardPin4"
-    private Button CardPin4; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin4;
 
-    @FXML // fx:id="CardPin5"
-    private Button CardPin5; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin5;
 
-    @FXML // fx:id="CardPin6"
-    private Button CardPin6; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin6;
 
-    @FXML // fx:id="CardPin7"
-    private Button CardPin7; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin7;
 
-    @FXML // fx:id="CardPin8"
-    private Button CardPin8; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin8;
 
-    @FXML // fx:id="CardPin9"
-    private Button CardPin9; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin9;
 
-    @FXML // fx:id="CardPin0"
-    private Button CardPin0; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin0;
 
-    @FXML // fx:id="CardImage"
-    private ImageView CardImage; // Value injected by FXMLLoader
+    @FXML
+    private ImageView CardImage;
 
-    @FXML // fx:id="CardDisplay"
-    private TextField CardDisplay; // Value injected by FXMLLoader
+    @FXML
+    private TextField CardDisplay;
 
-    @FXML // fx:id="CashMachineView"
-    private TitledPane CashMachineView; // Value injected by FXMLLoader
+    @FXML
+    private TitledPane CashMachineView;
 
+    @FXML
+    private RadioButton Pound20;
 
-    @FXML // fx:id="Pound20"
-    private RadioButton Pound20; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pound10;
 
-    @FXML // fx:id="Pound10"
-    private RadioButton Pound10; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pound5;
 
-    @FXML // fx:id="Pound5"
-    private RadioButton Pound5; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pence5;
 
-    @FXML // fx:id="Pence5"
-    private RadioButton Pence5; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pound2;
 
-    @FXML // fx:id="Pound2"
-    private RadioButton Pound2; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pence50;
 
-    @FXML // fx:id="Pence50"
-    private RadioButton Pence50; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pound1;
 
-    @FXML // fx:id="Pound1"
-    private RadioButton Pound1; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pence20;
 
-    @FXML // fx:id="Pence20"
-    private RadioButton Pence20; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pence10;
 
-    @FXML // fx:id="Pence10"
-    private RadioButton Pence10; // Value injected by FXMLLoader
+    @FXML
+    private TextField CashDisplay;
 
+    @FXML
+    private Button InsertCashButton;
 
-    @FXML // fx:id="CashDisplay"
-    private TextField CashDisplay; // Value injected by FXMLLoader
+    @FXML
+    private Tab ExitTextDisplay;
 
-    @FXML // fx:id="InsertCashButton"
-    private Button InsertCashButton; // Value injected by FXMLLoader
+    @FXML
+    private Label ExitDisplay;
 
-    @FXML // fx:id="ExitTextDisplay"
-    private Tab ExitTextDisplay; // Value injected by FXMLLoader
+    @FXML
+    private Button ExitInsert;
 
-    @FXML // fx:id="ExitDisplay"
-    private Label ExitDisplay; // Value injected by FXMLLoader
+    @FXML
+    private SplitPane AppSplitBar;
 
-    @FXML // fx:id="ExitInsert"
-    private Button ExitInsert; // Value injected by FXMLLoader
+    @FXML
+    private AnchorPane LogInBG;
 
-    @FXML // fx:id="AppSplitBar"
-    private SplitPane AppSplitBar; // Value injected by FXMLLoader
+    @FXML
+    private TextField UserNameTextbox;
 
-    @FXML // fx:id="LogInBG"
-    private AnchorPane LogInBG; // Value injected by FXMLLoader
+    @FXML
+    private PasswordField PasswordTextbox;
 
-    @FXML // fx:id="UserNameTextbox"
-    private TextField UserNameTextbox; // Value injected by FXMLLoader
+    @FXML
+    private Button LoginButton;
 
-    @FXML // fx:id="PasswordTextbox"
-    private PasswordField PasswordTextbox; // Value injected by FXMLLoader
-
-    @FXML // fx:id="LoginButton"
-    private Button LoginButton; // Value injected by FXMLLoader
-
-    @FXML // fx:id="LogInFeeback"
-    private Label LogInFeeback; // Value injected by FXMLLoader
-
-    @FXML // fx:id="AppMain"
-    private AnchorPane AppMain; // Value injected by FXMLLoader
+    @FXML
+    private Label LogInFeeback;
 
     @FXML
     private Button SignUpButton;
@@ -274,13 +269,22 @@ public class Controller
     private PasswordField PasswordSignupTextbox1;
 
     @FXML
-    private Button LogoutButton;
-
-    @FXML // fx:id="AccountBalance"
-    private Label AccountBalance; // Value injected by FXMLLoader
+    private AnchorPane AppMain;
 
     @FXML
-    private TabPane Tabs;
+    private Button LogoutButton;
+
+    @FXML
+    private Label AccountBalance;
+
+    @FXML
+    private Button TopUpButton;
+
+    @FXML
+    private Button VerificationButton;
+
+    @FXML
+    private Button SecureVehicleButton;
 
     @FXML
         // This method is called by the FXMLLoader when initialization is complete
@@ -373,14 +377,15 @@ public class Controller
         Update();
     }
 
-    private CarPark currentCarPark;
-    private Floor currentFloor;
-    private Bay currentBay;
-    private List <CarPark> carParkList;
-    private List <Floor> floorList;
-    private List <Bay> bayList;
-    private AccountInfo accountInfo;
-    private Stage CoinStage;
+    public CarPark currentCarPark;
+    public Floor currentFloor;
+    public Bay currentBay;
+    public List <CarPark> carParkList;
+    public List <Floor> floorList;
+    public List <Bay> bayList;
+    public AccountInfo accountInfo;
+    public Stage CoinStage;
+    public CoinGUI coinGUI;
 
     public enum listMode
     {
@@ -395,7 +400,7 @@ public class Controller
     {
 
         carParkList = new LinkedList <CarPark>();
-        CarPark defaultCP = new CarPark("Default Car Park");
+        CarPark defaultCP = new CarPark(this,"Default Car Park");
         carParkList.add(defaultCP);
         currentCarPark = defaultCP;
         currentFloor = currentCarPark.getFloor(0);
@@ -418,7 +423,7 @@ public class Controller
                         stringIt = carParkList.iterator();
                     }
                 }
-                currentCarPark = new CarPark(newName);
+                currentCarPark = new CarPark(this, newName);
                 carParkList.add(currentCarPark);
                 Update();
             }
@@ -537,6 +542,7 @@ public class Controller
     public void Update()
     {
         CarParkManUpdate();
+        coinGUI.Update();
     }
 
     public void CarParkManUpdate()
@@ -582,6 +588,7 @@ public class Controller
 
     private void CustomerCallBacks()
     {
+        ShowCoins.setOnAction(event -> {CoinStage.show(); CoinStage.toFront();});
         String message1 = "Please Proceed";
         String message2 = "Press for coin.";
         CoinButton.setOnAction(event -> {
@@ -591,7 +598,7 @@ public class Controller
                 EntryTextDisplay.setText(message1);
                 try
                 {
-                    sleep(500);
+                    sleep(100);
                 } catch (InterruptedException e)
                 {
                     e.printStackTrace();
@@ -599,13 +606,14 @@ public class Controller
                 Platform.runLater(()->{
                     try
                     {
-                        sleep(2000);
+                        sleep(2500);
                     } catch (InterruptedException e)
                     {
                         e.printStackTrace();
                     }
                     CoinStage.show();
                     CoinStage.toFront();
+                    currentCarPark.entryPoint.carInteracts();
                     EntryTextDisplay.setText(message2);});
             }
         });
@@ -705,7 +713,8 @@ public class Controller
         CoinStage.setTitle("Coin Select");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CoinGUI.fxml"));
         Parent root = (Parent) loader.load();
-        CoinGUI coinGUI = loader.getController();
+        coinGUI = loader.getController();
+        coinGUI.setMain(this);
         CoinStage.setTitle("Car Park System");
         int coinWindowW = 200;
         Scene main = new Scene(root, coinWindowW, 300);

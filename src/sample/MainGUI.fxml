@@ -51,7 +51,7 @@
                     </items>
                   </Menu>
                   <MenuItem mnemonicParsing="false" text="New Car Park" />
-                  <MenuItem mnemonicParsing="false" text="Show Coins" />
+                  <MenuItem fx:id="ShowCoins" mnemonicParsing="false" text="Show Coins" />
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

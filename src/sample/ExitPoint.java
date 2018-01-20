@@ -5,8 +5,9 @@ package sample;
  */
 public class ExitPoint extends AccessPoint
 {
-    public ExitPoint()
+    public ExitPoint(CarPark carPark)
     {
+        super(carPark);
         coinMachine = new CoinCollector(carPark, 100);
     }
 }
