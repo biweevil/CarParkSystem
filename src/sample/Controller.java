@@ -531,6 +531,7 @@ public class Controller {
                     File accountFile;
                     accountFile = new File("Accounts/" +
                             UserNameSignupTextbox1.getText() + ".txt");
+                    currentAccountUser[0] = UserNameSignupTextbox1.getText();
                     BufferedWriter bw = null;
                     FileWriter fw;
 
@@ -541,7 +542,7 @@ public class Controller {
                         bw.write(PasswordSignupTextbox1.getText());
                         bw.newLine();
                         bw.write("0");
-                        balanceSign.setText("Current Carpark Balance: " + "0");
+                        balanceSign.setText("0");
                         bw.close();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -567,6 +568,7 @@ public class Controller {
                     if (scanner.nextLine().equals(PasswordTextbox.getText())) {
                         LogInFeeback.setText("Login Succesful!");
                         signedinas.setText("Signed in as: " + UserNameTextbox.getText());
+                        balanceSign.setText(scanner.nextLine());
                         UserNameTextbox.setText("");
                         PasswordTextbox.setText("");
                         AppSplitBar.setDividerPosition(0, 0.0);
@@ -595,11 +597,25 @@ public class Controller {
 
         });
         balanceenter.setOnAction(event -> {
-//            Scanner scanner = new Scanner(new FileInputStream(currentAccount));
-//            scanner.nextLine();
-//            String oldBalance = scanner.nextLine();
-
-
+            balanceSign.setText(String.valueOf(Float.parseFloat(balanceSign.getText()) + Float.parseFloat(balanceaddbox.getText())));
+            File accountFile;
+            accountFile = new File("Accounts/" +
+                    currentAccountUser[0] + ".txt");
+            BufferedWriter bw = null;
+            FileWriter fw;
+            try {
+                Scanner scanner = new Scanner(new FileInputStream(accountFile));
+                accountFile.createNewFile();
+                String password = scanner.nextLine();
+                fw = new FileWriter(accountFile);
+                bw = new BufferedWriter(fw);
+                bw.write(password);
+                bw.newLine();
+                bw.write(balanceSign.getText());
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             });
 
 

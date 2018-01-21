@@ -597,7 +597,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="balanceSign" layoutX="731.0" layoutY="56.0" prefHeight="27.0" prefWidth="228.0" text="Current carpark Balance: ">
+                                    <Label fx:id="balanceSign" layoutX="941.0" layoutY="56.0" prefHeight="27.0" prefWidth="55.0">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -613,6 +613,11 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
+                                    <Label layoutX="730.0" layoutY="56.0" prefHeight="27.0" prefWidth="202.0" text="Current carpark Balance: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
                                  </children></AnchorPane>
                               <Label prefHeight="27.0" prefWidth="83.0" text="Password">
                                  <font>
