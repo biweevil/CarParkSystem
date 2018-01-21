@@ -516,7 +516,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane fx:id="AppSplitBar" dividerPositions="0.2764" orientation="VERTICAL" prefHeight="599.0" prefWidth="1200.0">
+                        <SplitPane fx:id="AppSplitBar" dividerPositions="0.2764, 0.5" orientation="VERTICAL" prefHeight="599.0" prefWidth="1200.0">
                           <items>
                             <AnchorPane fx:id="LogInBG" maxHeight="161.0" minHeight="0.0" minWidth="0.0" prefHeight="161.0" prefWidth="1198.0">
                                  <children>
@@ -569,7 +569,7 @@
                                     </Label>
                                  </children>
                               </AnchorPane>
-                            <AnchorPane fx:id="AppMain" minHeight="0.0" minWidth="0.0" prefHeight="460.0" prefWidth="1198.0" visible="false">
+                            <AnchorPane fx:id="AppMain" minHeight="0.0" minWidth="0.0" prefHeight="460.0" prefWidth="1198.0">
                                  <children>
                                     <VBox alignment="TOP_CENTER" prefHeight="178.0" prefWidth="244.0" spacing="5.0" styleClass="formbg">
                                        <children>
@@ -592,7 +592,33 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
+                                    <Label fx:id="signedinas" layoutX="824.0" layoutY="23.0" prefHeight="27.0" prefWidth="162.0" text="Signed in as: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="balanceSign" layoutX="731.0" layoutY="56.0" prefHeight="27.0" prefWidth="228.0" text="Current carpark Balance: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="balanceaddlabel" layoutX="63.0" layoutY="182.0" prefHeight="27.0" prefWidth="265.0" text="Enter amount to add to balance">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="balanceaddbox" layoutX="324.0" layoutY="180.0" prefHeight="31.0" prefWidth="46.0" />
+                                    <Button fx:id="balanceenter" layoutX="279.0" layoutY="230.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" text="Enter">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
                                  </children></AnchorPane>
+                              <Label prefHeight="27.0" prefWidth="83.0" text="Password">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
                           </items>
                         </SplitPane>
                      </children>

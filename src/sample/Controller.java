@@ -271,6 +271,21 @@ public class Controller {
     private Button LogoutButton;
 
     @FXML
+    private Label signedinas;
+
+    @FXML
+    private Label balanceSign;
+
+    @FXML
+    private Label balanceaddlabel;
+
+    @FXML
+    private TextField balanceaddbox;
+
+    @FXML
+    private Button balanceenter;
+
+    @FXML
         // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert NextHourButton != null : "fx:id=\"NextHourButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -484,7 +499,7 @@ public class Controller {
                 }
                 break;
             case FLOORS:
-                for(int count = 0; count < floorList.size(); count++){
+                for (int count = 0; count < floorList.size(); count++) {
                     stringList.add(currentCarPark.floorList.get(count).toString());
                 }
                 break;
@@ -501,6 +516,7 @@ public class Controller {
     }
 
     private void AppCallBacks() {
+        final String[] currentAccountUser = new String[1];
         new File("Accounts").mkdirs();
         SignUpButton.setOnAction((ActionEvent event) -> {
 
@@ -524,10 +540,13 @@ public class Controller {
                         bw = new BufferedWriter(fw);
                         bw.write(PasswordSignupTextbox1.getText());
                         bw.newLine();
+                        bw.write("0");
+                        balanceSign.setText("Current Carpark Balance: " + "0");
                         bw.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    signedinas.setText("Signed in as: " + UserNameSignupTextbox1.getText());
                     UserNameSignupTextbox1.setText("");
                     PasswordSignupTextbox1.setText("");
                     AppSplitBar.setDividerPosition(0, 0.0);
@@ -541,11 +560,13 @@ public class Controller {
 
         LoginButton.setOnAction((event -> {
             File currentAccount = new File("Accounts/" + UserNameTextbox.getText() + ".txt");
+            currentAccountUser[0] = UserNameTextbox.getText();
             if (currentAccount.exists()) {
                 try {
                     Scanner scanner = new Scanner(new FileInputStream(currentAccount));
                     if (scanner.nextLine().equals(PasswordTextbox.getText())) {
                         LogInFeeback.setText("Login Succesful!");
+                        signedinas.setText("Signed in as: " + UserNameTextbox.getText());
                         UserNameTextbox.setText("");
                         PasswordTextbox.setText("");
                         AppSplitBar.setDividerPosition(0, 0.0);
@@ -573,8 +594,16 @@ public class Controller {
             LogInFeeback.setText("Succesfully Signed Out!");
 
         });
+        balanceenter.setOnAction(event -> {
+//            Scanner scanner = new Scanner(new FileInputStream(currentAccount));
+//            scanner.nextLine();
+//            String oldBalance = scanner.nextLine();
+
+
+            });
+
+
+        }
+
 
     }
-
-
-}
