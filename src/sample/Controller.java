@@ -741,10 +741,10 @@ public class Controller
 
         TopUpButton.setOnAction((event) ->
         {
-            TextInputDialog dialog = new TextInputDialog("walter");
-            dialog.setTitle("Text Input Dialog");
-            dialog.setHeaderText("Look, a Text Input Dialog");
-            dialog.setContentText("Please enter your name:");
+            TextInputDialog dialog = new TextInputDialog("0.0");
+            dialog.setTitle("Account Top Up");
+            dialog.setHeaderText("Top up");
+            dialog.setContentText("Please enter top up amount:");
             Optional <String> result = dialog.showAndWait();
             result.ifPresent((string) ->
             {
