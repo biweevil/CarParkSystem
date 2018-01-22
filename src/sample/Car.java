@@ -7,17 +7,11 @@ import java.time.LocalDateTime;
  */
 public class Car
 {
-    public String getRegistraionPlate()
-    {
-        return registraionPlate;
-    }
 
-    private String registraionPlate;
     private LocalDateTime timeOfEntry;
     private Coin coin;
 
-    public Car(String registraionPlate, Coin coin){
-        this.registraionPlate = registraionPlate;
+    public Car(Coin coin){
         this.coin = coin;
     }
 

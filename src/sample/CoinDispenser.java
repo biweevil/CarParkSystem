@@ -10,7 +10,13 @@ public class CoinDispenser extends CoinMachine
         super(carPark, size);
     }
 
-    public void startInteraction(Coin currentCoin){
-        this.currentCoin = currentCoin;
+    public void startInteraction(){
+        while (coinBox.size() < this.size)
+        {
+            Coin fetchedCoin = this.coinManager.getNextCoin();
+            this.coinBox.add(fetchedCoin);
+        }
+        this.coinManager.addCoinInUse(coinBox.poll());
+        carPark.updateGUI();
     }
 }

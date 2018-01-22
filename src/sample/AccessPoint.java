@@ -6,17 +6,17 @@ package sample;
 public abstract class AccessPoint
 {
 
-    protected Barrier barrier;
     protected CoinMachine coinMachine;
     protected Coin currentCoin;
     protected CarPark carPark;
 
+    AccessPoint(CarPark carPark){
+        this.carPark = carPark;
+    }
+
 
     public void carInteracts(){
-
-
-            coinMachine.startInteraction(currentCoin);
-
+            coinMachine.startInteraction();
     }
 
 }

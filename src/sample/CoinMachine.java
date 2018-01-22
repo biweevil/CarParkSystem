@@ -1,5 +1,7 @@
 package sample;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -8,17 +10,21 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public abstract class CoinMachine
 {
-    protected LinkedBlockingQueue <Coin> coinBox;
+    protected Queue<Coin> coinBox;
     protected CoinManager coinManager;
     protected Coin currentCoin;
+    protected int size;
+    protected CarPark carPark;
 
     public CoinMachine(CarPark carPark, int size)
     {
-        coinBox = new LinkedBlockingQueue <>(size);
+        this.carPark = carPark;
+        this.size = size;
+        coinBox = new LinkedList <Coin>();
         coinManager = carPark.getCoinManager();
     }
 
-    public void startInteraction(Coin currentCoin)
+    public void startInteraction()
     {
 
     }

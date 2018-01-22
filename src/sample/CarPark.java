@@ -41,9 +41,12 @@ public class CarPark
     public Stack <PaymentMachine> paymentMachines;
     public CoinManager coinManager;
     public int noOfCars;
+    private Controller controller;
 
-    public CarPark(String name)
+    public CarPark(Controller controller, String name)
     {
+        this.controller = controller;
+        this.coinManager = new CoinManager();
         exitPoints = 1;
         carParkName = name;
 
@@ -51,6 +54,18 @@ public class CarPark
         Floor firstFloor = new Floor(this, 10, false, floorList.size());
         floorList.push(firstFloor);
         noOfCars = 0;
+        entryPoint = new EntryPoint(this);
+    }
+    public void updateGUI(){
+        controller.Update();
+    }
+
+    public void setName(String newName){
+        carParkName = newName;
+    }
+
+    public void setExitPoints(int exitPoints){
+        this.exitPoints = exitPoints;
     }
 
     public String toString(){

@@ -7,18 +7,19 @@ import java.util.*;
  */
 public class CoinManager
 {
-    private static CoinManager coinManager;
 
     private Queue <Coin> coinPool;
     private ArrayList <Coin> decirculatedCoins;
+    private ArrayList<Coin> coinsInUse;
 
-    private CoinManager()
+    public CoinManager()
     {
         coinPool = new LinkedList <Coin>();
         decirculatedCoins = new ArrayList <Coin>();
+        coinsInUse = new ArrayList <Coin>();
     }
 
-    public void addNewCoins(Coin[] newCoins)
+    public void addNewCoins(Coin... newCoins)
     {
         for (Coin newCoin : newCoins)
         {
@@ -42,6 +43,25 @@ public class CoinManager
         return coinPool.contains(testCoin);
     }
 
+    public Coin getNextCoin(){
+        if(coinPool.isEmpty()){
+            addNewCoins(new Coin());
+        }
+        return coinPool.poll();
+    }
+
+    public void addCoinInUse(Coin coinInUse){
+        coinsInUse.add(coinInUse);
+    }
+
+    public void removeCoinInUse(Coin coinNotInUse){
+        coinsInUse.remove(coinNotInUse);
+    }
+
+    public ArrayList<Coin> getCoinsInUse()
+    {
+        return coinsInUse;
+    }
 
     //TODO how are coin managed
 }

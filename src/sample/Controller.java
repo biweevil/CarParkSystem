@@ -6,257 +6,260 @@ package sample;
 
 import java.io.*;
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.*;
 
-import javafx.beans.InvalidationListener;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Camera;
+import javafx.scene.Parent;
+import javafx.scene.PerspectiveCamera;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import sun.plugin2.applet.Applet2Manager;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
+import static java.lang.Thread.sleep;
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class Controller {
+public class Controller
+{
 
-    @FXML // fx:id="NewFloorButton"
-    private Button NewFloorButton; // Value injected by FXMLLoader
+    @FXML
+    private MenuItem ShowCoins;
 
-    @FXML // fx:id="RemoveFloorButton"
-    private Button RemoveFloorButton; // Value injected by FXMLLoader
+    @FXML
+    private MenuItem NextHourButton;
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
+    @FXML
+    private MenuItem NextDayButton;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+    @FXML
+    private MenuItem Next10Button;
 
-    @FXML // fx:id="NextHourButton"
-    private MenuItem NextHourButton; // Value injected by FXMLLoader
+    @FXML
+    private AnchorPane FloorsBox;
 
-    @FXML // fx:id="NextDayButton"
-    private MenuItem NextDayButton; // Value injected by FXMLLoader
+    @FXML
+    private ListView <String> ManagerList;
 
-    @FXML // fx:id="Next10Button"
-    private MenuItem Next10Button; // Value injected by FXMLLoader
+    @FXML
+    private Button CarParkSelect;
 
-    @FXML // fx:id="FloorsBox"
-    private AnchorPane FloorsBox; // Value injected by FXMLLoader
+    @FXML
+    private Button FloorSelect;
 
-    @FXML // fx:id="ManagerList"
-    private ListView<String> ManagerList; // Value injected by FXMLLoader
+    @FXML
+    private Button BaySelect;
 
-    @FXML // fx:id="CarParkSelect"
-    private Button CarParkSelect; // Value injected by FXMLLoader
+    @FXML
+    private TitledPane OverviewPanel;
 
-    @FXML // fx:id="FloorSelect"
-    private Button FloorSelect; // Value injected by FXMLLoader
+    @FXML
+    private Button NewCarParkButton;
 
-    @FXML // fx:id="BaySelect"
-    private Button BaySelect; // Value injected by FXMLLoader
+    @FXML
+    private Button DeleteSelectedCarParkButton;
 
-    @FXML // fx:id="OverviewPanel"
-    private TitledPane OverviewPanel; // Value injected by FXMLLoader
+    @FXML
+    private TextField TotalCarParksBox;
 
-    @FXML // fx:id="NewCarParkButton"
-    private Button NewCarParkButton; // Value injected by FXMLLoader
+    @FXML
+    private TextField TotalSpacesBox;
 
-    @FXML // fx:id="DeleteSelectedCarParkButton"
-    private Button DeleteSelectedCarParkButton; // Value injected by FXMLLoader
+    @FXML
+    private TitledPane CarParkEditorPanel;
 
-    @FXML // fx:id="TotalCarParksBox"
-    private TextField TotalCarParksBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField CarParkNameBox;
 
-    @FXML // fx:id="TotalSpacesBox"
-    private TextField TotalSpacesBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField ExitPointsBox;
 
-    @FXML // fx:id="CarParkEditorPanel"
-    private TitledPane CarParkEditorPanel; // Value injected by FXMLLoader
+    @FXML
+    private TextField CapacityBox;
 
-    @FXML // fx:id="CarParkNameBox"
-    private TextField CarParkNameBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField CarsBox;
 
-    @FXML // fx:id="ExitPointsBox"
-    private TextField ExitPointsBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField SpacesBox;
 
-    @FXML // fx:id="CapacityBox"
-    private TextField CapacityBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField BookingsBox;
 
-    @FXML // fx:id="CarsBox"
-    private TextField CarsBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField SecureFloorsBox;
 
-    @FXML // fx:id="SpacesBox"
-    private TextField SpacesBox; // Value injected by FXMLLoader
+    @FXML
+    private TextField SecureBayBox;
 
-    @FXML // fx:id="BookingsBox"
-    private TextField BookingsBox; // Value injected by FXMLLoader
+    @FXML
+    private Button NewFloorButton;
 
-    @FXML // fx:id="SecureFloorsBox"
-    private TextField SecureFloorsBox; // Value injected by FXMLLoader
+    @FXML
+    private Button RemoveFloorButton;
 
-    @FXML // fx:id="SecureBayBox"
-    private TextField SecureBayBox; // Value injected by FXMLLoader
+    @FXML
+    private CheckBox SecureFloorCheckBox;
 
-    @FXML // fx:id="SecureFloorCheckBox"
-    private CheckBox SecureFloorCheckBox; // Value injected by FXMLLoader
+    @FXML
+    private TitledPane FloorEditorPanel;
 
-    @FXML // fx:id="FloorEditorPanel"
-    private TitledPane FloorEditorPanel; // Value injected by FXMLLoader
+    @FXML
+    private TextField FloorCapacityBox;
 
-    @FXML // fx:id="FloorCapacityBox"
-    private TextField FloorCapacityBox; // Value injected by FXMLLoader
+    @FXML
+    private Button FreeSpaceButton;
 
-    @FXML // fx:id="FreeSpaceButton"
-    private Button FreeSpaceButton; // Value injected by FXMLLoader
+    @FXML
+    private Button FillSpacesButton;
 
-    @FXML // fx:id="FillSpacesButton"
-    private Button FillSpacesButton; // Value injected by FXMLLoader
+    @FXML
+    private AnchorPane CarStatusPanel;
 
-    @FXML // fx:id="CarStatusPanel"
-    private AnchorPane CarStatusPanel; // Value injected by FXMLLoader
+    @FXML
+    private Label hasPaidLabel;
 
-    @FXML // fx:id="hasPaidLabel"
-    private Label hasPaidLabel; // Value injected by FXMLLoader
+    @FXML
+    private Label CostLabel;
 
-    @FXML // fx:id="CostLabel"
-    private Label CostLabel; // Value injected by FXMLLoader
+    @FXML
+    private Button OverrideChargeButton;
 
-    @FXML // fx:id="OverrideChargeButton"
-    private Button OverrideChargeButton; // Value injected by FXMLLoader
+    @FXML
+    private TabPane Tabs;
 
-    @FXML // fx:id="EntryTextDisplay"
-    private Label EntryTextDisplay; // Value injected by FXMLLoader
+    @FXML
+    private Label EntryTextDisplay;
 
-    @FXML // fx:id="CoinButton"
-    private Button CoinButton; // Value injected by FXMLLoader
+    @FXML
+    private Button CoinButton;
 
-    @FXML // fx:id="BarcodeButton"
-    private ImageView BarcodeButton; // Value injected by FXMLLoader
+    @FXML
+    private ScrollPane FloorPanel;
 
-    @FXML // fx:id="FloorPanel"
-    private ScrollPane FloorPanel; // Value injected by FXMLLoader
+    @FXML
+    private VBox FloorView;
 
-    @FXML // fx:id="FloorView"
-    private VBox FloorView; // Value injected by FXMLLoader
+    @FXML
+    private ImageView BarcodeButtonPayment;
 
-    @FXML // fx:id="BarcodeButtonPayment"
-    private ImageView BarcodeButtonPayment; // Value injected by FXMLLoader
+    @FXML
+    private Label PaymentTextDisplay;
 
-    @FXML // fx:id="PaymentTextDisplay"
-    private Label PaymentTextDisplay; // Value injected by FXMLLoader
+    @FXML
+    private Accordion PaymentGUI;
 
-    @FXML // fx:id="PaymentGUI"
-    private Accordion PaymentGUI; // Value injected by FXMLLoader
+    @FXML
+    private TitledPane CardMachineView;
 
-    @FXML // fx:id="CardMachineView"
-    private TitledPane CardMachineView; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin1;
 
-    @FXML // fx:id="CardPin1"
-    private Button CardPin1; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin2;
 
-    @FXML // fx:id="CardPin2"
-    private Button CardPin2; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin3;
 
-    @FXML // fx:id="CardPin3"
-    private Button CardPin3; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin4;
 
-    @FXML // fx:id="CardPin4"
-    private Button CardPin4; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin5;
 
-    @FXML // fx:id="CardPin5"
-    private Button CardPin5; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin6;
 
-    @FXML // fx:id="CardPin6"
-    private Button CardPin6; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin7;
 
-    @FXML // fx:id="CardPin7"
-    private Button CardPin7; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin8;
 
-    @FXML // fx:id="CardPin8"
-    private Button CardPin8; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin9;
 
-    @FXML // fx:id="CardPin9"
-    private Button CardPin9; // Value injected by FXMLLoader
+    @FXML
+    private Button CardPin0;
 
-    @FXML // fx:id="CardPin0"
-    private Button CardPin0; // Value injected by FXMLLoader
+    @FXML
+    private ImageView CardImage;
 
-    @FXML // fx:id="CardImage"
-    private ImageView CardImage; // Value injected by FXMLLoader
+    @FXML
+    private TextField CardDisplay;
 
-    @FXML // fx:id="CardDisplay"
-    private TextField CardDisplay; // Value injected by FXMLLoader
+    @FXML
+    private TitledPane CashMachineView;
 
-    @FXML // fx:id="CashMachineView"
-    private TitledPane CashMachineView; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pound20;
 
-    @FXML // fx:id="Pound20"
-    private RadioButton Pound20; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pound10;
 
-    @FXML // fx:id="Pound10"
-    private RadioButton Pound10; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pound5;
 
-    @FXML // fx:id="Pound5"
-    private RadioButton Pound5; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pence5;
 
-    @FXML // fx:id="Pence5"
-    private RadioButton Pence5; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pound2;
 
-    @FXML // fx:id="Pound2"
-    private RadioButton Pound2; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pence50;
 
-    @FXML // fx:id="Pence50"
-    private RadioButton Pence50; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pound1;
 
-    @FXML // fx:id="Pound1"
-    private RadioButton Pound1; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pence20;
 
-    @FXML // fx:id="Pence20"
-    private RadioButton Pence20; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton Pence10;
 
-    @FXML // fx:id="Pence10"
-    private RadioButton Pence10; // Value injected by FXMLLoader
+    @FXML
+    private TextField CashDisplay;
 
-    @FXML // fx:id="CashDisplay"
-    private TextField CashDisplay; // Value injected by FXMLLoader
+    @FXML
+    private Button InsertCashButton;
 
-    @FXML // fx:id="InsertCashButton"
-    private Button InsertCashButton; // Value injected by FXMLLoader
+    @FXML
+    private Tab ExitTextDisplay;
 
-    @FXML // fx:id="ExitTextDisplay"
-    private Tab ExitTextDisplay; // Value injected by FXMLLoader
+    @FXML
+    private Label ExitDisplay;
 
-    @FXML // fx:id="ExitDisplay"
-    private Label ExitDisplay; // Value injected by FXMLLoader
+    @FXML
+    private Button ExitInsert;
 
-    @FXML // fx:id="ExitInsert"
-    private Button ExitInsert; // Value injected by FXMLLoader
+    @FXML
+    private SplitPane AppSplitBar;
 
-    @FXML // fx:id="AppSplitBar"
-    private SplitPane AppSplitBar; // Value injected by FXMLLoader
+    @FXML
+    private AnchorPane LogInBG;
 
-    @FXML // fx:id="LogInBG"
-    private AnchorPane LogInBG; // Value injected by FXMLLoader
+    @FXML
+    private TextField UserNameTextbox;
 
-    @FXML // fx:id="UserNameTextbox"
-    private TextField UserNameTextbox; // Value injected by FXMLLoader
+    @FXML
+    private PasswordField PasswordTextbox;
 
-    @FXML // fx:id="PasswordTextbox"
-    private PasswordField PasswordTextbox; // Value injected by FXMLLoader
+    @FXML
+    private Button LoginButton;
 
-    @FXML // fx:id="LoginButton"
-    private Button LoginButton; // Value injected by FXMLLoader
-
-    @FXML // fx:id="LogInFeeback"
-    private Label LogInFeeback; // Value injected by FXMLLoader
-
-    @FXML // fx:id="AppMain"
-    private AnchorPane AppMain; // Value injected by FXMLLoader
+    @FXML
+    private Label LogInFeeback;
 
     @FXML
     private Button SignUpButton;
@@ -268,7 +271,22 @@ public class Controller {
     private PasswordField PasswordSignupTextbox1;
 
     @FXML
+    private AnchorPane AppMain;
+
+    @FXML
     private Button LogoutButton;
+
+    @FXML
+    private Label AccountBalance;
+
+    @FXML
+    private Button TopUpButton;
+
+    @FXML
+    private Button VerificationButton;
+
+    @FXML
+    private Button SecureVehicleButton;
 
     @FXML
     private Label signedinas;
@@ -287,7 +305,8 @@ public class Controller {
 
     @FXML
         // This method is called by the FXMLLoader when initialization is complete
-    void initialize() {
+    void initialize()
+    {
         assert NextHourButton != null : "fx:id=\"NextHourButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert NextDayButton != null : "fx:id=\"NextDayButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert Next10Button != null : "fx:id=\"Next10Button\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -321,7 +340,6 @@ public class Controller {
         assert OverrideChargeButton != null : "fx:id=\"OverrideChargeButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert EntryTextDisplay != null : "fx:id=\"EntryTextDisplay\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert CoinButton != null : "fx:id=\"CoinButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert BarcodeButton != null : "fx:id=\"BarcodeButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert FloorPanel != null : "fx:id=\"FloorPanel\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert FloorView != null : "fx:id=\"FloorView\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert BarcodeButtonPayment != null : "fx:id=\"BarcodeButtonPayment\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -364,60 +382,80 @@ public class Controller {
         assert AppMain != null : "fx:id=\"AppMain\" was not injected: check your FXML file 'MainGUI.fxml'.";
 
         CarParkManCallbacks();
+        CustomerCallBacks();
         AppCallBacks();
+        try
+        {
+            CoinStageSetup();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        Update();
     }
 
-    public LocalDateTime currentDateTime;
     public CarPark currentCarPark;
     public Floor currentFloor;
     public Bay currentBay;
-    public List<CarPark> carParkList;
-    public List<Floor> floorList;
-    public List<Bay> bayList;
+    public List <CarPark> carParkList;
+    public List <Floor> floorList;
+    public List <Bay> bayList;
+    public AccountInfo accountInfo;
+    public Stage CoinStage;
+    public CoinGUI coinGUI;
 
-    public enum listMode {
+    public enum listMode
+    {
         CARPARKS, FLOORS, BAYS
     }
 
-    public int CARPARKCOUNTUP = 1;
+    private int CARPARKCOUNTUP = 1;
 
-    public listMode currentListMode = listMode.CARPARKS;
+    private listMode currentListMode = listMode.CARPARKS;
 
-    public void CarParkManCallbacks() {
-        currentDateTime = LocalDateTime.now();
+    private void CarParkManCallbacks()
+    {
 
-        carParkList = new LinkedList<CarPark>();
-        CarPark defaultCP = new CarPark("Default Car Park");
+        carParkList = new LinkedList <CarPark>();
+        CarPark defaultCP = new CarPark(this, "Default Car Park");
         carParkList.add(defaultCP);
         currentCarPark = defaultCP;
         currentFloor = currentCarPark.getFloor(0);
         currentBay = currentFloor.getBay(0);
-        bayList = new ArrayList<Bay>(currentFloor.noOfBays());
+        bayList = new ArrayList <Bay>(currentFloor.noOfBays());
         floorList = currentCarPark.floorList;
 
-        NewCarParkButton.setOnAction(event -> {
-            if (currentListMode == listMode.CARPARKS) {
+        NewCarParkButton.setOnAction(event ->
+        {
+            if (currentListMode == listMode.CARPARKS)
+            {
                 CARPARKCOUNTUP = 0;
                 String newName = "Car Park" + CARPARKCOUNTUP++;
-                Iterator<CarPark> stringIt = carParkList.iterator();
-                while (stringIt.hasNext()) {
-                    if (stringIt.next().toString().equals(newName)) {
+                Iterator <CarPark> stringIt = carParkList.iterator();
+                while (stringIt.hasNext())
+                {
+                    if (stringIt.next().toString().equals(newName))
+                    {
                         newName = "Car Park" + CARPARKCOUNTUP++;
                         stringIt = carParkList.iterator();
                     }
                 }
-                currentCarPark = new CarPark(newName);
+                currentCarPark = new CarPark(this, newName);
                 carParkList.add(currentCarPark);
                 Update();
             }
         });
 
-        DeleteSelectedCarParkButton.setOnAction(event -> {
-            if (currentListMode == listMode.CARPARKS) {
+        DeleteSelectedCarParkButton.setOnAction(event ->
+        {
+            if (currentListMode == listMode.CARPARKS)
+            {
                 UpdateMan();
-                if (currentCarPark != null) {
+                if (currentCarPark != null)
+                {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + currentCarPark.toString());
-                    alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {
+                    alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response ->
+                    {
                         carParkList.remove(currentCarPark);
                         currentCarPark = null;
                     });
@@ -426,125 +464,217 @@ public class Controller {
             }
         });
 
-        NewFloorButton.setOnAction(event -> {
+        NewFloorButton.setOnAction(event ->
+        {
             currentCarPark.addFloor(100, false);
+            Update();
         });
 
-        RemoveFloorButton.setOnAction(event -> {
-
+        RemoveFloorButton.setOnAction(event ->
+        {
+            currentCarPark.removeFloor();
+            Update();
         });
 
-        ManagerList.setOnMousePressed(event -> {
+        ManagerList.setOnMousePressed(event ->
+        {
             String searchName = ManagerList.getFocusModel().getFocusedItem();
-            switch (currentListMode) {
+            switch (currentListMode)
+            {
                 case CARPARKS:
                     carParkList.forEach(carPark ->
                     {
-                        if (carPark.toString().equals(searchName)) {
+                        if (carPark.toString().equals(searchName))
+                        {
                             currentCarPark = carPark;
+                            floorList = currentCarPark.floorList;
                             currentFloor = currentCarPark.floorList.get(0);
                             currentBay = currentFloor.getBay(0);
                         }
+                        Update();
                     });
                     break;
                 case FLOORS:
                     floorList.forEach(floor ->
                     {
-                        if (floor.toString().equals(searchName)) {
+                        if (floor.toString().equals(searchName))
+                        {
                             currentFloor = floor;
+                            floorList = currentCarPark.floorList;
                             currentBay = currentFloor.getBay(0);
                         }
+                        Update();
                     });
                     break;
                 case BAYS:
-                    bayList.forEach(bay -> {
-                        if (bay.toString().equals(searchName)) {
+                    bayList.forEach(bay ->
+                    {
+                        if (bay.toString().equals(searchName))
+                        {
                             currentBay = bay;
                         }
+                        Update();
                     });
             }
         });
 
-        CarParkSelect.setOnAction(event -> {
+        CarParkSelect.setOnAction(event ->
+        {
             currentListMode = listMode.CARPARKS;
-            CarParkManUpdate();
+            Update();
         });
 
-        FloorSelect.setOnAction(event -> {
+        FloorSelect.setOnAction(event ->
+        {
             currentListMode = listMode.FLOORS;
-            CarParkManUpdate();
+            Update();
         });
 
-        BaySelect.setOnAction(event -> {
+        BaySelect.setOnAction(event ->
+        {
             currentListMode = listMode.BAYS;
-            CarParkManUpdate();
+            Update();
+        });
+
+        CarParkNameBox.textProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if (!newValue.equals("")) currentCarPark.setName(newValue);
+            UpdateMan();
+        });
+
+        ExitPointsBox.textProperty().addListener((observable, oldValue, newValue) ->
+        {
+            int exitPoints;
+            try
+            {
+                exitPoints = Integer.parseInt(newValue);
+            } catch (NumberFormatException e)
+            {
+                exitPoints = 1;
+            }
+            if (exitPoints > 0) currentCarPark.setExitPoints(exitPoints);
         });
 
     }
 
-    public void Update() {
-        UpdateMan();
+    public void Update()
+    {
+        CarParkManUpdate();
+        coinGUI.Update();
     }
 
-    public void CarParkManUpdate() {
+    public void CarParkManUpdate()
+    {
         UpdateMan();
+        UpdatePark();
     }
 
-    public void UpdateMan() {
-        LinkedList<String> stringList = new LinkedList<String>();
-        switch (currentListMode) {
+    public void UpdateMan()
+    {
+        LinkedList <String> stringList = new LinkedList <String>();
+        switch (currentListMode)
+        {
             case BAYS:
-                for (int count = 0; count < bayList.size(); count++) {
+                for (int count = 0; count < bayList.size(); count++)
+                {
                     stringList.add(bayList.get(count).toString());
                 }
                 break;
             case FLOORS:
-                for (int count = 0; count < floorList.size(); count++) {
-                    stringList.add(currentCarPark.floorList.get(count).toString());
+                for (int count = 0; count < floorList.size(); count++)
+                {
+                    stringList.add(floorList.get(count).toString());
                 }
                 break;
             case CARPARKS:
-                for (int count = 0; count < carParkList.size(); count++) {
+                for (int count = 0; count < carParkList.size(); count++)
+                {
                     stringList.add(carParkList.get(count).toString());
                 }
                 break;
         }
-        ObservableList<String> observableList = FXCollections.observableArrayList(stringList);
+        ObservableList <String> observableList = FXCollections.observableArrayList(stringList);
         ManagerList.setItems(observableList);
 
         TotalCarParksBox.setText(String.valueOf(carParkList.size()));
     }
 
-    private void AppCallBacks() {
-        final String[] currentAccountUser = new String[1];
-        new File("Accounts").mkdirs();
-        SignUpButton.setOnAction((ActionEvent event) -> {
+    public void UpdatePark()
+    {
+        CarParkNameBox.setText(currentCarPark.carParkName);
+        ExitPointsBox.setText(String.valueOf(currentCarPark.exitPoints));
+    }
 
-            if ((UserNameSignupTextbox1.getText().isEmpty()) || (PasswordSignupTextbox1.getText().isEmpty())) {
+    private void CustomerCallBacks()
+    {
+        ShowCoins.setOnAction(event ->
+        {
+            CoinStage.show();
+            CoinStage.toFront();
+        });
+        String message1 = "Please Proceed";
+        String message2 = "Press for coin.";
+        CoinButton.setOnAction(event ->
+        {
+            if (EntryTextDisplay.getText().equals(message1))
+            {
+                EntryTextDisplay.setText(message2);
+            } else
+            {
+                EntryTextDisplay.setText(message1);
+                try
+                {
+                    sleep(100);
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                Platform.runLater(() ->
+                {
+                    try
+                    {
+                        sleep(2500);
+                    } catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    CoinStage.show();
+                    CoinStage.toFront();
+                    currentCarPark.entryPoint.carInteracts();
+                    EntryTextDisplay.setText(message2);
+                });
+            }
+        });
+    }
+
+    private void AppCallBacks()
+    {
+        AppMain.setVisible(false);
+        new File("Accounts").mkdirs();
+        SignUpButton.setOnAction((ActionEvent event) ->
+        {
+
+            if ((UserNameSignupTextbox1.getText().isEmpty()) || (PasswordSignupTextbox1.getText().isEmpty()))
+            {
                 LogInFeeback.setText("You need to enter the Username and Password");
-            } else {
-                if (new File("Accounts/" + UserNameSignupTextbox1.getText() + ".txt").exists()) {
+            } else
+            {
+                if (new File("Accounts/" + UserNameSignupTextbox1.getText() + ".txt").exists())
+                {
                     LogInFeeback.setText("Username already Exists");
                     UserNameSignupTextbox1.setText("");
                     PasswordSignupTextbox1.setText("");
-                } else {
+                } else
+                {
                     File accountFile;
-                    accountFile = new File("Accounts/" +
-                            UserNameSignupTextbox1.getText() + ".txt");
-                    currentAccountUser[0] = UserNameSignupTextbox1.getText();
-                    BufferedWriter bw = null;
-                    FileWriter fw;
+                    accountFile = new File("Accounts/" + UserNameSignupTextbox1.getText() + ".txt");
 
-                    try {
+                    try
+                    {
                         accountFile.createNewFile();
-                        fw = new FileWriter(accountFile);
-                        bw = new BufferedWriter(fw);
-                        bw.write(PasswordSignupTextbox1.getText());
-                        bw.newLine();
-                        bw.write("0");
-                        balanceSign.setText("0");
-                        bw.close();
-                    } catch (IOException e) {
+                        accountInfo = AccountInfo.newAccount(accountFile, PasswordSignupTextbox1.getText());
+                    } catch (IOException e)
+                    {
                         e.printStackTrace();
                     }
                     signedinas.setText("Signed in as: " + UserNameSignupTextbox1.getText());
@@ -552,74 +682,112 @@ public class Controller {
                     PasswordSignupTextbox1.setText("");
                     AppSplitBar.setDividerPosition(0, 0.0);
                     AppMain.setVisible(true);
-                    LogInFeeback.setText("Login Succesful!");
+                    LogInFeeback.setText("Login Successful!");
                 }
             }
 
 
         });
 
-        LoginButton.setOnAction((event -> {
+        LoginButton.setOnAction((event ->
+        {
             File currentAccount = new File("Accounts/" + UserNameTextbox.getText() + ".txt");
-            currentAccountUser[0] = UserNameTextbox.getText();
-            if (currentAccount.exists()) {
-                try {
+            if (currentAccount.exists())
+            {
+                try
+                {
                     Scanner scanner = new Scanner(new FileInputStream(currentAccount));
-                    if (scanner.nextLine().equals(PasswordTextbox.getText())) {
-                        LogInFeeback.setText("Login Succesful!");
+                    if (scanner.nextLine().equals(PasswordTextbox.getText()))
+                    {
+                        LogInFeeback.setText("Login Successful!");
                         signedinas.setText("Signed in as: " + UserNameTextbox.getText());
-                        balanceSign.setText(scanner.nextLine());
                         UserNameTextbox.setText("");
                         PasswordTextbox.setText("");
                         AppSplitBar.setDividerPosition(0, 0.0);
                         AppMain.setVisible(true);
-
-                    } else {
+                        scanner.close();
+                        accountInfo = new AccountInfo(currentAccount);
+                        balanceSign.setText("Balance: £" + new DecimalFormat("###,###.00").parse(String.valueOf(accountInfo.getBalance())));
+                    } else
+                    {
                         LogInFeeback.setText("Incorrect Password");
                         UserNameTextbox.setText("");
                         PasswordTextbox.setText("");
                     }
-                } catch (FileNotFoundException e) {
+                } catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                } catch (ParseException e)
+                {
                     e.printStackTrace();
                 }
-            } else {
+            } else
+            {
                 LogInFeeback.setText("User Doesn't exist");
                 UserNameTextbox.setText("");
                 PasswordTextbox.setText("");
             }
 
         }));
-        LogoutButton.setOnAction(event -> {
+        LogoutButton.setOnAction(event ->
+        {
 
             AppMain.setVisible(false);
             AppSplitBar.setDividerPosition(0, 0.2764);
             LogInFeeback.setText("Succesfully Signed Out!");
-
+            accountInfo.update();
+            accountInfo = null;
         });
-        balanceenter.setOnAction(event -> {
-            balanceSign.setText(String.valueOf(Float.parseFloat(balanceSign.getText()) + Float.parseFloat(balanceaddbox.getText())));
-            File accountFile;
-            accountFile = new File("Accounts/" +
-                    currentAccountUser[0] + ".txt");
-            BufferedWriter bw = null;
-            FileWriter fw;
-            try {
-                Scanner scanner = new Scanner(new FileInputStream(accountFile));
-                accountFile.createNewFile();
-                String password = scanner.nextLine();
-                fw = new FileWriter(accountFile);
-                bw = new BufferedWriter(fw);
-                bw.write(password);
-                bw.newLine();
-                bw.write(balanceSign.getText());
-                bw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+        TopUpButton.setOnAction((event) ->
+        {
+            TextInputDialog dialog = new TextInputDialog("walter");
+            dialog.setTitle("Text Input Dialog");
+            dialog.setHeaderText("Look, a Text Input Dialog");
+            dialog.setContentText("Please enter your name:");
+            Optional <String> result = dialog.showAndWait();
+            result.ifPresent((string) ->
+            {
+                double topUpAmount;
+                try
+                {
+                    topUpAmount = Double.valueOf(string);
+                } catch (NumberFormatException e)
+                {
+                    topUpAmount = 0;
+                }
+                if (topUpAmount > 0)
+                {
+                    accountInfo.setBalance(accountInfo.getBalance() + topUpAmount);
+                    accountInfo.update();
+                }
+                try
+                {
+                    balanceSign.setText("Balance: £" + new DecimalFormat("###,###.00").parse(String.valueOf(accountInfo.getBalance())));
+                } catch (ParseException e)
+                {
+                    e.printStackTrace();
+                }
             });
-
-
-        }
-
+        });
 
     }
+
+    void CoinStageSetup() throws IOException
+    {
+        CoinStage = new Stage();
+        CoinStage.setTitle("Coin Select");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CoinGUI.fxml"));
+        Parent root = (Parent) loader.load();
+        coinGUI = loader.getController();
+        coinGUI.setMain(this);
+        CoinStage.setTitle("Car Park System");
+        int coinWindowW = 200;
+        Scene main = new Scene(root, coinWindowW, 300);
+        main.getStylesheets().add(Main.class.getResource("css.css").toExternalForm());
+        CoinStage.setScene(main);
+        CoinStage.setX(Screen.getPrimary().getVisualBounds().getMaxX() - coinWindowW);
+    }
+
+
+}

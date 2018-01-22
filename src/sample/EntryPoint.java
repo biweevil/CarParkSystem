@@ -5,13 +5,12 @@ package sample;
  */
 public class EntryPoint extends AccessPoint
 {
-    private FloorDisplay floorDisplay;
 
-    public EntryPoint()
+    public EntryPoint(CarPark carPark)
     {
+        super(carPark);
         coinMachine = new CoinDispenser(carPark, 100);
-
-
     }
+
 
 }
