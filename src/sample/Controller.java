@@ -678,6 +678,11 @@ public class Controller
                         e.printStackTrace();
                     }
                     signedinas.setText("Signed in as: " + UserNameSignupTextbox1.getText());
+                    try {
+                        balanceSign.setText("Balance: £" + new DecimalFormat("###,###.00").parse(String.valueOf(accountInfo.getBalance())));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     UserNameSignupTextbox1.setText("");
                     PasswordSignupTextbox1.setText("");
                     AppSplitBar.setDividerPosition(0, 0.0);
