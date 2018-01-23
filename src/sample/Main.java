@@ -2,6 +2,11 @@ package sample;
 
 import com.sun.javafx.robot.FXRobot;
 import com.sun.javafx.robot.FXRobotFactory;
+
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.rest.api.v2010.account.MessageCreator;
+import com.twilio.type.PhoneNumber;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -10,10 +15,12 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main extends Application
+{
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception
+    {
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainGUI.fxml"));
@@ -28,7 +35,5 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public static void main(String[] args) {launch(args);}
 }

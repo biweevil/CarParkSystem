@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.*;
 
+import com.twilio.type.PhoneNumber;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -771,6 +772,54 @@ public class Controller
             });
         });
 
+        VerificationButton.setOnAction(event ->
+        {
+
+            if (accountInfo.getPhoneNumber() == null)
+            {
+                boolean validNumber = false;
+                TextInputDialog numberdialog = new TextInputDialog("44");
+                numberdialog.setTitle("Verify Number");
+                numberdialog.setHeaderText("Verify Number");
+                numberdialog.setContentText("Please enter mobile number:");
+                Optional <String> result = numberdialog.showAndWait();
+                if (result.isPresent())
+                {
+                    try
+                    {
+                        new PhoneNumber(result.get());
+                        validNumber = true;
+                    } catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                if(validNumber){
+                    StringBuilder validationBuilder = new StringBuilder();
+                    for (int i = 0; i < 5; i++){
+                        validationBuilder.append(Math.floor(Math.random()*10));
+                    }
+                    String validationCode = validationBuilder.toString();
+                    String validationMessage = "Please enter the following 5 digit code into the app: "+validationCode;
+                    MessageApi Messenger = new MessageApi();
+                    Messenger.sendMessage(result.get(),validationMessage);
+
+                    TextInputDialog codedialog = new TextInputDialog("44");
+                    codedialog.setTitle("Verify Number");
+                    codedialog.setHeaderText("Verify Number");
+                    codedialog.setContentText("Please enter mobile number:");
+                    Optional <String> result2 = codedialog.showAndWait();
+                    boolean valid;
+                    if (result2.isPresent()){
+                        if(result2.get().equals(validationCode)){
+                            valid = true;
+                            accountInfo.setPhoneNumber(result.get());
+                        }
+                    }
+                }
+            }
+        });
+
     }
 
     void CoinStageSetup() throws IOException
@@ -788,6 +837,5 @@ public class Controller
         CoinStage.setScene(main);
         CoinStage.setX(Screen.getPrimary().getVisualBounds().getMaxX() - coinWindowW);
     }
-
 
 }

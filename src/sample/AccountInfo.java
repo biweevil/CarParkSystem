@@ -1,5 +1,7 @@
 package sample;
 
+import com.twilio.type.PhoneNumber;
+
 import java.io.*;
 import java.time.Instant;
 import java.util.Calendar;
@@ -15,6 +17,7 @@ public class AccountInfo
     private File accountFile;
     private String password;
     private double balance;
+    private String phoneNumber;
     private Instant seasonPass;
     private Instant weekPass;
     private Instant dayPass;
@@ -27,6 +30,7 @@ public class AccountInfo
         accountFile = file;
         this.password = password;
         balance = 0.0;
+        phoneNumber = null;
         seasonPass = Instant.EPOCH;
         weekPass = Instant.EPOCH;
         dayPass = Instant.EPOCH;
@@ -48,9 +52,28 @@ public class AccountInfo
     private void read(Scanner scanner){
         password = scanner.nextLine();
         balance = Double.parseDouble(scanner.nextLine());
+        phoneNumber = scanner.nextLine();
         seasonPass = Instant.parse(scanner.nextLine());
         weekPass = Instant.parse(scanner.nextLine());
         dayPass = Instant.parse(scanner.nextLine());
+        scanner.close();
+    }
+
+    public String getPhoneNumber()
+    {
+        return phoneNumber;
+    }
+
+    public boolean setPhoneNumber(String phoneNumber)
+    {
+        try
+        {
+            new PhoneNumber(phoneNumber);
+            this.phoneNumber = phoneNumber;
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public void setBalance(double balance)
@@ -73,6 +96,8 @@ public class AccountInfo
             bw.write(password);
             bw.newLine();
             bw.write(String.valueOf(balance));
+            bw.newLine();
+            bw.write(phoneNumber);
             bw.newLine();
             bw.write(seasonPass.toString());
             bw.newLine();

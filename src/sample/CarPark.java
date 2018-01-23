@@ -104,7 +104,8 @@ public class CarPark
 
     public void removeFloor()
     {
-        floorList.pop();
+        if(!floorList.empty())
+            floorList.pop();
     }
 
     public void addPaymentMachine()
