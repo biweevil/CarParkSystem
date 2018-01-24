@@ -267,7 +267,7 @@ public class Controller {
         Update();
     }
 
-    private void assets(){
+    private void assets() {
         assert NextHourButton != null : "fx:id=\"NextHourButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert NextDayButton != null : "fx:id=\"NextDayButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert Next10Button != null : "fx:id=\"Next10Button\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -583,7 +583,7 @@ public class Controller {
                             Bay currentBay = current.getBay(j);
                             currentBay.setCar(car);
                             spaceFound = true;
-                        }else{
+                        } else {
                             j++;
                         }
                     }
@@ -635,12 +635,27 @@ public class Controller {
             }
         });
 
-        ExitInsert.setOnAction(event -> {
-            if(currentCoin.isPaid()){
 
-            }
-            else
+        ExitInsert.setOnAction(event -> {
+
+            if (currentCoin.isPaid()) {
+                removeCoin(currentCoin);
+                for(int i = 0; i < floorList.size();i++){
+                    for (int j = 0; j < floorList.get(i).noOfBays();j++){
+                        if (floorList.get(i).getBay(j).getCar() == currentCoin.getCar()){
+                            floorList.get(i).getBay(j).setCarPresent(false);
+                        }
+                    }
+                }
+                currentCoin.setCar(null);
+                Update();
+
+            } else
                 new Alert(Alert.AlertType.WARNING, "Coin is not paid for").showAndWait();
+
+
+
+
 
 
         });
@@ -657,6 +672,10 @@ public class Controller {
             LostCoinButton.setVisible(false);
             PaymentGUI.setVisible(true);
         });
+    }
+
+    public void removeCoin(Coin currentCoin) {
+        coinGUI.removeCoin(currentCoin);
     }
 
     private String getSuitableCode() {

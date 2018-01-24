@@ -54,6 +54,7 @@ public class CoinManager
         coinsInUse.add(coinInUse);
     }
 
+
     public void removeCoinInUse(Coin coinNotInUse){
         coinsInUse.remove(coinNotInUse);
     }

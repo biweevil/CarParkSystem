@@ -20,9 +20,14 @@ public class Coin
         paid = true;
     }
 
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     public void assignCar(Car newCar)
     {
         car = newCar;
+
         paid = false;
     }
 
