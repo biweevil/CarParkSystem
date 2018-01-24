@@ -9,12 +9,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -341,6 +344,13 @@ public class Controller {
     public Stage CoinStage;
     public CoinGUI coinGUI;
     private String loginCode;
+    private Coin currentCoin;
+
+    public void setCurrentCoin(Coin currentCoin) {
+        this.currentCoin = currentCoin;
+    }
+
+
 
     public enum listMode {
         CARPARKS, FLOORS, BAYS
@@ -539,6 +549,25 @@ public class Controller {
         CarParkNameBox.setText(currentCarPark.carParkName);
         FloorID.setText(currentFloor.getFloorLetter());
         ExitPointsBox.setText(String.valueOf(currentCarPark.exitPoints));
+
+        FloorView.getChildren().clear();
+        for (int i = 0; i < currentCarPark.floorList.size(); i++ ) {
+            HBox hBox = new HBox();
+            Button button = new Button();
+            Label label = new Label("fbea");
+            hBox.getChildren().add(button);
+            hBox.getChildren().add(label);
+            FloorView.getChildren().add(hBox);
+            button.setText("Floor " + currentCarPark.getFloor(i));
+            label.setText("Free Spaces: " + currentCarPark.getFloor(i).noOfSpaces());
+            button.setFont(Font.font(25));
+            label.setFont(Font.font(25));
+            label.setPadding(new Insets(10));
+            button.setOnAction(event -> {
+
+
+            });
+        }
     }
 
     private void CustomerCallBacks() {
@@ -576,6 +605,7 @@ public class Controller {
                 });
             }
         });
+
 
         PaymentGUI.setVisible(false);
         PaymentTextDisplay.setText("Enter coin to start");
