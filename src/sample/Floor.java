@@ -30,7 +30,7 @@ public class Floor
         {
             for (int i = 0; i < bayN; i++)
             {
-                bays[i] = new Bay(this, i + 1, false);
+                bays[i] = new Bay(this, i + 1);
             }
         }
     }
@@ -54,16 +54,12 @@ public class Floor
     public int noOfSpaces()
     {
         int sum = 0;
-        if (secure)
-        {
-            for (Bay sbay : bays)
+            for (Bay bay : bays)
             {
-                sum += ((SecureBay) sbay).isCarPresent() ? 1 : 0;
+                if (!bay.isCarPresent())
+                sum++;
             }
-        } else
-        {
-            sum = -1;
-        }
+
         return sum;
     }
 

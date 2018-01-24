@@ -87,6 +87,15 @@ public class CarPark
         return sum;
     }
 
+    public void setCurrentGUICoin(Coin coin){
+        controller.setCurrentCoin(coin);
+    }
+
+    public Coin getCurrentGUICoin(){
+        return controller.getCurrentCoin();
+    }
+
+
     public int getSpaces()
     {
         return noOfCars;

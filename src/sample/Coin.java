@@ -26,6 +26,10 @@ public class Coin
         paid = false;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
     public boolean isPaid()
     {
         return paid;

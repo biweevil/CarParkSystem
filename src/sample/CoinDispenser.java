@@ -16,7 +16,8 @@ public class CoinDispenser extends CoinMachine
             Coin fetchedCoin = this.coinManager.getNextCoin();
             this.coinBox.add(fetchedCoin);
         }
-        this.coinManager.addCoinInUse(coinBox.poll());
+        carPark.setCurrentGUICoin(coinBox.poll());
+        this.coinManager.addCoinInUse(carPark.getCurrentGUICoin());
         carPark.updateGUI();
     }
 }
