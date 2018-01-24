@@ -406,7 +406,7 @@ public class Controller {
 
         NewFloorButton.setOnAction(event ->
         {
-            currentCarPark.addFloor(100, false);
+            currentCarPark.addFloor(10, false);
             Update();
         });
 
@@ -428,6 +428,7 @@ public class Controller {
                             currentCarPark = carPark;
                             floorList = currentCarPark.floorList;
                             currentFloor = currentCarPark.floorList.get(0);
+                            bayList = currentFloor.getBays();
                             currentBay = currentFloor.getBay(0);
                         }
                         Update();
@@ -440,6 +441,7 @@ public class Controller {
                             currentFloor = floor;
                             floorList = currentCarPark.floorList;
                             currentBay = currentFloor.getBay(0);
+                            bayList = currentFloor.getBays();
                         }
                         Update();
                     });
