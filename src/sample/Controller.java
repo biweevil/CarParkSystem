@@ -516,6 +516,12 @@ public class Controller {
         ManagerList.setItems(observableList);
 
         TotalCarParksBox.setText(String.valueOf(carParkList.size()));
+        int total = 0;
+        for(int i = 0; i < carParkList.size(); i++ ){
+            total = total + carParkList.get(i).getCapacity();
+        }
+        TotalSpacesBox.setText(""+total);
+
     }
 
     public void UpdatePark() {
