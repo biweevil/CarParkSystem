@@ -323,107 +323,111 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <Label fx:id="PaymentTextDisplay" alignment="CENTER" layoutX="301.0" layoutY="15.0" prefHeight="173.0" prefWidth="675.0" style="-fx-border-width: 5; -fx-border-color: 000000; -fx-border-style: solid;" text="Enter coin to start or 123456 on the mobile app." textAlignment="CENTER" textFill="#1200b2" wrapText="true">
+                                          <Label fx:id="PaymentTextDisplay" alignment="CENTER" layoutX="301.0" layoutY="15.0" prefHeight="173.0" prefWidth="677.0" style="-fx-border-width: 5; -fx-border-color: 000000; -fx-border-style: solid;" text="Enter coin to start" textAlignment="CENTER" textFill="#1200b2" wrapText="true">
                                              <font>
                                                 <Font name="Consolas" size="48.0" />
                                              </font>
                                           </Label>
-                                          <Accordion fx:id="PaymentGUI" layoutX="301.0" layoutY="241.0" prefHeight="260.0" prefWidth="675.0">
+                                          <Accordion fx:id="PaymentGUI" layoutX="632.0" layoutY="188.0" prefHeight="360.0" prefWidth="346.0" style="-fx-border-color: 000000; -fx-border-width: 5; -fx-border-style: solid;">
                                              <panes>
-                                                <TitledPane fx:id="CardMachineView" text="Card Machine">
+                                                <TitledPane fx:id="CardMachineView" prefHeight="235.0" prefWidth="303.0" text="Card Machine">
                                                    <content>
                                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                          <children>
-                                                            <GridPane layoutY="71.0" prefHeight="109.0" prefWidth="200.0">
-                                                               <columnConstraints>
-                                                                  <ColumnConstraints hgrow="SOMETIMES" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" />
-                                                               </columnConstraints>
-                                                               <rowConstraints>
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                               </rowConstraints>
+                                                            <VBox layoutX="67.0" layoutY="59.0">
                                                                <children>
-                                                                  <Button fx:id="CardPin1" mnemonicParsing="false" prefWidth="67.0" text="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button fx:id="CardPin2" mnemonicParsing="false" prefWidth="67.0" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button fx:id="CardPin3" mnemonicParsing="false" prefWidth="67.0" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button fx:id="CardPin4" mnemonicParsing="false" prefWidth="67.0" text="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button fx:id="CardPin5" layoutX="18.0" layoutY="43.0" mnemonicParsing="false" prefWidth="67.0" text="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button fx:id="CardPin6" layoutX="85.0" layoutY="43.0" mnemonicParsing="false" prefWidth="67.0" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button fx:id="CardPin7" layoutX="144.0" layoutY="43.0" mnemonicParsing="false" prefWidth="67.0" text="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button fx:id="CardPin8" layoutX="10.0" layoutY="73.0" mnemonicParsing="false" prefWidth="67.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button fx:id="CardPin9" layoutX="77.0" layoutY="73.0" mnemonicParsing="false" prefWidth="67.0" text="9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button layoutX="18.0" layoutY="13.0" mnemonicParsing="false" prefWidth="67.0" text="R" textFill="#ec0000" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button fx:id="CardPin0" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefWidth="67.0" text="0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                                  <Button layoutX="77.0" layoutY="76.0" mnemonicParsing="false" prefWidth="67.0" text="#" textFill="#03d714" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="15.0" />
-                                                                     </font>
-                                                                  </Button>
-                                                               </children>
-                                                            </GridPane>
-                                                            <VBox prefHeight="73.0" prefWidth="200.0">
-                                                               <children>
-                                                                  <ImageView fx:id="CardImage" fitHeight="40.0" fitWidth="200.0">
-                                                                     <image>
-                                                                        <Image url="@NoCard.jpg" />
-                                                                     </image>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                  </ImageView>
-                                                                  <TextField fx:id="CardDisplay" disable="true" prefHeight="37.0" prefWidth="200.0" text="Insert Card">
-                                                                     <font>
-                                                                        <Font name="Consolas" size="14.0" />
-                                                                     </font>
-                                                                  </TextField>
+                                                                  <VBox prefHeight="73.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <ImageView fx:id="CardImage" fitHeight="40.0" fitWidth="200.0">
+                                                                           <image>
+                                                                              <Image url="@NoCard.jpg" />
+                                                                           </image>
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                        </ImageView>
+                                                                        <TextField fx:id="CardDisplay" disable="true" prefHeight="37.0" prefWidth="200.0" text="Insert Card">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="14.0" />
+                                                                           </font>
+                                                                        </TextField>
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <GridPane prefHeight="109.0" prefWidth="200.0">
+                                                                     <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" />
+                                                                     </columnConstraints>
+                                                                     <rowConstraints>
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                     </rowConstraints>
+                                                                     <children>
+                                                                        <Button fx:id="CardPin1" mnemonicParsing="false" prefWidth="67.0" text="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button fx:id="CardPin2" mnemonicParsing="false" prefWidth="67.0" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button fx:id="CardPin3" mnemonicParsing="false" prefWidth="67.0" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button fx:id="CardPin4" mnemonicParsing="false" prefWidth="67.0" text="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button fx:id="CardPin5" layoutX="18.0" layoutY="43.0" mnemonicParsing="false" prefWidth="67.0" text="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button fx:id="CardPin6" layoutX="85.0" layoutY="43.0" mnemonicParsing="false" prefWidth="67.0" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button fx:id="CardPin7" layoutX="144.0" layoutY="43.0" mnemonicParsing="false" prefWidth="67.0" text="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button fx:id="CardPin8" layoutX="10.0" layoutY="73.0" mnemonicParsing="false" prefWidth="67.0" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button fx:id="CardPin9" layoutX="77.0" layoutY="73.0" mnemonicParsing="false" prefWidth="67.0" text="9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button layoutX="18.0" layoutY="13.0" mnemonicParsing="false" prefWidth="67.0" text="R" textFill="#ec0000" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button fx:id="CardPin0" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefWidth="67.0" text="0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Button layoutX="77.0" layoutY="76.0" mnemonicParsing="false" prefWidth="67.0" text="#" textFill="#03d714" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                                                           <font>
+                                                                              <Font name="Consolas" size="15.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                     </children>
+                                                                  </GridPane>
                                                                </children>
                                                             </VBox>
                                                          </children>
@@ -434,31 +438,21 @@
                                                    <content>
                                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                          <children>
-                                                            <RadioButton fx:id="Pound20" layoutX="18.0" layoutY="65.0" mnemonicParsing="false" text="£20" />
-                                                            <RadioButton fx:id="Pound10" layoutX="18.0" layoutY="82.0" mnemonicParsing="false" text="£10" />
-                                                            <RadioButton fx:id="Pound5" layoutX="18.0" layoutY="99.0" mnemonicParsing="false" text="£5" />
-                                                            <RadioButton fx:id="Pence5" layoutX="142.0" layoutY="99.0" mnemonicParsing="false" text="5p" />
-                                                            <RadioButton fx:id="Pound2" layoutX="84.0" layoutY="65.0" mnemonicParsing="false" text="£2" />
-                                                            <RadioButton fx:id="Pence50" layoutX="84.0" layoutY="99.0" mnemonicParsing="false" text="50p" />
-                                                            <RadioButton fx:id="Pound1" layoutX="84.0" layoutY="82.0" mnemonicParsing="false" text="£1" />
-                                                            <RadioButton fx:id="Pence20" layoutX="142.0" layoutY="65.0" mnemonicParsing="false" text="20p" />
-                                                            <RadioButton fx:id="Pence10" layoutX="142.0" layoutY="82.0" mnemonicParsing="false" text="10p" />
-                                                            <TextField fx:id="CashDisplay" editable="false" layoutX="27.0" layoutY="23.0" />
-                                                            <Button fx:id="InsertCashButton" layoutX="31.0" layoutY="141.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Insert Cash" />
-                                                         </children>
-                                                      </AnchorPane>
-                                                   </content>
-                                                </TitledPane>
-                                                <TitledPane prefHeight="200.0" prefWidth="200.0" text="Mobile App">
-                                                   <content>
-                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                                         <children>
-                                                            <TextField fx:id="PaymentMachineCodeBox" layoutX="18.0" layoutY="6.0" prefHeight="44.0" prefWidth="156.0" promptText="6 Digit Code">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </TextField>
-                                                            <Button fx:id="PaymentMachineCodeSubmit" layoutX="174.0" layoutY="6.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="52.0" text="Go" />
+                                                            <AnchorPane layoutX="85.0" layoutY="103.0">
+                                                               <children>
+                                                                  <RadioButton fx:id="Pound20" layoutY="42.0" mnemonicParsing="false" text="£20" />
+                                                                  <RadioButton fx:id="Pound10" layoutY="59.0" mnemonicParsing="false" text="£10" />
+                                                                  <RadioButton fx:id="Pound5" layoutY="76.0" mnemonicParsing="false" text="£5" />
+                                                                  <RadioButton fx:id="Pence5" layoutX="124.0" layoutY="76.0" mnemonicParsing="false" text="5p" />
+                                                                  <RadioButton fx:id="Pound2" layoutX="66.0" layoutY="42.0" mnemonicParsing="false" text="£2" />
+                                                                  <RadioButton fx:id="Pence50" layoutX="66.0" layoutY="76.0" mnemonicParsing="false" text="50p" />
+                                                                  <RadioButton fx:id="Pound1" layoutX="66.0" layoutY="59.0" mnemonicParsing="false" text="£1" />
+                                                                  <RadioButton fx:id="Pence20" layoutX="124.0" layoutY="42.0" mnemonicParsing="false" text="20p" />
+                                                                  <RadioButton fx:id="Pence10" layoutX="124.0" layoutY="59.0" mnemonicParsing="false" text="10p" />
+                                                                  <TextField fx:id="CashDisplay" editable="false" layoutX="9.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <Button fx:id="InsertCashButton" layoutX="94.0" layoutY="213.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Insert Cash" />
                                                          </children>
                                                       </AnchorPane>
                                                    </content>
@@ -473,7 +467,25 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button fx:id="LostCoinButton" layoutX="43.0" layoutY="241.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="208.0" text="Lost Coin Button" />
+                                          <Button fx:id="LostCoinButton" layoutX="42.0" layoutY="221.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: fff000;" text="Lost Coin Button">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font></Button>
+                                          <AnchorPane fx:id="MobileGUI" layoutX="301.0" layoutY="188.0" prefHeight="359.0" prefWidth="331.0" style="-fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 5;">
+                                             <children>
+                                                <TextField fx:id="PaymentMachineCodeBox" layoutX="36.0" layoutY="100.0" prefHeight="44.0" prefWidth="208.0" promptText="6 Digit Code">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Button fx:id="PaymentMachineCodeSubmit" layoutX="244.0" layoutY="100.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="52.0" text="Go" />
+                                                <Label fx:id="MobileDisplay" layoutX="35.0" layoutY="45.0" prefHeight="42.0" prefWidth="261.0" style="-fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 3;" text="App Code: 12345" textFill="#0d2390">
+                                                   <font>
+                                                      <Font size="25.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
                                        </children>
                                     </AnchorPane>
                                  </content>

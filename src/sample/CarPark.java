@@ -122,9 +122,9 @@ public class CarPark
         paymentMachines.push(new PaymentMachine(this));
     }
 
-    public void bayViolation(SecureBay secureBay)
+    public void bayViolation(SecureBay secureBay, Floor floor)
     {
-        secureBay.toString();
+        secureBay.getCar().getCoin().getAccountInfo().contact("Your vehicle at bay "+secureBay.toString()+" has been moved without authorisation");
     }
 
 

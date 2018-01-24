@@ -104,6 +104,10 @@ public class AccountInfo
         return balance;
     }
 
+    public void contact(String message){
+        new MessageApi().sendMessage(phoneNumber,message);
+    }
+
     public void update(){
 
         FileWriter fw = null;

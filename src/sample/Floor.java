@@ -48,7 +48,7 @@ public class Floor
 
     public void bayViolation(SecureBay secureBay)
     {
-        carPark.bayViolation(secureBay);
+        carPark.bayViolation(secureBay, this);
     }
 
     public int noOfSpaces()

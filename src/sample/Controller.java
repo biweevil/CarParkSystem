@@ -250,7 +250,13 @@ public class Controller {
     private Button PaymentMachineCodeSubmit;
 
     @FXML
+    private AnchorPane MobileGUI;
+
+    @FXML
     private Button LostCoinButton;
+
+    @FXML
+    private Label MobileDisplay;
 
     @FXML
         // This method is called by the FXMLLoader when initialization is complete
@@ -345,6 +351,7 @@ public class Controller {
     public CoinGUI coinGUI;
     private String loginCode;
     private Coin currentCoin;
+    private AccountInfo  currentAccount;
 
     public void setCurrentCoin(Coin currentCoin) {
         this.currentCoin = currentCoin;
@@ -637,18 +644,47 @@ public class Controller {
 
 
         PaymentGUI.setVisible(false);
+        MobileGUI.setVisible(false);
         PaymentTextDisplay.setText("Enter coin to start");
         CoinButtonPayment.setOnAction(event -> {
             CoinButtonPayment.setVisible(false);
+            LostCoinButton.setVisible(false);
             loginCode = getSuitableCode();
-            PaymentTextDisplay.setText("Choose Payment Method");
+            PaymentTextDisplay.setText("Total to pay: "+currentCoin.getTotalCost());
+            PaymentGUI.setVisible(true);
+            MobileGUI.setVisible(true);
+            loginCode = getSuitableCode();
+            MobileDisplay.setText("App Code: "+loginCode);
+
         });
 
         LostCoinButton.setOnAction(event -> {
             CoinButtonPayment.setVisible(false);
             LostCoinButton.setVisible(false);
             PaymentGUI.setVisible(true);
+            MobileGUI.setVisible(true);
+            PaymentGUI.setDisable(true);
+            loginCode = getSuitableCode();
+            MobileDisplay.setText("App Code: "+loginCode);
         });
+
+        PaymentMachineCodeSubmit.setOnAction(event -> {
+            String appCode = PaymentMachineCodeBox.getText();
+            File[] accountLoc = new File(System.getProperty("user.home") + "/Accounts").listFiles();
+            for (File accountFile : accountLoc) {
+                AccountInfo testAccount = new AccountInfo(accountFile);
+                if(testAccount.Verify(loginCode).equals(appCode)){
+                    currentAccount = testAccount;
+                    MobileDisplay.setText("Welcome "+accountFile.getName().replaceAll(".txt",""));
+                    PaymentGUI.setVisible(true);
+                }
+            }
+            if (currentAccount == null){
+                MobileDisplay.setText("Retry: "+loginCode);
+            }
+        });
+
+
     }
 
     private String getSuitableCode() {

@@ -9,6 +9,23 @@ public class Coin
     private CoinMachine currentMachine;
     private boolean paid;
     private AccountInfo accountInfo;
+    private double totalCost;
+
+    public Coin()
+    {
+        this.totalCost = 5;
+    }
+
+    public void setTotalCost(double totalCost)
+    {
+        this.totalCost = totalCost;
+    }
+
+    public double getTotalCost()
+    {
+        return totalCost;
+
+    }
 
     public String toString()
     {
@@ -18,6 +35,16 @@ public class Coin
     public void paid()
     {
         paid = true;
+    }
+
+    public AccountInfo getAccountInfo()
+    {
+        return accountInfo;
+    }
+
+    public void setAccountInfo(AccountInfo accountInfo)
+    {
+        this.accountInfo = accountInfo;
     }
 
     public void assignCar(Car newCar)
