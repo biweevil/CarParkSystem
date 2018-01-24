@@ -796,6 +796,40 @@ public class Controller
                 MobileDisplay.setText("Retry: " + loginCode);
             }
         });
+        InsertCashButton.setOnAction(event -> {
+            float cash = 0;
+            try {
+                CashDisplay.setText(String.valueOf(new DecimalFormat("###,###.00").parse(String.valueOf(String.valueOf(cash)))));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if (Pound2.isSelected()){
+                cash+=2;
+            }
+            if (Pound5.isSelected()){
+                cash+=5;
+            }
+            if (Pound10.isSelected()){
+                cash+=10;
+            }
+            if (Pound20.isSelected()){
+                cash+=20;
+            }
+            if (Pence5.isSelected()){
+                cash+=.05;
+            }
+            if (Pence10.isSelected()){
+                cash+=.10;
+            }
+            if (Pence20.isSelected()){
+                cash+=.20;
+            }
+            if (Pence50.isSelected()){
+                cash+=.50;
+            }
+            CashDisplay.setText(""+(cash));
+        });
 
 
     }
@@ -817,10 +851,11 @@ public class Controller
                 newCode += (int) Math.floor(Math.random() * 10);
             }
             File[] accountLoc = new File(System.getProperty("user.home") + "/Accounts").listFiles();
-            List <String> list = new ArrayList <>();
-            for (File accountFile : accountLoc)
-            {
-                list.add(new AccountInfo(accountFile).Verify(newCode));
+            List<String> list = new ArrayList<>();
+            if (accountLoc != null) {
+                for (File accountFile : accountLoc) {
+                    list.add(new AccountInfo(accountFile).Verify(newCode));
+                }
             }
             Set <String> set = new HashSet <>(list);
             if (set.size() == list.size())
@@ -832,8 +867,7 @@ public class Controller
     }
 
 
-    void CoinStageSetup() throws IOException
-    {
+    void CoinStageSetup() throws IOException {
         CoinStage = new Stage();
         CoinStage.setTitle("Coin Select");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CoinGUI.fxml"));
