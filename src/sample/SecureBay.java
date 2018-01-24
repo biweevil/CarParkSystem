@@ -11,7 +11,7 @@ public class SecureBay extends Bay
 
     SecureBay(CarPark carPark, Floor floor, int bayNo)
     {
-        super(floor, bayNo);
+        super(floor, bayNo, false);
         carPresent = false;
         secured = false;
     }
