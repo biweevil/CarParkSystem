@@ -558,7 +558,8 @@ public class Controller {
             currentFloor = currentCarPark.floorList.get(i);
             HBox hBox = new HBox();
             Button button = new Button();
-            Label label = new Label("fbea");
+            button.setId(i + "");
+            Label label = new Label("");
             hBox.getChildren().add(button);
             hBox.getChildren().add(label);
             FloorView.getChildren().add(hBox);
@@ -568,23 +569,27 @@ public class Controller {
             label.setFont(Font.font(25));
             label.setPadding(new Insets(10));
             button.setOnAction(event -> {
+                int floorIndex = Integer.parseInt(button.getId());
+                Floor current = currentCarPark.floorList.get(floorIndex);
                 boolean spaceFound = false;
                 if (currentCoin == null || currentCoin.getCar() != null) {
                     new Alert(Alert.AlertType.WARNING, "Car already parked").showAndWait();
                 } else {
                     int j = 0;
-                    while ((j < currentFloor.noOfBays()) && (!spaceFound)) {
-                        if (!currentFloor.getBay(j).isCarPresent()) {
+                    while ((j < current.noOfBays()) && (!spaceFound)) {
+                        if (!current.getBay(j).isCarPresent()) {
                             Car car = new Car(currentCoin);
-                            currentBay = currentFloor.getBay(j);
+                            Bay currentBay = current.getBay(j);
                             currentBay.setCar(car);
                             spaceFound = true;
+                        }else{
+                            j++;
                         }
                     }
-                    if (!spaceFound){
+                    if (!spaceFound) {
                         new Alert(Alert.AlertType.WARNING, "Floor full").showAndWait();
-                    }else{
-                        new Alert(Alert.AlertType.INFORMATION, "Car parked at "+currentBay.toString()).showAndWait();
+                    } else {
+                        new Alert(Alert.AlertType.INFORMATION, "Car parked at " + current.getBay(j).toString()).showAndWait();
                     }
                     Update();
                 }
