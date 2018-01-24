@@ -30,7 +30,7 @@ public class Floor
         {
             for (int i = 0; i < bayN; i++)
             {
-                bays[i] = new Bay(this, i + 1);
+                bays[i] = new Bay(this, i + 1, false);
             }
         }
     }

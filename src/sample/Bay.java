@@ -7,10 +7,12 @@ public class Bay
 {
     protected Floor floor;
     protected int bayNo;
+    protected boolean disabled;
 
-    Bay(Floor floor, int bayNo){
+    Bay(Floor floor, int bayNo, boolean disabled){
         this.floor = floor;
         this.bayNo = bayNo;
+        this.disabled = disabled;
     }
 
     @Override

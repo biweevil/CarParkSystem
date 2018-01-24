@@ -226,11 +226,11 @@
                                     </ScrollPane>
                                  </content>
                             </TitledPane>
-                            <TitledPane fx:id="FloorEditorPanel" animated="false" text="Floor Editor">
+                            <TitledPane fx:id="FloorEditorPanel" animated="false" prefHeight="431.0" prefWidth="392.0" text="Floor Editor">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <HBox alignment="CENTER" layoutX="53.0" layoutY="14.0" prefHeight="44.0" prefWidth="284.0">
+                                          <HBox alignment="CENTER" layoutX="63.0" layoutY="46.0" prefHeight="44.0" prefWidth="284.0">
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Floor Capacity">
                                                    <font>
@@ -240,27 +240,33 @@
                                                 <TextField fx:id="FloorCapacityBox" alignment="CENTER" prefHeight="26.0" prefWidth="146.0" />
                                              </children>
                                           </HBox>
-                                          <Separator layoutX="53.0" layoutY="57.0" prefWidth="284.0" />
-                                          <Label alignment="CENTER" layoutX="106.0" layoutY="60.0" prefHeight="25.0" prefWidth="178.0" text="Override Bay" />
-                                          <Button fx:id="FreeSpaceButton" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" text="Free Space" />
-                                          <Button fx:id="FillSpacesButton" layoutX="195.0" layoutY="85.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" text="Disable Space" />
+                                          <Label alignment="CENTER" layoutX="106.0" layoutY="102.0" prefHeight="25.0" prefWidth="178.0" text="Override Bay" />
                                           <Separator layoutX="53.0" layoutY="136.0" prefWidth="284.0" />
                                           <AnchorPane fx:id="CarStatusPanel" layoutX="53.0" layoutY="150.0" prefHeight="200.0" prefWidth="284.0">
                                              <children>
-                                                <Label alignment="CENTER" prefHeight="39.0" prefWidth="284.0" text="Car Status" />
-                                                <Label fx:id="hasPaidLabel" alignment="CENTER" layoutY="39.0" prefHeight="40.0" prefWidth="284.0" text="Paid : True">
+                                                <Label alignment="CENTER" layoutY="41.0" prefHeight="39.0" prefWidth="284.0" text="Car Status" />
+                                                <Label fx:id="hasPaidLabel" alignment="CENTER" layoutY="80.0" prefHeight="40.0" prefWidth="284.0" text="Paid : True">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="CostLabel" alignment="CENTER" layoutY="79.0" prefHeight="40.0" prefWidth="284.0" text="Current Charge : £0.0">
+                                                <Label fx:id="CostLabel" alignment="CENTER" layoutY="118.0" prefHeight="40.0" prefWidth="284.0" text="Current Charge : £0.0">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <Button fx:id="OverrideChargeButton" layoutY="119.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Override Charge" />
+                                                <Button fx:id="OverrideChargeButton" layoutY="158.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Override Charge" />
+                                                <Button fx:id="FreeSpaceButton" layoutY="-13.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" text="Free Space" />
+                                                <Button fx:id="FillSpacesButton" layoutX="142.0" layoutY="-13.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" text="Disable Space" />
                                              </children>
                                           </AnchorPane>
+                                          <Separator layoutX="63.0" layoutY="91.0" prefHeight="22.0" prefWidth="284.0" />
+                                          <Label alignment="CENTER" layoutX="63.0" layoutY="-17.0" prefHeight="85.0" prefWidth="139.0" text="Floor">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="FloorID" alignment="CENTER" layoutX="202.0" layoutY="10.0" prefHeight="26.0" prefWidth="146.0" />
                                        </children>
                                     </AnchorPane>
                               </content>
