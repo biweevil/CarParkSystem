@@ -21,6 +21,16 @@ public class CoinGUI
         this.main = main;
     }
 
+    @FXML
+        // This method is called by the FXMLLoader when initialization is complete
+    void initialize() {
+        CoinList.setOnMouseClicked(event -> {
+            main.setCurrentCoin(CoinList.getSelectionModel().getSelectedItem());
+        });
+
+
+    }
+
     public void Update(){
         try
         {

@@ -13,6 +13,7 @@ public class Car
 
     public Car(Coin coin){
         this.coin = coin;
+        coin.assignCar(this);
     }
 
     public Coin getCoin(){

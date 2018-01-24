@@ -9,12 +9,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -341,6 +344,16 @@ public class Controller {
     public Stage CoinStage;
     public CoinGUI coinGUI;
     private String loginCode;
+    private Coin currentCoin;
+
+    public void setCurrentCoin(Coin currentCoin) {
+        this.currentCoin = currentCoin;
+    }
+
+    public Coin getCurrentCoin() {
+        return currentCoin;
+    }
+
 
     public enum listMode {
         CARPARKS, FLOORS, BAYS
@@ -529,10 +542,10 @@ public class Controller {
 
         TotalCarParksBox.setText(String.valueOf(carParkList.size()));
         int total = 0;
-        for(int i = 0; i < carParkList.size(); i++ ){
+        for (int i = 0; i < carParkList.size(); i++) {
             total = total + carParkList.get(i).getCapacity();
         }
-        TotalSpacesBox.setText(""+total);
+        TotalSpacesBox.setText("" + total);
 
     }
 
@@ -540,6 +553,45 @@ public class Controller {
         CarParkNameBox.setText(currentCarPark.carParkName);
         FloorID.setText(currentFloor.getFloorLetter());
         ExitPointsBox.setText(String.valueOf(currentCarPark.exitPoints));
+
+        FloorView.getChildren().clear();
+        for (int i = 0; i < currentCarPark.floorList.size(); i++) {
+            currentFloor = currentCarPark.floorList.get(i);
+            HBox hBox = new HBox();
+            Button button = new Button();
+            Label label = new Label("fbea");
+            hBox.getChildren().add(button);
+            hBox.getChildren().add(label);
+            FloorView.getChildren().add(hBox);
+            button.setText("Floor " + currentFloor);
+            label.setText("Free Spaces: " + currentFloor.noOfSpaces());
+            button.setFont(Font.font(25));
+            label.setFont(Font.font(25));
+            label.setPadding(new Insets(10));
+            button.setOnAction(event -> {
+                boolean spaceFound = false;
+                if (currentCoin == null || currentCoin.getCar() != null) {
+                    new Alert(Alert.AlertType.WARNING, "Car already parked").showAndWait();
+                } else {
+                    int j = 0;
+                    while ((j < currentFloor.noOfBays()) && (!spaceFound)) {
+                        if (!currentFloor.getBay(j).isCarPresent()) {
+                            Car car = new Car(currentCoin);
+                            currentBay = currentFloor.getBay(j);
+                            currentBay.setCar(car);
+                            spaceFound = true;
+                        }
+                    }
+                    if (!spaceFound){
+                        new Alert(Alert.AlertType.WARNING, "Floor full").showAndWait();
+                    }else{
+                        new Alert(Alert.AlertType.INFORMATION, "Car parked at "+currentBay.toString()).showAndWait();
+                    }
+                    Update();
+                }
+
+            });
+        }
     }
 
     private void CustomerCallBacks() {
@@ -578,6 +630,7 @@ public class Controller {
             }
         });
 
+
         PaymentGUI.setVisible(false);
         PaymentTextDisplay.setText("Enter coin to start");
         CoinButtonPayment.setOnAction(event -> {
@@ -593,22 +646,21 @@ public class Controller {
         });
     }
 
-    private String getSuitableCode(){
+    private String getSuitableCode() {
         boolean suitable = false;
         String newCode = "";
-        while (!suitable){
+        while (!suitable) {
             newCode = "";
-            for(int i = 0; i < 6; i++){
-                newCode += (int)Math.floor(Math.random()*10);
+            for (int i = 0; i < 6; i++) {
+                newCode += (int) Math.floor(Math.random() * 10);
             }
-            File[] accountLoc = new File(System.getProperty("user.home")+"/Accounts").listFiles();
-            List<String> list = new ArrayList <>();
-            for (File accountFile: accountLoc)
-            {
+            File[] accountLoc = new File(System.getProperty("user.home") + "/Accounts").listFiles();
+            List<String> list = new ArrayList<>();
+            for (File accountFile : accountLoc) {
                 list.add(new AccountInfo(accountFile).Verify(newCode));
             }
             Set<String> set = new HashSet<>(list);
-            if(set.size() == list.size()){
+            if (set.size() == list.size()) {
                 suitable = true;
             }
         }

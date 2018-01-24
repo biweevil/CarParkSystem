@@ -8,11 +8,26 @@ public class Bay
     protected Floor floor;
     protected int bayNo;
     protected boolean disabled;
+    private boolean carPresent;
+    private Car car;
 
-    Bay(Floor floor, int bayNo, boolean disabled){
+    Bay(Floor floor, int bayNo){
         this.floor = floor;
         this.bayNo = bayNo;
-        this.disabled = disabled;
+        this.disabled = false;
+        this.carPresent = false;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+        carPresent = true;
+    }
+    public boolean isCarPresent(){
+        return carPresent;
     }
 
     @Override
