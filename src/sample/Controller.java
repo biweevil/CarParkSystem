@@ -622,7 +622,7 @@ public class Controller {
                 Platform.runLater(() ->
                 {
                     try {
-                        sleep(2500);
+                        sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -635,7 +635,15 @@ public class Controller {
             }
         });
 
+        ExitInsert.setOnAction(event -> {
+            if(currentCoin.isPaid()){
 
+            }
+            else
+                new Alert(Alert.AlertType.WARNING, "Coin is not paid for").showAndWait();
+
+
+        });
         PaymentGUI.setVisible(false);
         PaymentTextDisplay.setText("Enter coin to start");
         CoinButtonPayment.setOnAction(event -> {
