@@ -23,6 +23,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.*;
 
 import static java.lang.Thread.sleep;
@@ -737,6 +739,40 @@ public class Controller {
                 MobileDisplay.setText("Retry: "+loginCode);
             }
         });
+        InsertCashButton.setOnAction(event -> {
+            float cash = 0;
+            try {
+                CashDisplay.setText(String.valueOf(new DecimalFormat("###,###.00").parse(String.valueOf(String.valueOf(cash)))));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if (Pound2.isSelected()){
+                cash+=2;
+            }
+            if (Pound5.isSelected()){
+                cash+=5;
+            }
+            if (Pound10.isSelected()){
+                cash+=10;
+            }
+            if (Pound20.isSelected()){
+                cash+=20;
+            }
+            if (Pence5.isSelected()){
+                cash+=.05;
+            }
+            if (Pence10.isSelected()){
+                cash+=.10;
+            }
+            if (Pence20.isSelected()){
+                cash+=.20;
+            }
+            if (Pence50.isSelected()){
+                cash+=.50;
+            }
+            CashDisplay.setText(""+(cash));
+        });
 
 
     }
@@ -755,8 +791,10 @@ public class Controller {
             }
             File[] accountLoc = new File(System.getProperty("user.home") + "/Accounts").listFiles();
             List<String> list = new ArrayList<>();
-            for (File accountFile : accountLoc) {
-                list.add(new AccountInfo(accountFile).Verify(newCode));
+            if (accountLoc != null) {
+                for (File accountFile : accountLoc) {
+                    list.add(new AccountInfo(accountFile).Verify(newCode));
+                }
             }
             Set<String> set = new HashSet<>(list);
             if (set.size() == list.size()) {
