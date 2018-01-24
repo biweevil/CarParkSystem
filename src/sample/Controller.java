@@ -145,9 +145,6 @@ public class Controller {
     private VBox FloorView;
 
     @FXML
-    private ImageView BarcodeButtonPayment;
-
-    @FXML
     private Label PaymentTextDisplay;
 
     @FXML
@@ -255,6 +252,19 @@ public class Controller {
     @FXML
         // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
+        assets();
+
+        CarParkManCallbacks();
+        CustomerCallBacks();
+        try {
+            CoinStageSetup();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Update();
+    }
+
+    private void assets(){
         assert NextHourButton != null : "fx:id=\"NextHourButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert NextDayButton != null : "fx:id=\"NextDayButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert Next10Button != null : "fx:id=\"Next10Button\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -290,7 +300,6 @@ public class Controller {
         assert CoinButton != null : "fx:id=\"CoinButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert FloorPanel != null : "fx:id=\"FloorPanel\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert FloorView != null : "fx:id=\"FloorView\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert BarcodeButtonPayment != null : "fx:id=\"BarcodeButtonPayment\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert PaymentTextDisplay != null : "fx:id=\"PaymentTextDisplay\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert PaymentGUI != null : "fx:id=\"PaymentGUI\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert CardMachineView != null : "fx:id=\"CardMachineView\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -321,15 +330,6 @@ public class Controller {
         assert ExitTextDisplay != null : "fx:id=\"ExitTextDisplay\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert ExitDisplay != null : "fx:id=\"ExitDisplay\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert ExitInsert != null : "fx:id=\"ExitInsert\" was not injected: check your FXML file 'MainGUI.fxml'.";
-
-        CarParkManCallbacks();
-        CustomerCallBacks();
-        try {
-            CoinStageSetup();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Update();
     }
 
     public CarPark currentCarPark;
@@ -404,9 +404,10 @@ public class Controller {
             }
         });
 
+
         NewFloorButton.setOnAction(event ->
         {
-            currentCarPark.addFloor(10, false);
+            currentCarPark.addFloor(10, SecureFloorCheckBox.isSelected());
             Update();
         });
 

@@ -286,7 +286,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="826.0">
                                        <children>
-                                          <Label fx:id="EntryTextDisplay" alignment="CENTER" layoutX="344.0" layoutY="53.0" prefHeight="173.0" prefWidth="571.0" text="Press For Coin." textAlignment="CENTER" textFill="#1200b2" wrapText="true">
+                                          <Label fx:id="EntryTextDisplay" alignment="CENTER" layoutX="344.0" layoutY="53.0" prefHeight="173.0" prefWidth="571.0" style="-fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 5;" text="Press For Coin." textAlignment="CENTER" textFill="#1200b2" wrapText="true">
                                              <font>
                                                 <Font size="48.0" />
                                              </font>
@@ -495,15 +495,18 @@
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <Label fx:id="ExitDisplay" alignment="CENTER" layoutX="329.0" layoutY="56.0" prefHeight="173.0" prefWidth="571.0" text="Insert Coin to Exit" textAlignment="CENTER" textFill="#1200b2" wrapText="true">
+                                          <Label fx:id="ExitDisplay" alignment="CENTER" layoutX="329.0" layoutY="56.0" prefHeight="173.0" prefWidth="571.0" style="-fx-border-color: 000000; -fx-border-width: 5; -fx-border-style: solid;" text="Insert Coin to Exit" textAlignment="CENTER" textFill="#1200b2" wrapText="true">
                                              <font>
                                                 <Font size="48.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="ExitInsert" layoutX="416.0" layoutY="305.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="396.0" text="Insert">
+                                          <Button fx:id="ExitInsert" layoutX="538.0" layoutY="239.0" mnemonicParsing="false" prefHeight="189.0" prefWidth="189.0" style="-fx-background-radius: 100; -fx-background-color: fff000; -fx-border-radius: 100; -fx-border-color: black; -fx-border-width: 8;" text="Coin">
                                              <font>
-                                                <Font name="Consolas" size="48.0" />
+                                                <Font size="48.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                     </AnchorPane>
