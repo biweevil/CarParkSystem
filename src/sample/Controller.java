@@ -253,6 +253,12 @@ public class Controller {
     private Button LostCoinButton;
 
     @FXML
+    private Button EmergencyButton;
+
+    @FXML
+    private Label Emergencystate;
+
+    @FXML
         // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assets();
@@ -345,6 +351,7 @@ public class Controller {
     public CoinGUI coinGUI;
     private String loginCode;
     private Coin currentCoin;
+    public boolean emergency;
 
     public void setCurrentCoin(Coin currentCoin) {
         this.currentCoin = currentCoin;
@@ -470,7 +477,6 @@ public class Controller {
                     });
             }
         });
-
         CarParkSelect.setOnAction(event ->
         {
             currentListMode = listMode.CARPARKS;
@@ -520,6 +526,7 @@ public class Controller {
 
     public void UpdateMan() {
         LinkedList<String> stringList = new LinkedList<String>();
+
         switch (currentListMode) {
             case BAYS:
                 for (int count = 0; count < bayList.size(); count++) {
@@ -546,9 +553,9 @@ public class Controller {
             total = total + carParkList.get(i).getCapacity();
         }
         TotalSpacesBox.setText("" + total);
-        CapacityBox.setText(""+currentFloor.getBays().size());
-        SpacesBox.setText(""+currentFloor.noOfSpaces());
-        CarsBox.setText("" + (10-currentFloor.noOfSpaces()));
+        CapacityBox.setText("" + currentFloor.getBays().size());
+        SpacesBox.setText("" + currentFloor.noOfSpaces());
+        CarsBox.setText("" + (10 - currentFloor.noOfSpaces()));
 
     }
 
@@ -610,7 +617,24 @@ public class Controller {
         });
         String message1 = "Please Proceed";
         String message2 = "Press for coin.";
+        EmergencyButton.setOnAction(event -> {
+            if (Emergencystate.getText().equals("Off")) {
+                EntryTextDisplay.setText("EMERGENCY ENTRY");
+                ExitDisplay.setText("EMERGENCY EXIT");
+                CoinButton.setVisible(false);
+                ExitInsert.setVisible(false);
+                Emergencystate.setText("On");
+            } else {
+                EntryTextDisplay.setText("Press For Coin");
+                ExitDisplay.setText("Insert Coin to Exit");
+                CoinButton.setVisible(true);
+                ExitInsert.setVisible(true);
+                Emergencystate.setText("Off");
+            }
+
+        });
         CoinButton.setOnAction(event ->
+
         {
             CoinButton.setVisible(false);
             if (EntryTextDisplay.getText().equals(message1)) {
@@ -639,13 +663,15 @@ public class Controller {
         });
 
 
-        ExitInsert.setOnAction(event -> {
+        ExitInsert.setOnAction(event ->
+
+        {
 
             if (currentCoin.isPaid()) {
                 removeCoin(currentCoin);
-                for(int i = 0; i < floorList.size();i++){
-                    for (int j = 0; j < floorList.get(i).noOfBays();j++){
-                        if (floorList.get(i).getBay(j).getCar() == currentCoin.getCar()){
+                for (int i = 0; i < floorList.size(); i++) {
+                    for (int j = 0; j < floorList.get(i).noOfBays(); j++) {
+                        if (floorList.get(i).getBay(j).getCar() == currentCoin.getCar()) {
                             floorList.get(i).getBay(j).setCarPresent(false);
                         }
                     }
@@ -658,20 +684,20 @@ public class Controller {
                 new Alert(Alert.AlertType.WARNING, "Coin is not paid for").showAndWait();
 
 
-
-
-
-
         });
         PaymentGUI.setVisible(false);
         PaymentTextDisplay.setText("Enter coin to start");
-        CoinButtonPayment.setOnAction(event -> {
+        CoinButtonPayment.setOnAction(event ->
+
+        {
             CoinButtonPayment.setVisible(false);
             loginCode = getSuitableCode();
             PaymentTextDisplay.setText("Choose Payment Method");
         });
 
-        LostCoinButton.setOnAction(event -> {
+        LostCoinButton.setOnAction(event ->
+
+        {
             CoinButtonPayment.setVisible(false);
             LostCoinButton.setVisible(false);
             PaymentGUI.setVisible(true);
