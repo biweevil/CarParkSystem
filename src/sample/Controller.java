@@ -4,33 +4,27 @@
 
 package sample;
 
-import java.io.*;
-import java.net.URL;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.util.*;
-
-import com.twilio.type.PhoneNumber;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Camera;
 import javafx.scene.Parent;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 import static java.lang.Thread.sleep;
-import static javafx.collections.FXCollections.observableArrayList;
 
 public class Controller
 {
@@ -335,7 +329,6 @@ public class Controller
     public List <CarPark> carParkList;
     public List <Floor> floorList;
     public List <Bay> bayList;
-    public AccountInfo accountInfo;
     public Stage CoinStage;
     public CoinGUI coinGUI;
 
