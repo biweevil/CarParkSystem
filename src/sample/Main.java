@@ -12,6 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -21,7 +23,6 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainGUI.fxml"));
         Parent root = (Parent) loader.load();

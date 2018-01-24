@@ -30,10 +30,11 @@ public class AccountInfo
         accountFile = file;
         this.password = password;
         balance = 0.0;
-        phoneNumber = null;
+        phoneNumber = "";
         seasonPass = Instant.EPOCH;
         weekPass = Instant.EPOCH;
         dayPass = Instant.EPOCH;
+        update();
     }
 
     AccountInfo(File file){
@@ -48,6 +49,23 @@ public class AccountInfo
         }
     }
 
+    public String Verify(String input)
+    {
+        String key = String.valueOf(input)+accountFile.getName()+input;
+        int hash = Integer.MAX_VALUE / (key.length() + 1);
+        for (int i = 0; i < key.length(); i++)
+            hash = hash * (6977 - key.charAt(i));
+        int returnInt = Math.abs(hash)%1000000;
+        String returnString = String.valueOf(returnInt);
+        while(returnString.length() < 6)
+            returnString = "0"+returnString;
+        return returnString;
+    }
+
+    public File getAccountFile()
+    {
+        return accountFile;
+    }
 
     private void read(Scanner scanner){
         password = scanner.nextLine();

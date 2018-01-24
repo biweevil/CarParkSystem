@@ -25,6 +25,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -33,6 +34,7 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public class Controller
 {
+
 
     @FXML
     private MenuItem ShowCoins;
@@ -245,66 +247,6 @@ public class Controller
     private Button ExitInsert;
 
     @FXML
-    private SplitPane AppSplitBar;
-
-    @FXML
-    private AnchorPane LogInBG;
-
-    @FXML
-    private TextField UserNameTextbox;
-
-    @FXML
-    private PasswordField PasswordTextbox;
-
-    @FXML
-    private Button LoginButton;
-
-    @FXML
-    private Label LogInFeeback;
-
-    @FXML
-    private Button SignUpButton;
-
-    @FXML
-    private TextField UserNameSignupTextbox1;
-
-    @FXML
-    private PasswordField PasswordSignupTextbox1;
-
-    @FXML
-    private AnchorPane AppMain;
-
-    @FXML
-    private Button LogoutButton;
-
-    @FXML
-    private Label AccountBalance;
-
-    @FXML
-    private Button TopUpButton;
-
-    @FXML
-    private Button VerificationButton;
-
-    @FXML
-    private Button SecureVehicleButton;
-
-    @FXML
-    private Label signedinas;
-
-    @FXML
-    private Label balanceSign;
-
-    @FXML
-    private Label balanceaddlabel;
-
-    @FXML
-    private TextField balanceaddbox;
-
-    @FXML
-    private Button balanceenter;
-
-    @FXML
         // This method is called by the FXMLLoader when initialization is complete
     void initialize()
     {
@@ -374,17 +316,9 @@ public class Controller
         assert ExitTextDisplay != null : "fx:id=\"ExitTextDisplay\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert ExitDisplay != null : "fx:id=\"ExitDisplay\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert ExitInsert != null : "fx:id=\"ExitInsert\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert AppSplitBar != null : "fx:id=\"AppSplitBar\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert LogInBG != null : "fx:id=\"LogInBG\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert UserNameTextbox != null : "fx:id=\"UserNameTextbox\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert PasswordTextbox != null : "fx:id=\"PasswordTextbox\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert LoginButton != null : "fx:id=\"LoginButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert LogInFeeback != null : "fx:id=\"LogInFeeback\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert AppMain != null : "fx:id=\"AppMain\" was not injected: check your FXML file 'MainGUI.fxml'.";
 
         CarParkManCallbacks();
         CustomerCallBacks();
-        AppCallBacks();
         try
         {
             CoinStageSetup();
@@ -648,184 +582,7 @@ public class Controller
         });
     }
 
-    private void AppCallBacks()
-    {
-        AppMain.setVisible(false);
-        new File("Accounts").mkdirs();
-        SignUpButton.setOnAction((ActionEvent event) ->
-        {
 
-            if ((UserNameSignupTextbox1.getText().isEmpty()) || (PasswordSignupTextbox1.getText().isEmpty()))
-            {
-                LogInFeeback.setText("You need to enter the Username and Password");
-            } else
-            {
-                if (new File("Accounts/" + UserNameSignupTextbox1.getText() + ".txt").exists())
-                {
-                    LogInFeeback.setText("Username already Exists");
-                    UserNameSignupTextbox1.setText("");
-                    PasswordSignupTextbox1.setText("");
-                } else
-                {
-                    File accountFile;
-                    accountFile = new File("Accounts/" + UserNameSignupTextbox1.getText() + ".txt");
-
-                    try
-                    {
-                        accountFile.createNewFile();
-                        accountInfo = AccountInfo.newAccount(accountFile, PasswordSignupTextbox1.getText());
-                    } catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    signedinas.setText("Signed in as: " + UserNameSignupTextbox1.getText());
-                    try {
-                        balanceSign.setText("Balance: £" + new DecimalFormat("###,###.00").parse(String.valueOf(accountInfo.getBalance())));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    UserNameSignupTextbox1.setText("");
-                    PasswordSignupTextbox1.setText("");
-                    AppSplitBar.setDividerPosition(0, 0.0);
-                    AppMain.setVisible(true);
-                    LogInFeeback.setText("Login Successful!");
-                }
-            }
-
-
-        });
-
-        LoginButton.setOnAction((event ->
-        {
-            File currentAccount = new File("Accounts/" + UserNameTextbox.getText() + ".txt");
-            if (currentAccount.exists())
-            {
-                try
-                {
-                    Scanner scanner = new Scanner(new FileInputStream(currentAccount));
-                    if (scanner.nextLine().equals(PasswordTextbox.getText()))
-                    {
-                        LogInFeeback.setText("Login Successful!");
-                        signedinas.setText("Signed in as: " + UserNameTextbox.getText());
-                        UserNameTextbox.setText("");
-                        PasswordTextbox.setText("");
-                        AppSplitBar.setDividerPosition(0, 0.0);
-                        AppMain.setVisible(true);
-                        scanner.close();
-                        accountInfo = new AccountInfo(currentAccount);
-                        balanceSign.setText("Balance: £" + new DecimalFormat("###,###.00").parse(String.valueOf(accountInfo.getBalance())));
-                    } else
-                    {
-                        LogInFeeback.setText("Incorrect Password");
-                        UserNameTextbox.setText("");
-                        PasswordTextbox.setText("");
-                    }
-                } catch (FileNotFoundException e)
-                {
-                    e.printStackTrace();
-                } catch (ParseException e)
-                {
-                    e.printStackTrace();
-                }
-            } else
-            {
-                LogInFeeback.setText("User Doesn't exist");
-                UserNameTextbox.setText("");
-                PasswordTextbox.setText("");
-            }
-
-        }));
-        LogoutButton.setOnAction(event ->
-        {
-
-            AppMain.setVisible(false);
-            AppSplitBar.setDividerPosition(0, 0.2764);
-            LogInFeeback.setText("Succesfully Signed Out!");
-            accountInfo.update();
-            accountInfo = null;
-        });
-
-        TopUpButton.setOnAction((event) ->
-        {
-            TextInputDialog dialog = new TextInputDialog("0.0");
-            dialog.setTitle("Account Top Up");
-            dialog.setHeaderText("Top up");
-            dialog.setContentText("Please enter top up amount:");
-            Optional <String> result = dialog.showAndWait();
-            result.ifPresent((string) ->
-            {
-                double topUpAmount;
-                try
-                {
-                    topUpAmount = Double.valueOf(string);
-                } catch (NumberFormatException e)
-                {
-                    topUpAmount = 0;
-                }
-                if (topUpAmount > 0)
-                {
-                    accountInfo.setBalance(accountInfo.getBalance() + topUpAmount);
-                    accountInfo.update();
-                }
-                try
-                {
-                    balanceSign.setText("Balance: £" + new DecimalFormat("###,###.00").parse(String.valueOf(accountInfo.getBalance())));
-                } catch (ParseException e)
-                {
-                    e.printStackTrace();
-                }
-            });
-        });
-
-        VerificationButton.setOnAction(event ->
-        {
-
-            if (accountInfo.getPhoneNumber() == null)
-            {
-                boolean validNumber = false;
-                TextInputDialog numberdialog = new TextInputDialog("44");
-                numberdialog.setTitle("Verify Number");
-                numberdialog.setHeaderText("Verify Number");
-                numberdialog.setContentText("Please enter mobile number:");
-                Optional <String> result = numberdialog.showAndWait();
-                if (result.isPresent())
-                {
-                    try
-                    {
-                        new PhoneNumber(result.get());
-                        validNumber = true;
-                    } catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                if(validNumber){
-                    StringBuilder validationBuilder = new StringBuilder();
-                    for (int i = 0; i < 5; i++){
-                        validationBuilder.append(Math.floor(Math.random()*10));
-                    }
-                    String validationCode = validationBuilder.toString();
-                    String validationMessage = "Please enter the following 5 digit code into the app: "+validationCode;
-                    MessageApi Messenger = new MessageApi();
-                    Messenger.sendMessage(result.get(),validationMessage);
-
-                    TextInputDialog codedialog = new TextInputDialog("44");
-                    codedialog.setTitle("Verify Number");
-                    codedialog.setHeaderText("Verify Number");
-                    codedialog.setContentText("Please enter mobile number:");
-                    Optional <String> result2 = codedialog.showAndWait();
-                    boolean valid;
-                    if (result2.isPresent()){
-                        if(result2.get().equals(validationCode)){
-                            valid = true;
-                            accountInfo.setPhoneNumber(result.get());
-                        }
-                    }
-                }
-            }
-        });
-
-    }
 
     void CoinStageSetup() throws IOException
     {
