@@ -546,6 +546,9 @@ public class Controller {
             total = total + carParkList.get(i).getCapacity();
         }
         TotalSpacesBox.setText("" + total);
+        CapacityBox.setText(""+currentFloor.getBays().size());
+        SpacesBox.setText(""+currentFloor.noOfSpaces());
+        CarsBox.setText("" + (10-currentFloor.noOfSpaces()));
 
     }
 
