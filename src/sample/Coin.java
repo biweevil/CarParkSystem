@@ -8,6 +8,7 @@ public class Coin
     private Car car;
     private CoinMachine currentMachine;
     private boolean paid;
+    private AccountInfo accountInfo;
 
     public String toString()
     {

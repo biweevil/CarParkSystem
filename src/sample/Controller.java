@@ -18,11 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static java.lang.Thread.sleep;
 
@@ -243,6 +241,18 @@ public class Controller {
     private TextField FloorID;
 
     @FXML
+    private Button CoinButtonPayment;
+
+    @FXML
+    private TextField PaymentMachineCodeBox;
+
+    @FXML
+    private Button PaymentMachineCodeSubmit;
+
+    @FXML
+    private Button LostCoinButton;
+
+    @FXML
         // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert NextHourButton != null : "fx:id=\"NextHourButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -330,6 +340,7 @@ public class Controller {
     public List<Bay> bayList;
     public Stage CoinStage;
     public CoinGUI coinGUI;
+    private String loginCode;
 
     public enum listMode {
         CARPARKS, FLOORS, BAYS
@@ -540,6 +551,7 @@ public class Controller {
         String message2 = "Press for coin.";
         CoinButton.setOnAction(event ->
         {
+            CoinButton.setVisible(false);
             if (EntryTextDisplay.getText().equals(message1)) {
                 EntryTextDisplay.setText(message2);
             } else {
@@ -560,9 +572,46 @@ public class Controller {
                     CoinStage.toFront();
                     currentCarPark.entryPoint.carInteracts();
                     EntryTextDisplay.setText(message2);
+                    CoinButton.setVisible(true);
                 });
             }
         });
+
+        PaymentGUI.setVisible(false);
+        PaymentTextDisplay.setText("Enter coin to start");
+        CoinButtonPayment.setOnAction(event -> {
+            CoinButtonPayment.setVisible(false);
+            loginCode = getSuitableCode();
+            PaymentTextDisplay.setText("Choose Payment Method");
+        });
+
+        LostCoinButton.setOnAction(event -> {
+            CoinButtonPayment.setVisible(false);
+            LostCoinButton.setVisible(false);
+            PaymentGUI.setVisible(true);
+        });
+    }
+
+    private String getSuitableCode(){
+        boolean suitable = false;
+        String newCode = "";
+        while (!suitable){
+            newCode = "";
+            for(int i = 0; i < 6; i++){
+                newCode += (int)Math.floor(Math.random()*10);
+            }
+            File[] accountLoc = new File(System.getProperty("user.home")+"/Accounts").listFiles();
+            List<String> list = new ArrayList <>();
+            for (File accountFile: accountLoc)
+            {
+                list.add(new AccountInfo(accountFile).Verify(newCode));
+            }
+            Set<String> set = new HashSet<>(list);
+            if(set.size() == list.size()){
+                suitable = true;
+            }
+        }
+        return newCode;
     }
 
 
