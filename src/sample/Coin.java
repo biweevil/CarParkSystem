@@ -37,19 +37,24 @@ public class Coin
         paid = true;
     }
 
+    public void setAccountInfo(AccountInfo accountInfo) {
+        this.accountInfo = accountInfo;
+    }
+
+    public void setCar(Car car) {
+
+        this.car = car;
+    }
+
     public AccountInfo getAccountInfo()
     {
         return accountInfo;
     }
 
-    public void setAccountInfo(AccountInfo accountInfo)
-    {
-        this.accountInfo = accountInfo;
-    }
-
     public void assignCar(Car newCar)
     {
         car = newCar;
+
         paid = false;
     }
 

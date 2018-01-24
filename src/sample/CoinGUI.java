@@ -30,6 +30,13 @@ public class CoinGUI
 
 
     }
+    public void removeCoin(Coin current){
+        CoinManager coinManager = main.currentCarPark.coinManager;
+        List <Coin> coins = coinManager.getCoinsInUse();
+        coins.remove(current);
+        CoinList.getItems().clear();
+        CoinList.getItems().addAll(coins);
+    }
 
     public void Update(){
         try

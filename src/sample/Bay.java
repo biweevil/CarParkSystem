@@ -18,6 +18,10 @@ public class Bay
         this.carPresent = false;
     }
 
+    public void setCarPresent(boolean carPresent) {
+        this.carPresent = carPresent;
+    }
+
     public Car getCar() {
         return car;
     }

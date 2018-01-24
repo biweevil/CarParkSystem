@@ -256,6 +256,12 @@ public class Controller {
     private Button LostCoinButton;
 
     @FXML
+    private Button EmergencyButton;
+
+    @FXML
+    private Label Emergencystate;
+
+    @FXML
     private Label MobileDisplay;
 
     @FXML
@@ -273,7 +279,7 @@ public class Controller {
         Update();
     }
 
-    private void assets(){
+    private void assets() {
         assert NextHourButton != null : "fx:id=\"NextHourButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert NextDayButton != null : "fx:id=\"NextDayButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert Next10Button != null : "fx:id=\"Next10Button\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -351,6 +357,7 @@ public class Controller {
     public CoinGUI coinGUI;
     private String loginCode;
     private Coin currentCoin;
+    public boolean emergency;
     private AccountInfo  currentAccount;
 
     public void setCurrentCoin(Coin currentCoin) {
@@ -477,7 +484,6 @@ public class Controller {
                     });
             }
         });
-
         CarParkSelect.setOnAction(event ->
         {
             currentListMode = listMode.CARPARKS;
@@ -527,6 +533,7 @@ public class Controller {
 
     public void UpdateMan() {
         LinkedList<String> stringList = new LinkedList<String>();
+
         switch (currentListMode) {
             case BAYS:
                 for (int count = 0; count < bayList.size(); count++) {
@@ -553,6 +560,9 @@ public class Controller {
             total = total + carParkList.get(i).getCapacity();
         }
         TotalSpacesBox.setText("" + total);
+        CapacityBox.setText("" + currentFloor.getBays().size());
+        SpacesBox.setText("" + currentFloor.noOfSpaces());
+        CarsBox.setText("" + (10 - currentFloor.noOfSpaces()));
 
     }
 
@@ -590,7 +600,7 @@ public class Controller {
                             Bay currentBay = current.getBay(j);
                             currentBay.setCar(car);
                             spaceFound = true;
-                        }else{
+                        } else {
                             j++;
                         }
                     }
@@ -614,7 +624,25 @@ public class Controller {
         });
         String message1 = "Please Proceed";
         String message2 = "Press for coin.";
+        EmergencyButton.setOnAction(event -> {
+            if (Emergencystate.getText().equals("Off")) {
+                EntryTextDisplay.setText("EMERGENCY ENTRY");
+                ExitDisplay.setText("EMERGENCY EXIT");
+                CoinButton.setVisible(false);
+                ExitInsert.setVisible(false);
+                Emergencystate.setText("On");
+            } else {
+                EntryTextDisplay.setText("Press For Coin");
+                ExitDisplay.setText("Insert Coin to Exit");
+                CoinButton.setVisible(true);
+                ExitInsert.setVisible(true);
+                Emergencystate.setText("Off");
+            }
+
+        });
+
         CoinButton.setOnAction(event ->
+
         {
             CoinButton.setVisible(false);
             if (EntryTextDisplay.getText().equals(message1)) {
@@ -629,7 +657,7 @@ public class Controller {
                 Platform.runLater(() ->
                 {
                     try {
-                        sleep(2500);
+                        sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -643,10 +671,34 @@ public class Controller {
         });
 
 
+        ExitInsert.setOnAction(event ->
+
+        {
+
+            if (currentCoin.isPaid()) {
+                removeCoin(currentCoin);
+                for (int i = 0; i < floorList.size(); i++) {
+                    for (int j = 0; j < floorList.get(i).noOfBays(); j++) {
+                        if (floorList.get(i).getBay(j).getCar() == currentCoin.getCar()) {
+                            floorList.get(i).getBay(j).setCarPresent(false);
+                        }
+                    }
+                }
+                currentCoin.setCar(null);
+                currentCoin.setAccountInfo(null);
+                Update();
+
+            } else
+                new Alert(Alert.AlertType.WARNING, "Coin is not paid for").showAndWait();
+
+
+        });
         PaymentGUI.setVisible(false);
         MobileGUI.setVisible(false);
         PaymentTextDisplay.setText("Enter coin to start");
-        CoinButtonPayment.setOnAction(event -> {
+        CoinButtonPayment.setOnAction(event ->
+
+        {
             CoinButtonPayment.setVisible(false);
             LostCoinButton.setVisible(false);
             loginCode = getSuitableCode();
@@ -658,7 +710,9 @@ public class Controller {
 
         });
 
-        LostCoinButton.setOnAction(event -> {
+        LostCoinButton.setOnAction(event ->
+
+        {
             CoinButtonPayment.setVisible(false);
             LostCoinButton.setVisible(false);
             PaymentGUI.setVisible(true);
@@ -685,6 +739,10 @@ public class Controller {
         });
 
 
+    }
+
+    public void removeCoin(Coin currentCoin) {
+        coinGUI.removeCoin(currentCoin);
     }
 
     private String getSuitableCode() {

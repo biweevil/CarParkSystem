@@ -87,6 +87,14 @@
                                           <Button fx:id="NewCarParkButton" layoutX="62.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="New Car Park" />
                                           <Button fx:id="DeleteSelectedCarParkButton" layoutX="62.0" layoutY="66.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="284.0" text="Delete Selected Car Park" />
                                           <Separator layoutX="62.0" layoutY="117.0" prefWidth="284.0" />
+                                          <Button fx:id="EmergencyButton" layoutX="139.0" layoutY="229.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="109.0" style="-fx-background-radius: 1000; -fx-background-color: ff0000; -fx-border-radius: 100; -fx-border-color: black; -fx-border-width: 8;" text="EMERGENCY" textFill="WHITE" underline="true">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
                                           <HBox alignment="CENTER" layoutX="62.0" layoutY="130.0" prefHeight="44.0" prefWidth="284.0">
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="85.0" prefWidth="139.0" text="Total Car Parks">
@@ -107,6 +115,11 @@
                                                 <TextField fx:id="TotalSpacesBox" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="146.0" />
                                              </children>
                                           </HBox>
+                                          <Label fx:id="Emergencystate" alignment="CENTER" layoutX="263.0" layoutY="260.0" prefHeight="42.0" prefWidth="71.0" text="Off">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                        <padding>
                                           <Insets top="10.0" />
