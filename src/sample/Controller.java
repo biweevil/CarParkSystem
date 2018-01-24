@@ -648,6 +648,7 @@ public class Controller {
                     }
                 }
                 currentCoin.setCar(null);
+                currentCoin.setAccountInfo(null);
                 Update();
 
             } else

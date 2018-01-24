@@ -20,7 +20,12 @@ public class Coin
         paid = true;
     }
 
+    public void setAccountInfo(AccountInfo accountInfo) {
+        this.accountInfo = accountInfo;
+    }
+
     public void setCar(Car car) {
+
         this.car = car;
     }
 
