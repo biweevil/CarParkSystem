@@ -702,7 +702,6 @@ public class Controller {
 
         ExitInsert.setOnAction(event ->
         {
-
             if (currentCoin.isPaid()) {
                 removeCoin(currentCoin);
                 for (int i = 0; i < floorList.size(); i++) {
@@ -712,11 +711,30 @@ public class Controller {
                         }
                     }
                 }
-                currentCoin.setCar(null);
-                currentCoin.setAccountInfo(null);
-                Update();
+                ExitDisplay.setText("Have a Nice Day!");
+                ExitInsert.setVisible(false);
+                try {
+                    sleep(100
+                    );
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Platform.runLater(() ->
+                {
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    ExitDisplay.setText("Insert Coin to Exit");
+                    ExitInsert.setVisible(true);
+                    currentCoin.setCar(null);
+                    currentCoin.setAccountInfo(null);
+                    Update();
+                });
 
             } else new Alert(Alert.AlertType.WARNING, "Coin is not paid for").showAndWait();
+
 
 
         });
