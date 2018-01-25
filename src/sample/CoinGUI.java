@@ -31,8 +31,11 @@ public class CoinGUI
 
     }
     public void removeCoin(Coin current){
-        AccountInfo temp = current.getAccountInfo();
-        temp.setCoin(null);
+        if(current.getAccountInfo()!=null)
+        {
+            AccountInfo temp = current.getAccountInfo();
+            temp.setCoin(null);
+        }
         current.setAccountInfo(null);
         CoinManager coinManager = main.currentCarPark.coinManager;
         List <Coin> coins = coinManager.getCoinsInUse();

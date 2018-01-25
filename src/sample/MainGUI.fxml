@@ -498,9 +498,9 @@
                                                    <font>
                                                       <Font size="16.0" />
                                                    </font></Button>
-                                                <Label fx:id="MobileDisplay" layoutX="35.0" layoutY="45.0" prefHeight="42.0" prefWidth="261.0" style="-fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 3;" text="App Code: 12345" textFill="#0d2390">
+                                                <Label fx:id="MobileDisplay" alignment="TOP_LEFT" layoutX="8.0" layoutY="11.0" prefHeight="82.0" prefWidth="313.0" style="-fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 3;" text="App Code: 12345" textFill="#0d2390" wrapText="true">
                                                    <font>
-                                                      <Font size="25.0" />
+                                                      <Font size="22.0" />
                                                    </font>
                                                 </Label>
                                                 <Button fx:id="RecoverCoinButton" layoutX="35.0" layoutY="155.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="259.0" text="Recover Coin">

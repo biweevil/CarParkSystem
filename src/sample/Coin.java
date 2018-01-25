@@ -39,7 +39,8 @@ public class Coin
 
     public void setAccountInfo(AccountInfo accountInfo) {
         this.accountInfo = accountInfo;
-        accountInfo.setCoin(this);
+        if(accountInfo!=null)
+            accountInfo.setCoin(this);
     }
 
     public Coin clone(){

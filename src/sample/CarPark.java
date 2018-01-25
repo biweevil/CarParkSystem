@@ -87,6 +87,10 @@ public class CarPark
         return sum;
     }
 
+    public boolean isFull(){
+        return coinManager.getCoinsInUse().size()>= getCapacity();
+    }
+
     public void setCurrentGUICoin(Coin coin){
         controller.setCurrentCoin(coin);
     }

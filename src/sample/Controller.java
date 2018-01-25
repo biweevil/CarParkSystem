@@ -728,13 +728,9 @@ public class Controller
 
         CoinButton.setOnAction(event ->
         {
-            CoinButton.setVisible(false);
-            if (EntryTextDisplay.getText().equals(message1))
+            if (currentCarPark.isFull())
             {
-                EntryTextDisplay.setText(message2);
-            } else
-            {
-                EntryTextDisplay.setText(message1);
+                EntryTextDisplay.setText("Car park is full");
                 try
                 {
                     sleep(100);
@@ -751,27 +747,60 @@ public class Controller
                     {
                         e.printStackTrace();
                     }
-                    CoinStage.show();
-                    CoinStage.toFront();
-                    currentCarPark.entryPoint.carInteracts();
                     EntryTextDisplay.setText(message2);
-                    CoinButton.setVisible(true);
                 });
+            } else
+            {
+                CoinButton.setVisible(false);
+                if (EntryTextDisplay.getText().equals(message1))
+                {
+                    EntryTextDisplay.setText(message2);
+                } else
+                {
+                    EntryTextDisplay.setText(message1);
+                    try
+                    {
+                        sleep(100);
+                    } catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    Platform.runLater(() ->
+                    {
+                        try
+                        {
+                            sleep(1000);
+                        } catch (InterruptedException e)
+                        {
+                            e.printStackTrace();
+                        }
+                        CoinStage.show();
+                        CoinStage.toFront();
+                        currentCarPark.entryPoint.carInteracts();
+                        EntryTextDisplay.setText(message2);
+                        CoinButton.setVisible(true);
+                    });
+                }
             }
         });
 
 
         ExitInsert.setOnAction(event ->
         {
-            if (currentCoin.getCar().secure)
+            Car car = currentCoin.getCar();
+            if (car.secure)
             {
-                currentCoin.getAccountInfo().contact("Vehicle Security Alert, car removed with permission");
+                try
+                {
+                    currentCoin.getAccountInfo().contact("Vehicle Security Alert, car removed with permission");
+                }
+                catch (Exception e){}
+                ExitDisplay.setText("Car is not released");
             } else
             {
 
                 if (currentCoin.isPaid())
                 {
-                    removeCoin(currentCoin);
                     for (int i = 0; i < floorList.size(); i++)
                     {
                         for (int j = 0; j < floorList.get(i).noOfBays(); j++)
@@ -782,6 +811,7 @@ public class Controller
                             }
                         }
                     }
+                    removeCoin(currentCoin);
                     ExitDisplay.setText("Have a Nice Day!");
                     ExitInsert.setVisible(false);
                     try
@@ -809,9 +839,7 @@ public class Controller
 
                 } else new Alert(Alert.AlertType.WARNING, "Coin is not paid for").showAndWait();
             }
-            });
-
-
+        });
 
 
         PaymentGUI.setVisible(false);
@@ -824,19 +852,7 @@ public class Controller
         {
             if (PaymentTextDisplay.getText().equals("Collect coin") || PaymentTextDisplay.getText().equals("Coin paid, collect") || CoinButtonPayment.getText().equals("Eject"))
             {
-                CoinButtonPayment.setText("Coin");
-                PaymentTextDisplay.setText("Enter coin to start");
-                LostCoinButton.setVisible(true);
-                PaymentGUI.setDisable(false);
-                PaymentGUI.setVisible(false);
-                MobileGUI.setVisible(false);
-                currentAccount = null;
-                PayUsingBalanceButton.setVisible(false);
-                RecoverCoinButton.setVisible(false);
-                SecureVehicleButton.setVisible(false);
-                PaymentMachineCodeBox.setVisible(true);
-                PaymentMachineCodeSubmit.setVisible(true);
-                lostMode = false;
+                resetPaymentMachine();
             } else
             {
                 lostMode = false;
@@ -859,8 +875,20 @@ public class Controller
                     MobileDisplay.setText("App Code: " + loginCode);
                 } else
                 {
-                    PaymentTextDisplay.setText("Coin paid, collect");
                     currentAccount = null;
+                    if(currentCoin.getAccountInfo()==null)
+                        PaymentTextDisplay.setText("Coin already paid, collect.");
+                    else{
+                        CoinButtonPayment.setText("Eject");
+                        LostCoinButton.setVisible(false);
+                        RecoverCoinButton.setDisable(true);
+                        loginCode = getSuitableCode();
+                        PaymentGUI.setVisible(true);
+                        PaymentGUI.setDisable(true);
+                        MobileGUI.setVisible(true);
+                        loginCode = getSuitableCode();
+                        MobileDisplay.setText("App Code: " + loginCode);
+                    }
                 }
             }
         });
@@ -884,9 +912,11 @@ public class Controller
         {
             String appCode = PaymentMachineCodeBox.getText();
             File[] accountLoc = new File(System.getProperty("user.home") + "/Accounts").listFiles();
-            for (File accountFile : accountLoc) {
+            for (File accountFile : accountLoc)
+            {
                 AccountInfo testAccount = new AccountInfo(accountFile);
-                if (testAccount.Verify(loginCode).equals(appCode)) {
+                if (testAccount.Verify(loginCode).equals(appCode))
+                {
                     currentAccount = testAccount;
                     MobileDisplay.setText("Welcome " + accountFile.getName().replaceAll(".txt", ""));
                     currentAccount.setCoin(currentCoin);
@@ -910,24 +940,9 @@ public class Controller
                         if (car.secure)
                         {
                             SecureVehicleButton.setText("Release Car");
-                            SecureVehicleButton.setOnAction(event3 ->
-                            {
-                                if (!currentAccount.getCoin().getCar().secure)
-                                    currentAccount.getCoin().getCar().secure = false;
-                                currentAccount.contact("Car Released");
-
-                            });
                         } else
                         {
                             SecureVehicleButton.setText("Secure Car");
-                            SecureVehicleButton.setOnAction(event2 ->
-                            {
-                                if (!currentAccount.getCoin().getCar().secure)
-                                    currentAccount.getCoin().getCar().secure = true;
-                                currentAccount.contact("Car Secured");
-
-                            });
-
                         }
                     } else
                     {
@@ -942,6 +957,25 @@ public class Controller
         });
 
         cardCallbacks();
+
+        SecureVehicleButton.setOnAction(event2 ->
+        {
+            if (currentAccount.getCoin() != null && currentAccount.getCoin().getCar() != null)
+            {
+                if (!currentAccount.getCoin().getCar().secure)
+                {
+                    currentAccount.getCoin().getCar().secure = true;
+                    currentAccount.contact("Car Secured");
+                    SecureVehicleButton.setText("Release Car");
+                } else
+                {
+
+                    currentAccount.getCoin().getCar().secure = false;
+                    currentAccount.contact("Car Released");
+                    SecureVehicleButton.setText("Secure Car");
+                }
+            }
+        });
 
         CashDisplay.setId("0.0");
         CashDisplay.setText("0.0");
@@ -1024,13 +1058,18 @@ public class Controller
             {
                 Coin lostCoin = currentAccount.getCoin();
                 currentCoin = lostCoin.clone();
+                currentCarPark.coinManager.addCoinInUse(currentCoin);
                 currentAccount.setCoin(currentCoin);
                 currentCarPark.coinManager.removeCoinInUse(lostCoin);
+                CoinButtonPayment.setVisible(true);
+                resetPaymentMachine();
                 Update();
-            }else
+            } else
             {
                 MobileDisplay.setText("Coin not found");
+                resetPaymentMachine();
             }
+
         });
 
         PayUsingBalanceButton.setOnAction(event ->
@@ -1038,18 +1077,39 @@ public class Controller
             if (currentAccount.validPass())
             {
                 currentCoin.paid();
+                MobileDisplay.setText("Valid pass used");
+                PayUsingBalanceButton.setDisable(true);
             } else if (currentAccount.getBalance() >= currentCoin.getTotalCost())
             {
                 currentCoin.paid();
                 currentAccount.setBalance(currentAccount.getBalance() - currentCoin.getTotalCost());
-            }
+                MobileDisplay.setText("Balance used:\n£"+currentAccount.getBalance()+ "left.");
+                PayUsingBalanceButton.setDisable(true);
+            }else
             MobileDisplay.setText("Insufficient Funds");
         });
 
 
     }
 
-    private void cardCallbacks(){
+    private void resetPaymentMachine(){
+        CoinButtonPayment.setText("Coin");
+        PaymentTextDisplay.setText("Enter coin to start");
+        LostCoinButton.setVisible(true);
+        PaymentGUI.setDisable(false);
+        PaymentGUI.setVisible(false);
+        MobileGUI.setVisible(false);
+        currentAccount = null;
+        PayUsingBalanceButton.setVisible(false);
+        RecoverCoinButton.setVisible(false);
+        SecureVehicleButton.setVisible(false);
+        PaymentMachineCodeBox.setVisible(true);
+        PaymentMachineCodeSubmit.setVisible(true);
+        lostMode = false;
+    }
+
+    private void cardCallbacks()
+    {
         final String[] number = {""};
 
         CardPin0.setOnAction(event ->
@@ -1143,40 +1203,52 @@ public class Controller
         {
             CardDisplay.setText("Enter Pin");
         });
-    InsertCashButton.setOnAction(event -> {
-    float cash = 0;
-    try {
-        CashDisplay.setText(String.valueOf(new DecimalFormat("###,###.00").parse(String.valueOf(String.valueOf(cash)))));
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
+        InsertCashButton.setOnAction(event ->
+        {
+            float cash = 0;
+            try
+            {
+                CashDisplay.setText(String.valueOf(new DecimalFormat("###,###.00").parse(String.valueOf(String.valueOf(cash)))));
+            } catch (ParseException e)
+            {
+                e.printStackTrace();
+            }
 
-            if (Pound2.isSelected()){
-                cash+=2;
+            if (Pound2.isSelected())
+            {
+                cash += 2;
             }
-            if (Pound5.isSelected()){
-                cash+=5;
+            if (Pound5.isSelected())
+            {
+                cash += 5;
             }
-            if (Pound10.isSelected()){
-                cash+=10;
+            if (Pound10.isSelected())
+            {
+                cash += 10;
             }
-            if (Pound20.isSelected()){
-                cash+=20;
+            if (Pound20.isSelected())
+            {
+                cash += 20;
             }
-            if (Pence5.isSelected()){
-                cash+=.05;
+            if (Pence5.isSelected())
+            {
+                cash += .05;
             }
-            if (Pence10.isSelected()){
-                cash+=.10;
+            if (Pence10.isSelected())
+            {
+                cash += .10;
             }
-            if (Pence20.isSelected()){
-                cash+=.20;
+            if (Pence20.isSelected())
+            {
+                cash += .20;
             }
-            if (Pence50.isSelected()){
-                cash+=.50;
+            if (Pence50.isSelected())
+            {
+                cash += .50;
             }
-            CashDisplay.setText(""+(cash));
-        });}
+            CashDisplay.setText("" + (cash));
+        });
+    }
 
     private void coinPaid()
     {
@@ -1187,14 +1259,17 @@ public class Controller
     }
 
 
-    public void removeCoin(Coin currentCoin) {
+    public void removeCoin(Coin currentCoin)
+    {
         coinGUI.removeCoin(currentCoin);
     }
 
-    private String getSuitableCode() {
+    private String getSuitableCode()
+    {
         boolean suitable = false;
         String newCode = "";
-        while (!suitable) {
+        while (!suitable)
+        {
             newCode = "";
             for (int i = 0; i < 4; i++)
             {
@@ -1209,8 +1284,9 @@ public class Controller
                     list.add(new AccountInfo(accountFile).Verify(newCode));
                 }
             }
-            Set<String> set = new HashSet<>(list);
-            if (set.size() == list.size()) {
+            Set <String> set = new HashSet <>(list);
+            if (set.size() == list.size())
+            {
                 suitable = true;
             }
         }

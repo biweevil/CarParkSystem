@@ -40,14 +40,7 @@ public class AccountInfo
 
     AccountInfo(File file){
         accountFile = file;
-        try
-        {
-            Scanner scanner = new Scanner(new FileInputStream(accountFile));
-            read(scanner);
-        } catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
+        refresh();
     }
 
     public String Verify(String input)
@@ -65,12 +58,14 @@ public class AccountInfo
 
     public Coin getCoin()
     {
+        refresh();
         return coin;
     }
 
     public void setCoin(Coin coin)
     {
         this.coin = coin;
+        update();
     }
 
     public File getAccountFile()
@@ -78,7 +73,16 @@ public class AccountInfo
         return accountFile;
     }
 
-    private void read(Scanner scanner){
+    private void refresh()
+    {
+        Scanner scanner = null;
+        try
+        {
+            scanner = new Scanner(new FileInputStream(accountFile));
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
         password = scanner.nextLine();
         balance = Double.parseDouble(scanner.nextLine());
         phoneNumber = scanner.nextLine();
@@ -92,6 +96,7 @@ public class AccountInfo
 
     public String getPhoneNumber()
     {
+        refresh();
         return phoneNumber;
     }
 
@@ -116,14 +121,17 @@ public class AccountInfo
 
     public double getBalance()
     {
+        refresh();
         return balance;
     }
 
     public void contact(String message){
+        refresh();
         new MessageApi().sendMessage(phoneNumber,message);
     }
 
     public boolean validPass(){
+        refresh();
         boolean passVaild = true;
         if(dayPass.isBefore(Instant.now())) passVaild = false;
         if(weekPass.isBefore(Instant.now())) passVaild = false;

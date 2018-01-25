@@ -35,6 +35,14 @@ public class Floor
         }
     }
 
+    public boolean isFull(){
+        boolean full = true;
+        for(int i = 0; i < getBays().size(); i++){
+            if(!getBays().get(i).isCarPresent())
+                full = false;
+        }
+        return full;
+    }
 
     public int noOfBays()
     {
