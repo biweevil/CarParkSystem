@@ -1076,12 +1076,12 @@ public class Controller
         {
             if (currentAccount.validPass())
             {
-                currentCoin.paid();
+                coinPaid();
                 MobileDisplay.setText("Valid pass used");
                 PayUsingBalanceButton.setDisable(true);
             } else if (currentAccount.getBalance() >= currentCoin.getTotalCost())
             {
-                currentCoin.paid();
+                coinPaid();
                 currentAccount.setBalance(currentAccount.getBalance() - currentCoin.getTotalCost());
                 MobileDisplay.setText("Balance used:\n£"+currentAccount.getBalance()+ "left.");
                 PayUsingBalanceButton.setDisable(true);
