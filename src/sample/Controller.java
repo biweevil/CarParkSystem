@@ -420,6 +420,7 @@ public class Controller {
             currentBay.setCarPresent(false);
             Update();
         });
+        FloorCapacityBox.setText("10");
 
         NewCarParkButton.setOnAction(event ->
         {
