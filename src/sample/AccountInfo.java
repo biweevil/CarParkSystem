@@ -21,6 +21,7 @@ public class AccountInfo
     private Instant seasonPass;
     private Instant weekPass;
     private Instant dayPass;
+    private Coin coin;
 
     static AccountInfo newAccount(File file, String password){
         return new AccountInfo(file, password);
@@ -55,11 +56,21 @@ public class AccountInfo
         int hash = Integer.MAX_VALUE / (key.length() + 1);
         for (int i = 0; i < key.length(); i++)
             hash = hash * (6977 - key.charAt(i));
-        int returnInt = Math.abs(hash)%1000000;
+        int returnInt = Math.abs(hash)%10000;
         String returnString = String.valueOf(returnInt);
-        while(returnString.length() < 6)
+        while(returnString.length() < 4)
             returnString = "0"+returnString;
         return returnString;
+    }
+
+    public Coin getCoin()
+    {
+        return coin;
+    }
+
+    public void setCoin(Coin coin)
+    {
+        this.coin = coin;
     }
 
     public File getAccountFile()
@@ -77,6 +88,8 @@ public class AccountInfo
         scanner.close();
     }
 
+
+
     public String getPhoneNumber()
     {
         return phoneNumber;
@@ -88,6 +101,7 @@ public class AccountInfo
         {
             new PhoneNumber(phoneNumber);
             this.phoneNumber = phoneNumber;
+            update();
             return true;
         }catch (Exception e){
             return false;
@@ -97,6 +111,7 @@ public class AccountInfo
     public void setBalance(double balance)
     {
         this.balance = balance;
+        update();
     }
 
     public double getBalance()
@@ -106,6 +121,14 @@ public class AccountInfo
 
     public void contact(String message){
         new MessageApi().sendMessage(phoneNumber,message);
+    }
+
+    public boolean validPass(){
+        boolean passVaild = true;
+        if(dayPass.isBefore(Instant.now())) passVaild = false;
+        if(weekPass.isBefore(Instant.now())) passVaild = false;
+        if(seasonPass.isBefore(Instant.now())) passVaild = false;
+        return passVaild;
     }
 
     public void update(){

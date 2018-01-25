@@ -39,6 +39,16 @@ public class Coin
 
     public void setAccountInfo(AccountInfo accountInfo) {
         this.accountInfo = accountInfo;
+        accountInfo.setCoin(this);
+    }
+
+    public Coin clone(){
+        Coin newCoin = new Coin();
+        if(this.isPaid()) newCoin.paid();
+        if(this.getAccountInfo()!=null)newCoin.setAccountInfo(this.accountInfo);
+        newCoin.setTotalCost(this.totalCost);
+        if(this.getCar()!=null) newCoin.setCar(this.getCar());
+        return newCoin;
     }
 
     public void setCar(Car car) {

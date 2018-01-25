@@ -10,11 +10,15 @@ public class Car
 
     private LocalDateTime timeOfEntry;
     private Coin coin;
+    public boolean secure;
 
     public Car(Coin coin){
         this.coin = coin;
         coin.assignCar(this);
+        secure = false;
     }
+
+
 
     public Coin getCoin(){
         return coin;

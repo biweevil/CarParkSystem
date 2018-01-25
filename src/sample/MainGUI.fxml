@@ -480,23 +480,44 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button fx:id="LostCoinButton" layoutX="42.0" layoutY="221.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: fff000;" text="Lost Coin Button">
+                                          <Button fx:id="LostCoinButton" layoutX="42.0" layoutY="221.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: fff000; -fx-border-width: 2; -fx-border-style: solid;" text="Lost Coin Button">
                                              <font>
                                                 <Font size="20.0" />
-                                             </font></Button>
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                           <AnchorPane fx:id="MobileGUI" layoutX="301.0" layoutY="188.0" prefHeight="359.0" prefWidth="331.0" style="-fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 5;">
                                              <children>
-                                                <TextField fx:id="PaymentMachineCodeBox" layoutX="36.0" layoutY="100.0" prefHeight="44.0" prefWidth="208.0" promptText="6 Digit Code">
+                                                <TextField fx:id="PaymentMachineCodeBox" layoutX="36.0" layoutY="100.0" prefHeight="44.0" prefWidth="208.0" promptText="4 Digit Code">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </TextField>
-                                                <Button fx:id="PaymentMachineCodeSubmit" layoutX="244.0" layoutY="100.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="52.0" text="Go" />
+                                                <Button fx:id="PaymentMachineCodeSubmit" layoutX="244.0" layoutY="100.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="52.0" text="Go">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font></Button>
                                                 <Label fx:id="MobileDisplay" layoutX="35.0" layoutY="45.0" prefHeight="42.0" prefWidth="261.0" style="-fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 3;" text="App Code: 12345" textFill="#0d2390">
                                                    <font>
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
+                                                <Button fx:id="RecoverCoinButton" layoutX="35.0" layoutY="155.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="259.0" text="Recover Coin">
+                                                   <font>
+                                                      <Font size="25.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="PayUsingBalanceButton" layoutX="36.0" layoutY="219.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="258.0" text="Pay Using Account">
+                                                   <font>
+                                                      <Font size="25.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="SecureVehicleButton" layoutX="36.0" layoutY="284.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="258.0" text="Secure Vehicle">
+                                                   <font>
+                                                      <Font size="25.0" />
+                                                   </font>
+                                                </Button>
                                              </children>
                                           </AnchorPane>
                                        </children>
