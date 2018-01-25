@@ -1195,7 +1195,7 @@ public class Controller
 
         Enter.setOnAction(event ->
         {
-            currentCoin.paid();
+            coinPaid();
             number[0] = "Insert Card";
             CardDisplay.setText(number[0]);
         });
