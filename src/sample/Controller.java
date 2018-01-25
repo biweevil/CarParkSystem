@@ -850,7 +850,7 @@ public class Controller
         RecoverCoinButton.setVisible(false);
         CoinButtonPayment.setOnAction(event ->
         {
-            if (PaymentTextDisplay.getText().equals("Collect coin") || PaymentTextDisplay.getText().equals("Coin paid, collect") || CoinButtonPayment.getText().equals("Eject"))
+            if (PaymentTextDisplay.getText().equals("Collect coin") || PaymentTextDisplay.getText().equals("Coin paid, collect") || CoinButtonPayment.getText().equals("Eject") || (currentCoin.getCar() == null))
             {
                 resetPaymentMachine();
             } else
