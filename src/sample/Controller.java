@@ -7,6 +7,7 @@ package sample;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -30,8 +31,7 @@ import java.util.*;
 
 import static java.lang.Thread.sleep;
 
-public class Controller
-{
+public class Controller {
 
 
     @FXML
@@ -50,7 +50,7 @@ public class Controller
     private AnchorPane FloorsBox;
 
     @FXML
-    private ListView <String> ManagerList;
+    private ListView<String> ManagerList;
 
     @FXML
     private Button CarParkSelect;
@@ -273,24 +273,20 @@ public class Controller
 
     @FXML
         // This method is called by the FXMLLoader when initialization is complete
-    void initialize()
-    {
+    void initialize() {
         assets();
 
         CarParkManCallbacks();
         CustomerCallBacks();
-        try
-        {
+        try {
             CoinStageSetup();
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         Update();
     }
 
-    private void assets()
-    {
+    private void assets() {
         assert NextHourButton != null : "fx:id=\"NextHourButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert NextDayButton != null : "fx:id=\"NextDayButton\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert Next10Button != null : "fx:id=\"Next10Button\" was not injected: check your FXML file 'MainGUI.fxml'.";
@@ -361,9 +357,9 @@ public class Controller
     public CarPark currentCarPark;
     public Floor currentFloor;
     public Bay currentBay;
-    public List <CarPark> carParkList;
-    public List <Floor> floorList;
-    public List <Bay> bayList;
+    public List<CarPark> carParkList;
+    public List<Floor> floorList;
+    public List<Bay> bayList;
     public Stage CoinStage;
     public CoinGUI coinGUI;
     private String loginCode;
@@ -371,19 +367,16 @@ public class Controller
     public boolean emergency;
     private AccountInfo currentAccount;
 
-    public void setCurrentCoin(Coin currentCoin)
-    {
+    public void setCurrentCoin(Coin currentCoin) {
         this.currentCoin = currentCoin;
     }
 
-    public Coin getCurrentCoin()
-    {
+    public Coin getCurrentCoin() {
         return currentCoin;
     }
 
 
-    public enum listMode
-    {
+    public enum listMode {
         CARPARKS, FLOORS, BAYS
     }
 
@@ -391,10 +384,9 @@ public class Controller
 
     private listMode currentListMode = listMode.CARPARKS;
 
-    private void CarParkManCallbacks()
-    {
+    private void CarParkManCallbacks() {
 
-        carParkList = new LinkedList <CarPark>();
+        carParkList = new LinkedList<CarPark>();
         CarPark defaultCP = new CarPark(this, "Default Car Park");
         CarPark defaultCP2 = new CarPark(this, "Default Car Park 2");
         CarPark defaultCP3 = new CarPark(this, "Default Car Park 3");
@@ -404,21 +396,39 @@ public class Controller
         currentCarPark = defaultCP;
         currentFloor = currentCarPark.getFloor(0);
         currentBay = currentFloor.getBay(0);
-        bayList = new ArrayList <Bay>(currentFloor.noOfBays());
+        bayList = new ArrayList<Bay>(currentFloor.noOfBays());
         bayList = currentFloor.getBays();
         floorList = currentCarPark.floorList;
 
+        FillSpacesButton.setOnAction((ActionEvent event) -> {
+            String floor = ManagerList.getFocusModel().getFocusedItem().split("")[0];
+            String bay = ManagerList.getFocusModel().getFocusedItem().split("")[1];
+            for (int i = 0; i < currentCarPark.floorList.size(); i++)
+                if (floor == currentCarPark.getFloor(i).getFloorLetter()) {
+                    currentBay = currentCarPark.getFloor(i).getBay(Integer.parseInt(bay));
+                }
+            currentBay.setCarPresent(true);
+            Update();
+        });
+        FreeSpaceButton.setOnAction((ActionEvent event) -> {
+            String floor = ManagerList.getFocusModel().getFocusedItem().split("")[0];
+            String bay = ManagerList.getFocusModel().getFocusedItem().split("")[1];
+            for (int i = 0; i < currentCarPark.floorList.size(); i++)
+                if (floor == currentCarPark.getFloor(i).getFloorLetter()) {
+                    currentBay = currentCarPark.getFloor(i).getBay(Integer.parseInt(bay));
+                }
+            currentBay.setCarPresent(false);
+            Update();
+        });
+
         NewCarParkButton.setOnAction(event ->
         {
-            if (currentListMode == listMode.CARPARKS)
-            {
+            if (currentListMode == listMode.CARPARKS) {
                 CARPARKCOUNTUP = 0;
                 String newName = "Car Park" + CARPARKCOUNTUP++;
-                Iterator <CarPark> stringIt = carParkList.iterator();
-                while (stringIt.hasNext())
-                {
-                    if (stringIt.next().toString().equals(newName))
-                    {
+                Iterator<CarPark> stringIt = carParkList.iterator();
+                while (stringIt.hasNext()) {
+                    if (stringIt.next().toString().equals(newName)) {
                         newName = "Car Park" + CARPARKCOUNTUP++;
                         stringIt = carParkList.iterator();
                     }
@@ -431,17 +441,14 @@ public class Controller
 
         DeleteSelectedCarParkButton.setOnAction(event ->
         {
-            if (currentListMode == listMode.CARPARKS)
-            {
+            if (currentListMode == listMode.CARPARKS) {
                 UpdateMan();
-                if (currentCarPark != null)
-                {
+                if (currentCarPark != null) {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + currentCarPark.toString());
                     alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response ->
                     {
                         carParkList.remove(currentCarPark);
-                        if (carParkList.isEmpty())
-                        {
+                        if (carParkList.isEmpty()) {
                             currentCarPark = new CarPark(this, "Empty Park");
                             carParkList.add(currentCarPark);
                         } else currentCarPark = carParkList.get(0);
@@ -468,13 +475,11 @@ public class Controller
         ManagerList.setOnMousePressed(event ->
         {
             String searchName = ManagerList.getFocusModel().getFocusedItem();
-            switch (currentListMode)
-            {
+            switch (currentListMode) {
                 case CARPARKS:
                     carParkList.forEach(carPark ->
                     {
-                        if (carPark.toString().equals(searchName))
-                        {
+                        if (carPark.toString().equals(searchName)) {
                             currentCarPark = carPark;
                             floorList = currentCarPark.floorList;
                             currentFloor = currentCarPark.floorList.get(0);
@@ -487,8 +492,7 @@ public class Controller
                 case FLOORS:
                     floorList.forEach(floor ->
                     {
-                        if (floor.toString().equals(searchName))
-                        {
+                        if (floor.toString().equals(searchName)) {
                             currentFloor = floor;
                             floorList = currentCarPark.floorList;
                             currentBay = currentFloor.getBay(0);
@@ -500,8 +504,7 @@ public class Controller
                 case BAYS:
                     bayList.forEach(bay ->
                     {
-                        if (bay.toString().equals(searchName))
-                        {
+                        if (bay.toString().equals(searchName)) {
                             currentBay = bay;
                         }
                         Update();
@@ -535,11 +538,9 @@ public class Controller
         ExitPointsBox.textProperty().addListener((observable, oldValue, newValue) ->
         {
             int exitPoints;
-            try
-            {
+            try {
                 exitPoints = Integer.parseInt(newValue);
-            } catch (NumberFormatException e)
-            {
+            } catch (NumberFormatException e) {
                 exitPoints = 1;
             }
             if (exitPoints > 0) currentCarPark.setExitPoints(exitPoints);
@@ -547,50 +548,42 @@ public class Controller
 
     }
 
-    public void Update()
-    {
+    public void Update() {
         CarParkManUpdate();
         coinGUI.Update();
     }
 
-    public void CarParkManUpdate()
-    {
+    public void CarParkManUpdate() {
         UpdateMan();
         UpdatePark();
     }
 
-    public void UpdateMan()
-    {
-        LinkedList <String> stringList = new LinkedList <String>();
+    public void UpdateMan() {
+        LinkedList<String> stringList = new LinkedList<String>();
 
-        switch (currentListMode)
-        {
+        switch (currentListMode) {
             case BAYS:
-                for (int count = 0; count < bayList.size(); count++)
-                {
+                for (int count = 0; count < bayList.size(); count++) {
                     stringList.add(bayList.get(count).toString());
                 }
                 break;
             case FLOORS:
-                for (int count = 0; count < floorList.size(); count++)
-                {
+                for (int count = 0; count < floorList.size(); count++) {
                     stringList.add(floorList.get(count).toString());
                 }
                 break;
             case CARPARKS:
-                for (int count = 0; count < carParkList.size(); count++)
-                {
+                for (int count = 0; count < carParkList.size(); count++) {
                     stringList.add(carParkList.get(count).toString());
                 }
                 break;
         }
-        ObservableList <String> observableList = FXCollections.observableArrayList(stringList);
+        ObservableList<String> observableList = FXCollections.observableArrayList(stringList);
         ManagerList.setItems(observableList);
 
         TotalCarParksBox.setText(String.valueOf(carParkList.size()));
         int total = 0;
-        for (int i = 0; i < carParkList.size(); i++)
-        {
+        for (int i = 0; i < carParkList.size(); i++) {
             total = total + carParkList.get(i).getCapacity();
         }
         TotalSpacesBox.setText("" + total);
@@ -600,15 +593,13 @@ public class Controller
 
     }
 
-    public void UpdatePark()
-    {
+    public void UpdatePark() {
         CarParkNameBox.setText(currentCarPark.carParkName);
         FloorID.setText(currentFloor.getFloorLetter());
         ExitPointsBox.setText(String.valueOf(currentCarPark.exitPoints));
 
         FloorView.getChildren().clear();
-        for (int i = 0; i < currentCarPark.floorList.size(); i++)
-        {
+        for (int i = 0; i < currentCarPark.floorList.size(); i++) {
             currentFloor = currentCarPark.floorList.get(i);
             HBox hBox = new HBox();
             Button button = new Button();
@@ -627,30 +618,23 @@ public class Controller
                 int floorIndex = Integer.parseInt(button.getId());
                 Floor current = currentCarPark.floorList.get(floorIndex);
                 boolean spaceFound = false;
-                if (currentCoin == null || currentCoin.getCar() != null)
-                {
+                if (currentCoin == null || currentCoin.getCar() != null) {
                     new Alert(Alert.AlertType.WARNING, "Car already parked").showAndWait();
-                } else
-                {
+                } else {
                     int j = 0;
-                    while ((j < current.noOfBays()) && (!spaceFound))
-                    {
-                        if (!current.getBay(j).isCarPresent())
-                        {
+                    while ((j < current.noOfBays()) && (!spaceFound)) {
+                        if (!current.getBay(j).isCarPresent()) {
                             Car car = new Car(currentCoin);
                             Bay currentBay = current.getBay(j);
                             currentBay.setCar(car);
                             spaceFound = true;
-                        } else
-                        {
+                        } else {
                             j++;
                         }
                     }
-                    if (!spaceFound)
-                    {
+                    if (!spaceFound) {
                         new Alert(Alert.AlertType.WARNING, "Floor full").showAndWait();
-                    } else
-                    {
+                    } else {
                         new Alert(Alert.AlertType.INFORMATION, "Car registered at " + current.getBay(j).toString()).showAndWait();
                     }
                     Update();
@@ -660,8 +644,7 @@ public class Controller
         }
     }
 
-    private void CustomerCallBacks()
-    {
+    private void CustomerCallBacks() {
         ShowCoins.setOnAction(event ->
         {
             CoinStage.show();
@@ -671,15 +654,13 @@ public class Controller
         String message2 = "Press for coin.";
         EmergencyButton.setOnAction(event ->
         {
-            if (Emergencystate.getText().equals("Off"))
-            {
+            if (Emergencystate.getText().equals("Off")) {
                 EntryTextDisplay.setText("EMERGENCY ENTRY");
                 ExitDisplay.setText("EMERGENCY EXIT");
                 CoinButton.setVisible(false);
                 ExitInsert.setVisible(false);
                 Emergencystate.setText("On");
-            } else
-            {
+            } else {
                 EntryTextDisplay.setText("Press For Coin");
                 ExitDisplay.setText("Insert Coin to Exit");
                 CoinButton.setVisible(true);
@@ -692,26 +673,20 @@ public class Controller
         CoinButton.setOnAction(event ->
         {
             CoinButton.setVisible(false);
-            if (EntryTextDisplay.getText().equals(message1))
-            {
+            if (EntryTextDisplay.getText().equals(message1)) {
                 EntryTextDisplay.setText(message2);
-            } else
-            {
+            } else {
                 EntryTextDisplay.setText(message1);
-                try
-                {
+                try {
                     sleep(100);
-                } catch (InterruptedException e)
-                {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 Platform.runLater(() ->
                 {
-                    try
-                    {
+                    try {
                         sleep(1000);
-                    } catch (InterruptedException e)
-                    {
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     CoinStage.show();
@@ -727,15 +702,11 @@ public class Controller
         ExitInsert.setOnAction(event ->
         {
 
-            if (currentCoin.isPaid())
-            {
+            if (currentCoin.isPaid()) {
                 removeCoin(currentCoin);
-                for (int i = 0; i < floorList.size(); i++)
-                {
-                    for (int j = 0; j < floorList.get(i).noOfBays(); j++)
-                    {
-                        if (floorList.get(i).getBay(j).getCar() == currentCoin.getCar())
-                        {
+                for (int i = 0; i < floorList.size(); i++) {
+                    for (int j = 0; j < floorList.get(i).noOfBays(); j++) {
+                        if (floorList.get(i).getBay(j).getCar() == currentCoin.getCar()) {
                             floorList.get(i).getBay(j).setCarPresent(false);
                         }
                     }
@@ -756,11 +727,9 @@ public class Controller
             CoinButtonPayment.setVisible(false);
             LostCoinButton.setVisible(false);
             loginCode = getSuitableCode();
-            try
-            {
+            try {
                 PaymentTextDisplay.setText("Total to pay: £" + new DecimalFormat("###,###.00").parse(String.valueOf(currentCoin.getTotalCost())));
-            } catch (ParseException e)
-            {
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
             PaymentGUI.setVisible(true);
@@ -785,18 +754,15 @@ public class Controller
         {
             String appCode = PaymentMachineCodeBox.getText();
             File[] accountLoc = new File(System.getProperty("user.home") + "/Accounts").listFiles();
-            for (File accountFile : accountLoc)
-            {
+            for (File accountFile : accountLoc) {
                 AccountInfo testAccount = new AccountInfo(accountFile);
-                if (testAccount.Verify(loginCode).equals(appCode))
-                {
+                if (testAccount.Verify(loginCode).equals(appCode)) {
                     currentAccount = testAccount;
                     MobileDisplay.setText("Welcome " + accountFile.getName().replaceAll(".txt", ""));
                     PaymentGUI.setVisible(true);
                 }
             }
-            if (currentAccount == null)
-            {
+            if (currentAccount == null) {
                 MobileDisplay.setText("Retry: " + loginCode);
             }
         });
@@ -839,7 +805,7 @@ public class Controller
             }
         });
         CardPin6.setOnAction(event -> {
-            if (number[0].length()< 4) {
+            if (number[0].length() < 4) {
                 number[0] = number[0] + "6";
                 CardDisplay.setText(number[0]);
             }
@@ -879,50 +845,46 @@ public class Controller
                 e.printStackTrace();
             }
 
-            if (Pound2.isSelected()){
-                cash+=2;
+            if (Pound2.isSelected()) {
+                cash += 2;
             }
-            if (Pound5.isSelected()){
-                cash+=5;
+            if (Pound5.isSelected()) {
+                cash += 5;
             }
-            if (Pound10.isSelected()){
-                cash+=10;
+            if (Pound10.isSelected()) {
+                cash += 10;
             }
-            if (Pound20.isSelected()){
-                cash+=20;
+            if (Pound20.isSelected()) {
+                cash += 20;
             }
-            if (Pence5.isSelected()){
-                cash+=.05;
+            if (Pence5.isSelected()) {
+                cash += .05;
             }
-            if (Pence10.isSelected()){
-                cash+=.10;
+            if (Pence10.isSelected()) {
+                cash += .10;
             }
-            if (Pence20.isSelected()){
-                cash+=.20;
+            if (Pence20.isSelected()) {
+                cash += .20;
             }
-            if (Pence50.isSelected()){
-                cash+=.50;
+            if (Pence50.isSelected()) {
+                cash += .50;
             }
-            CashDisplay.setText(""+(cash));
+            CashDisplay.setText("" + (cash));
         });
 
 
     }
 
-    public void removeCoin(Coin currentCoin)
-    {
+    public void removeCoin(Coin currentCoin) {
         coinGUI.removeCoin(currentCoin);
     }
 
-    private String getSuitableCode()
-    {
+    private String getSuitableCode() {
         boolean suitable = false;
         String newCode = "";
-        while (!suitable)
-        {
+        while (!suitable) {
             newCode = "";
-            for (int i = 0; i < 6; i++)
-            {
+            for (int i = 0; i < 6; i++) {
                 newCode += (int) Math.floor(Math.random() * 10);
             }
             File[] accountLoc = new File(System.getProperty("user.home") + "/Accounts").listFiles();
@@ -932,9 +894,8 @@ public class Controller
                     list.add(new AccountInfo(accountFile).Verify(newCode));
                 }
             }
-            Set <String> set = new HashSet <>(list);
-            if (set.size() == list.size())
-            {
+            Set<String> set = new HashSet<>(list);
+            if (set.size() == list.size()) {
                 suitable = true;
             }
         }
