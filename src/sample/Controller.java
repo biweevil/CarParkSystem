@@ -7,6 +7,7 @@ package sample;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -418,6 +419,32 @@ public class Controller
         bayList = currentFloor.getBays();
         floorList = currentCarPark.floorList;
 
+        FillSpacesButton.setOnAction((ActionEvent event) ->
+        {
+            String floor = ManagerList.getFocusModel().getFocusedItem().split("")[0];
+            String bay = ManagerList.getFocusModel().getFocusedItem().split("")[1];
+            for (int i = 0; i < currentCarPark.floorList.size(); i++)
+                if (floor == currentCarPark.getFloor(i).getFloorLetter())
+                {
+                    currentBay = currentCarPark.getFloor(i).getBay(Integer.parseInt(bay));
+                }
+            currentBay.setCarPresent(true);
+            Update();
+        });
+        FreeSpaceButton.setOnAction((ActionEvent event) ->
+        {
+            String floor = ManagerList.getFocusModel().getFocusedItem().split("")[0];
+            String bay = ManagerList.getFocusModel().getFocusedItem().split("")[1];
+            for (int i = 0; i < currentCarPark.floorList.size(); i++)
+                if (floor == currentCarPark.getFloor(i).getFloorLetter())
+                {
+                    currentBay = currentCarPark.getFloor(i).getBay(Integer.parseInt(bay));
+                }
+            currentBay.setCarPresent(false);
+            Update();
+        });
+        FloorCapacityBox.setText("10");
+
         NewCarParkButton.setOnAction(event ->
         {
             if (currentListMode == listMode.CARPARKS)
@@ -741,6 +768,7 @@ public class Controller
                 currentCoin.getAccountInfo().contact("Vehicle Security Alert, car removed with permission");
             } else
             {
+
                 if (currentCoin.isPaid())
                 {
                     removeCoin(currentCoin);
@@ -754,14 +782,38 @@ public class Controller
                             }
                         }
                     }
-                    currentCoin.setCar(null);
-                    currentCoin.setAccountInfo(null);
-                    Update();
+                    ExitDisplay.setText("Have a Nice Day!");
+                    ExitInsert.setVisible(false);
+                    try
+                    {
+                        sleep(100);
+                    } catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    Platform.runLater(() ->
+                    {
+                        try
+                        {
+                            sleep(1000);
+                        } catch (InterruptedException e)
+                        {
+                            e.printStackTrace();
+                        }
+                        ExitDisplay.setText("Insert Coin to Exit");
+                        ExitInsert.setVisible(true);
+                        currentCoin.setCar(null);
+                        currentCoin.setAccountInfo(null);
+                        Update();
+                    });
 
                 } else new Alert(Alert.AlertType.WARNING, "Coin is not paid for").showAndWait();
             }
+            });
 
-        });
+
+
+
         PaymentGUI.setVisible(false);
         MobileGUI.setVisible(false);
         PaymentTextDisplay.setText("Enter coin to start");
@@ -832,11 +884,9 @@ public class Controller
         {
             String appCode = PaymentMachineCodeBox.getText();
             File[] accountLoc = new File(System.getProperty("user.home") + "/Accounts").listFiles();
-            for (File accountFile : accountLoc)
-            {
+            for (File accountFile : accountLoc) {
                 AccountInfo testAccount = new AccountInfo(accountFile);
-                if (testAccount.Verify(loginCode).equals(appCode))
-                {
+                if (testAccount.Verify(loginCode).equals(appCode)) {
                     currentAccount = testAccount;
                     MobileDisplay.setText("Welcome " + accountFile.getName().replaceAll(".txt", ""));
                     currentAccount.setCoin(currentCoin);
@@ -1093,7 +1143,40 @@ public class Controller
         {
             CardDisplay.setText("Enter Pin");
         });
+    InsertCashButton.setOnAction(event -> {
+    float cash = 0;
+    try {
+        CashDisplay.setText(String.valueOf(new DecimalFormat("###,###.00").parse(String.valueOf(String.valueOf(cash)))));
+    } catch (ParseException e) {
+        e.printStackTrace();
     }
+
+            if (Pound2.isSelected()){
+                cash+=2;
+            }
+            if (Pound5.isSelected()){
+                cash+=5;
+            }
+            if (Pound10.isSelected()){
+                cash+=10;
+            }
+            if (Pound20.isSelected()){
+                cash+=20;
+            }
+            if (Pence5.isSelected()){
+                cash+=.05;
+            }
+            if (Pence10.isSelected()){
+                cash+=.10;
+            }
+            if (Pence20.isSelected()){
+                cash+=.20;
+            }
+            if (Pence50.isSelected()){
+                cash+=.50;
+            }
+            CashDisplay.setText(""+(cash));
+        });}
 
     private void coinPaid()
     {
@@ -1103,17 +1186,15 @@ public class Controller
         PaymentMachineCodeBox.setVisible(true);
     }
 
-    public void removeCoin(Coin currentCoin)
-    {
+
+    public void removeCoin(Coin currentCoin) {
         coinGUI.removeCoin(currentCoin);
     }
 
-    private String getSuitableCode()
-    {
+    private String getSuitableCode() {
         boolean suitable = false;
         String newCode = "";
-        while (!suitable)
-        {
+        while (!suitable) {
             newCode = "";
             for (int i = 0; i < 4; i++)
             {
@@ -1128,9 +1209,8 @@ public class Controller
                     list.add(new AccountInfo(accountFile).Verify(newCode));
                 }
             }
-            Set <String> set = new HashSet <>(list);
-            if (set.size() == list.size())
-            {
+            Set<String> set = new HashSet<>(list);
+            if (set.size() == list.size()) {
                 suitable = true;
             }
         }
