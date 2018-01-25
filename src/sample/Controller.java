@@ -21,6 +21,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import javax.smartcardio.Card;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -265,6 +266,9 @@ public class Controller {
 
     @FXML
     private Label MobileDisplay;
+
+    @FXML
+    private Button Enter;
 
     @FXML
         // This method is called by the FXMLLoader when initialization is complete
@@ -738,6 +742,77 @@ public class Controller {
             if (currentAccount == null){
                 MobileDisplay.setText("Retry: "+loginCode);
             }
+        });
+        final String[] number = {""};
+
+        CardPin0.setOnAction(event -> {
+            if (number[0].length() < 4) {
+                number[0] = number[0] + "0";
+                CardDisplay.setText(number[0]);
+            }
+        });
+        CardPin1.setOnAction(event -> {
+            if (number[0].length() < 4) {
+                number[0] = number[0] + "1";
+                CardDisplay.setText(number[0]);
+            }
+        });
+        CardPin2.setOnAction(event -> {
+            if (number[0].length() < 4) {
+                number[0] = number[0] + "2";
+                CardDisplay.setText(number[0]);
+            }
+        });
+        CardPin3.setOnAction(event -> {
+            if (number[0].length() < 4) {
+                number[0] = number[0] + "3";
+                CardDisplay.setText(number[0]);
+            }
+        });
+        CardPin4.setOnAction(event -> {
+            if (number[0].length() < 4) {
+                number[0] = number[0] + "4";
+                CardDisplay.setText(number[0]);
+            }
+        });
+        CardPin5.setOnAction(event -> {
+            if (number[0].length() < 4) {
+                number[0] = number[0] + "5";
+                CardDisplay.setText(number[0]);
+            }
+        });
+        CardPin6.setOnAction(event -> {
+            if (number[0].length()< 4) {
+                number[0] = number[0] + "6";
+                CardDisplay.setText(number[0]);
+            }
+        });
+        CardPin7.setOnAction(event -> {
+            if (number[0].length() < 4) {
+                number[0] = number[0] + "7";
+                CardDisplay.setText(number[0]);
+            }
+        });
+        CardPin8.setOnAction(event -> {
+            if (number[0].length() < 4) {
+                number[0] = number[0] + "8";
+                CardDisplay.setText(number[0]);
+            }
+        });
+        CardPin9.setOnAction(event -> {
+            if (number[0].length() < 4) {
+                number[0] = number[0] + "9";
+                CardDisplay.setText(number[0]);
+            }
+        });
+
+        Enter.setOnAction(event -> {
+            number[0] = "Insert Card";
+            CardDisplay.setText(number[0]);
+        });
+
+        CardImage.setOnMousePressed(event -> {
+            CardDisplay.setText("Enter Pin");
         });
         InsertCashButton.setOnAction(event -> {
             float cash = 0;

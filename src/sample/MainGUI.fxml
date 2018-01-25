@@ -434,7 +434,7 @@
                                                                               <Font name="Consolas" size="15.0" />
                                                                            </font>
                                                                         </Button>
-                                                                        <Button layoutX="77.0" layoutY="76.0" mnemonicParsing="false" prefWidth="67.0" text="#" textFill="#03d714" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                                                        <Button fx:id="Enter" layoutX="77.0" layoutY="76.0" mnemonicParsing="false" prefWidth="67.0" text="#" textFill="#03d714" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                                                            <font>
                                                                               <Font name="Consolas" size="15.0" />
                                                                            </font>
